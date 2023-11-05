@@ -1,24 +1,42 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# my comics
+​
+## サイト概要
+### サイトテーマ
+<!--何を『目的』とし、どのような『分類』なのかを簡潔に書く-->
+漫画が好きな方が、自分の漫画を把握できるサイト
+​
+### テーマを選んだ理由
+<!--なぜこのようなテーマにしたかを説明する-->
+漫画が好きで本屋さんや電子書籍等いろんな場所で購入するので、「この巻って買った？」「電子書籍か本屋さんどっちで買った？」とわからなくなることがあります。
+所持している漫画が把握しきれない方、発売から期間が開いて購入したかわからなくなった方など、いろんな方が自分の所持している漫画の把握ができれば便利だと考えました。
+​
+### ターゲットユーザ
+<!--誰に使ってもらうかを具体的に記載する-->
+- 自分の所持している漫画を把握したい方
+- 自分の所持している漫画の新刊情報を知りたい方
+- 気になる漫画にブックマークをしておき、購入するときの参考として使う方
+​
+### 主な利用シーン
+<!--どのような時に使うのかの状況を記載すること-->
+- 漫画を検索し、マイページの本棚に追加する
+- どの巻数を持っているか把握し、新刊購入の際に参考にする
+- 読み返したいときにジャンルやキーワードで探す
+- どのサイズの漫画を何冊持っているか把握し、本棚や収納ケースを購入する際の参考にする
+​
+## 設計書
+<!--テーマを設定・提出する時点では不要です-->
+​
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
+​
+## 使用素材
+<!--
+- 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名とURLを明記してください。
+- アプリケーションの実装に使用したgem/bootstrapのリファレンスなどの記載は不要です。
+- 使用しない場合は、使用素材の項目をREADMEから削除してください。
+折りたたむ
+-->
