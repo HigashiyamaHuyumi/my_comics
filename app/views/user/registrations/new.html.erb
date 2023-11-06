@@ -1,5 +1,5 @@
 <div class="container">
-<h5><span style="background-color: #dcdcdc;">新規会員登録</span></h5>
+<h5><span style="background-color: #eeeeee;">新規会員登録</span></h5>
 
   <div class="row">
     <div class="col-md-8">
@@ -9,7 +9,7 @@
 
       <div class="field">
         <%= f.label :ニックネーム, class: "col-lg-4" %>
-        <%= f.email_field :nickname, autofocus: true, class: "col-lg-3" %>
+        <%= f.text_field :nickname, autofocus: true, class: "col-lg-3" %>
       </div>
 
       <div class="field">
@@ -38,10 +38,12 @@
   <div class="row">
     <div class="text-left">
       <div class="col-md-12">
-        <h5><span style="background-color: #dcdcdc;">既に登録済みの方</span></h5>
+        <h5><span style="background-color: #eeeeee;">既に登録済みの方</span></h5>
         <span><%= render "user/shared/links" %>からログインしてください。</span>
       </div>
     </div>
   </div>
 
 </div>
+
+<%= render 'layouts/footer' %>
