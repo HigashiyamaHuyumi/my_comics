@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row">
+    <h5><span style="background-color: #dcdcdc;">マイページ</span></h5>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+    <table class="table">
+      <% if @user.present? %>
+        <th>ニックネーム</th>
+        <td><%= @user.nickname %></td>
+        <th><%= link_to "編集する", infomation_path, class: "btn btn-success" %></th>
+      <% end %>
+    </table>
+    </div>
+  </div>
+
+
+</div>

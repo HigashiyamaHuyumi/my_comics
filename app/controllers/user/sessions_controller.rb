@@ -2,13 +2,13 @@
 
 class User::SessionsController < Devise::SessionsController
   before_action :user_state, only: [:create]
-  
+
   def create
     user = User.find_by(email: params[:user][:email])
 
     if user && user.valid_password?(params[:user][:password]) && user.is_active
       sign_in user
-      redirect_to root_path
+      redirect_to my_page_path
     else
       flash[:alert] = "ログインできません。アカウントが無効になっているか、パスワードが正しくありません。"
       render new_user_registration_path
@@ -28,7 +28,7 @@ class User::SessionsController < Devise::SessionsController
       redirect_to new_user_registration_path
     end
   end
-  
+
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in

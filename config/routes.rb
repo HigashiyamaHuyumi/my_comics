@@ -6,6 +6,15 @@ Rails.application.routes.draw do
     sessions: 'user/sessions'
   }
 
+  scope module: 'user' do
+		get '/users/my_page', to: 'users#my_page', as: 'my_page' #マイページ用のルート
+		get '/users/my_page/infomation', to: 'users#infomation', as: 'infomation' 
+    resources :users, only: [:update] do # 顧客リソース用のルートを追加
+		  get :confirm, on: :member # 退会確認ページ用のルート
+      patch :withdrawal, on: :member # 退会処理用のルート
+		end
+	end
+
   # 管理者用
   # URL /admin/sign_in ...
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
