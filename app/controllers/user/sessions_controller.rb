@@ -8,7 +8,7 @@ class User::SessionsController < Devise::SessionsController
 
     if user && user.valid_password?(params[:user][:password]) && user.is_active
       sign_in user
-      redirect_to my_page_path
+      redirect_to root_path
     else
       flash[:alert] = "ログインできません。アカウントが無効になっているか、パスワードが正しくありません。"
       render new_user_registration_path
