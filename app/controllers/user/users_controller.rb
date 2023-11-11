@@ -26,7 +26,7 @@ class User::UsersController < ApplicationController
 
   def withdrawal  #退会画面
     @user = User.find(params[:id])
-    #@customer.update(is_active: false)
+    @user.update(is_active: false)
     sign_out @user
     redirect_to root_path, notice: "アカウントが削除されました。"
   end

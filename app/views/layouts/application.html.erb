@@ -63,6 +63,9 @@
         </div>
       </nav>
     </header>
+    <%= flash[:success] %>
+    <%= flash[:error] %>
+    <%= flash[:alert] %>
     <%= yield %>
   </body>
 </html>
