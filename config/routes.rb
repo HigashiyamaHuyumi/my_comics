@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   # 顧客用
   # URL /customers/sign_in ...
-  devise_for :users, controllers: {
-    registrations: 'users/registrations',
-    passwords: 'users/passwords'
+  devise_for :users, skip: [:passwords], controllers: {
+    registrations: "user/registrations",
+    sessions: 'user/sessions'
   }
 
   scope module: 'user' do
@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 		  get :confirm, on: :member # 退会確認ページ用のルート
       patch :withdrawal, on: :member # 退会処理用のルート
 		end
+		resources :comics
 	end
 
   # 管理者用

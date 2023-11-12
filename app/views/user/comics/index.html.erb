@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row">
+
+    <div class="col-8">
+      <h5><span style="background-color: #dcdcdc;">商品一覧</span></h5>
+    </div>
+
+    <div class="col-4" style="text-align: right;">
+      <%= link_to new_comics_path, class: "btn btn-outline-dark btn-circle text-dark" do %>
+        <i class="fas fa-plus"></i>
+      <% end %>
+    </div>
+
+    <div class="col-12">
+      <table class = "table table-striped">
+
+        <thead>
+          <tr>
+            <th>商品ID</th>
+            <th>商品名</th>
+            <th>税抜価格</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @items.each do |item| %>
+            <tr>
+              <td><%= item.id %></td>
+              <td><%= link_to item.name, admin_item_path(item) %></td>
+              <td><%= number_with_delimiter(item.price, precision: 0) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+  <%= paginate @items %>
+</div>
