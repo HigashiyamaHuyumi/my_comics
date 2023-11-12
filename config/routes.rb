@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   scope module: 'user' do
     post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
 		get '/users/my_page', to: 'users#my_page', as: 'my_page' #マイページ用のルート
-		get '/users/my_page/infomation', to: 'users#infomation', as: 'infomation' 
+		get '/users/my_page/infomation', to: 'users#infomation', as: 'infomation'
     resources :users, only: [:update] do # 顧客リソース用のルートを追加
 		  get :confirm, on: :member # 退会確認ページ用のルート
       patch :withdrawal, on: :member # 退会処理用のルート
@@ -26,4 +26,5 @@ Rails.application.routes.draw do
   root to: "homes#top"
   get '/about', to: 'homes#about', as: 'home_about'
   post '/homes/guest_sign_in', to: 'homes#guest_sign_in'
+  get 'books/search', to: "books#search"
 end

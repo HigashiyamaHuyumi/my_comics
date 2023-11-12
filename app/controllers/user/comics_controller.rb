@@ -44,11 +44,11 @@ class User::ComicsController < ApplicationController
     flash[:notice] ='選んだ漫画を本棚から削除しました'
     redirect_to comics_path # 投稿一覧画面へリダイレクト
   end
-
+  
   private
-
+  
   def comics_params
-    params.require(:comics).permit(:title, :author, :isbn_code, :publicher, :publication_date, :rakuten_books_url, :remarks)
+    params.require(:comics).permit(:title, :author, :isbn_code, :publicher, :publication_date, :rakuten_books_url, :remarks, :image)
   end
 
   def is_matching_login_user
@@ -57,4 +57,5 @@ class User::ComicsController < ApplicationController
       redirect_to comics_path
     end
   end
+  
 end

@@ -4,15 +4,7 @@
   <div class="row justify-content-center">
     <div class="col-md-6">
 
-    <!-- エラーチェック -->
-    <% if @comics.errors.any? %>
-      <%= @comics.errors.count %> errors prohibited this item from being saved:
-      <ul>
-        <% @comics.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    <% end %>
+    <%= render 'layouts/comics_errors' , comics: @comics  %>
 
     <%= form_with model: @comics,url: comics_path, method: :post, local: true, multipart: true do |f| %>
 

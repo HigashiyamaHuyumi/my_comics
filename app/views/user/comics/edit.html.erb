@@ -1,0 +1,35 @@
+<div class="container">
+  <h5><span style="background-color: #dcdcdc;">漫画情報編集</span></h5>
+
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+
+    <%= render 'layouts/comics_errors' , comics: @comics  %>
+
+  　<%= form_with model: @item,url: admin_item_path(@item), method: :patch do |f| %>
+
+      <%= f.label :"商品画像" %>
+      <%= f.file_field :image, accept: "image/*" %>
+      <br>
+
+      <%= f.label :"商品名" %>
+      <%= f.text_field :name %>
+      <br>
+
+      <%= f.label :"商品説明" %>
+      <%= f.text_area :introduction %>
+      <br>
+
+      <%= f.label :"税抜価格" %>
+      <%= f.text_field :price %>円
+      <br>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <%= f.submit '変更を保存' ,class: "btn btn-success" %>
+  </div>
+
+    <% end %>
+
+</div>
