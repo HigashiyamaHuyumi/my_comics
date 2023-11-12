@@ -2,6 +2,7 @@
 
 class User::RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :ensure_normal_user, only: %i[update destroy]
 
   def after_sign_in_path_for(resource)
     my_page_path
@@ -9,6 +10,12 @@ class User::RegistrationsController < Devise::RegistrationsController
 
   def after_sign_out_path_for(resource)
     root_path
+  end
+  
+  def ensure_normal_user
+    if resource.email == 'guest@example.com'
+      redirect_to root_path, alert: 'ゲストユーザーの更新・削除はできません。'
+    end
   end
 
   protected
