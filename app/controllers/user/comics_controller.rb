@@ -3,7 +3,7 @@ class User::ComicsController < ApplicationController
 
   def index # データの一覧を表示する
     @comics = Comics.new
-    @comic = Comic.all
+    @comics_all = Comics.all
   end
 
   def new
@@ -48,7 +48,7 @@ class User::ComicsController < ApplicationController
   private
 
   def comics_params
-    params.require(:comic).permit(:title, :author, :isbn_code, :publicher, :publication_date, :rakuten_books_url, :remarks)
+    params.require(:comics).permit(:title, :author, :isbn_code, :publicher, :publication_date, :rakuten_books_url, :remarks)
   end
 
   def is_matching_login_user

@@ -18,15 +18,27 @@
 
 
       <%= f.label :"タイトル" %>
-      <%= f.text_field :title %>
+      <%= f.text_field :title, required: true %>
       <br>
 
       <%= f.label :"著者" %>
-      <%= f.text_area :author %>
+      <%= f.text_field :author, required: true %>
       <br>
 
       <%= f.label :"ISBNコード" %>
       <%= f.text_field :isbn_code %>
+      <br>
+
+      <%= f.label :"出版社" %>
+      <%= f.text_field :publisher %>
+      <br>
+
+      <%= f.label :"出版日" %>
+      <%= f.text_field :ipublication_date %>
+      <br>
+
+      <%= f.label :"備考" %>
+      <%= f.text_field :remarks %>
       <br>
 
     </div>
@@ -39,3 +51,5 @@
     <% end %>
 
 </div>
+
+<%= render 'layouts/footer' %>

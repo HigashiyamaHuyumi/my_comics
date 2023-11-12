@@ -29,6 +29,10 @@
 
               <% if user_signed_in? %><!-- 顧客がログインしている場合のメニュー項目 -->
                 <li class="nav-item">
+                  <%= link_to "漫画一覧", comics_path , class: "btn btn-outline-dark" %>
+                </li>
+
+                <li class="nav-item">
                   <%= link_to "マイページ", my_page_path , class: "btn btn-outline-dark" %>
                 </li>
 

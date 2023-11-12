@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 2023_11_12_100749) do
 
   create_table "admins", force: :cascade do |t|
-    t.string "email", defaultcomics: "", null: false
+    t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -25,15 +25,15 @@ ActiveRecord::Schema.define(version: 2023_11_12_100749) do
   end
 
   create_table "comics", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "comics_detail_id", null: false
+    t.integer "user_id"
+    t.integer "comics_detail_id"
     t.string "title", null: false
     t.string "author", null: false
-    t.integer "isbn_code", null: false
-    t.string "publisher", null: false
+    t.integer "isbn_code"
+    t.string "publisher"
     t.datetime "publication_date"
-    t.string "rakuten_books_url", null: false
-    t.string "remarks", null: false
+    t.string "rakuten_books_url"
+    t.string "remarks"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

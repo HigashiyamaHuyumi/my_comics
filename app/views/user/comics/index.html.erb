@@ -6,7 +6,7 @@
     </div>
 
     <div class="col-4" style="text-align: right;">
-      <%= link_to new_comics_path, class: "btn btn-outline-dark btn-circle text-dark" do %>
+      <%= link_to new_comic_path, class: "btn btn-outline-dark btn-circle text-dark" do %>
         <i class="fas fa-plus"></i>
       <% end %>
     </div>
@@ -16,18 +16,17 @@
 
         <thead>
           <tr>
-            <th>商品ID</th>
-            <th>商品名</th>
-            <th>税抜価格</th>
+            <th>タイトル</th>
+            <th>著者</th>
+            <th></th>
           </tr>
         </thead>
 
         <tbody>
-          <% @items.each do |item| %>
+          <% @comics_all.each do |comic| %>
             <tr>
-              <td><%= item.id %></td>
-              <td><%= link_to item.name, admin_item_path(item) %></td>
-              <td><%= number_with_delimiter(item.price, precision: 0) %></td>
+              <td><%= link_to comic.title, comic_path(comic) %></td>
+              <td><%= comic.author %></td>
             </tr>
           <% end %>
         </tbody>
@@ -35,5 +34,7 @@
       </table>
     </div>
   </div>
-  <%= paginate @items %>
+  <!-- %= paginate @comics % -->
 </div>
+
+<%= render 'layouts/footer' %>
