@@ -25,9 +25,11 @@
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
 
-              <!-- 共通のメニュー項目（誰もログインしていない状態） -->
-
               <% if user_signed_in? %><!-- 顧客がログインしている場合のメニュー項目 -->
+                <li class="nav-item">
+                  <%= link_to "本を探す", books_search_path , class: "btn btn-outline-dark" %>
+                </li>
+
                 <li class="nav-item">
                   <%= link_to "漫画一覧", comics_path , class: "btn btn-outline-dark" %>
                 </li>
@@ -51,7 +53,6 @@
                 <li class="nav-item">
                 <%= link_to "About", home_about_path, class: "btn btn-outline-dark" %>
                 </li>
-
 
                 <li class="nav-item">
                   <%= link_to "新規登録", new_user_registration_path, class: "btn btn-outline-dark" %>

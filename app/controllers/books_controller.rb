@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
+
   def search
-    #ここで空の配列を作ります
     @books = []
     @title = params[:title]
     if @title.present?
@@ -10,17 +10,15 @@ class BooksController < ApplicationController
         title: @title,
         applicationId: "1044821469818202176"
       })
-      #この部分で「@books」にAPIからの取得したJSONデータを格納していきます。
-      #read(result)については、privateメソッドとして、設定しております。
+
       results.each do |result|
-        book = Book.new(read(result))
-        @books << book
+        book = Book.new(read(result))  #read(result)については、privateメソッドとして、設定
+        @books << book #「@books」にAPIからの取得したJSONデータを格納
       end
     end
-    #「@books」内の各データをそれぞれ保存していきます。
-    #すでに保存済の本は除外するためにunlessの構文を記載しています。
-    @books.each do |book|
-      unless Book.all.include?(book)
+
+    @books.each do |book|  #「@books」内の各データをそれぞれ保存していきます。
+      unless Book.all.include?(book)  #すでに保存済の本は除外するためにunlessの構文を記載しています。
         book.save
       end
     end
@@ -35,12 +33,15 @@ class BooksController < ApplicationController
     url = result["itemUrl"]
     isbn = result["isbn"]
     image_url = result["mediumImageUrl"].gsub('?_ex=120x120', '')
+    salesDate = result["salesDate"]
     {
       title: title,
       author: author,
       url: url,
       isbn: isbn,
       image_url: image_url,
+      salesDate: salesDate,
     }
   end
+
 end

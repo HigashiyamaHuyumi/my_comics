@@ -1,13 +1,32 @@
+<div class="container">
+  <div class="row">
+    <%= form_tag(books_search_path(@book), method: :get) do %>
+      <%= text_field_tag :title, @title %>
+      <%= button_tag "検索", type: "submit" %>
+    <% end %>
+  </div>
 
-<%= form_tag(books_search_path(@book), method: :get) do %>
-  <%= text_field_tag :title, @title %>
-  <%= button_tag type: "submit" %>
-<% end %>
+  <div class="row center">
+    <% if @books %>
+      <% @books.each do |book| %>
+        <div class="col-md-5">
+          <% if book.image_url.present? %>
+            <%= image_tag book.image_url, width: 128, height: 188 %>
+          <% else %>
+            <%= image_tag "no_image.jpg", width: 128, height: 188 %>
+          <% end %>
+        </div>
+        <div class="col-md-5">
+          <%= book.title %>
+          <br>
+          <%= book.author %>
+          <br>
+          <%= book.salesDate %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
 
-<% if @books %>
-  <% @books.each do |book| %>
-    <%= image_tag book.image_url %>
-    <%= book.title %>
-    <%= book.author %>
-  <% end %>
-<% end %>
+</div>
+
+<%= render 'layouts/footer' %>

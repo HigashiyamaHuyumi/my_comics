@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2023_11_12_190242) do
     t.string "author"
     t.string "url"
     t.string "image_url"
+    t.string "salesDate"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
