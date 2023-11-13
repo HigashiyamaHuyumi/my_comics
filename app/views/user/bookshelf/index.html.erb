@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h5><span style="background-color: #dcdcdc;">本棚</span></h5>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table" style="border: 1px solid black;">
+        <thead>
+          <th style="border: 1px solid black;">タイトル</th>
+          <th style="border: 1px solid black;">著者</th>
+        </thead>
+        <tbody>
+          <% @bookshelf.each do |bookshelf| %>
+            <tr>
+              <td style="border: 1px solid black;">
+                <% if bookshelf.item.image.attached? %>
+                  <%= image_tag bookshelf.item.image, width: 50, height: 50 %>
+                <% else %>
+                  <%= image_tag "no_image.jpg", width: 50, height: 50 %>
+                <% end %>
+                <%= bookshelf.tital %>
+              </td>
+              <td style="border: 1px solid black; text-align: center;">
+                <%= link_to bookshelf_path(bookshelf), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に消しますか？"  do %>
+                  削除する
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+</div>

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       patch :withdrawal, on: :member # 退会処理用のルート
 		end
 		resources :comics
+		resources :bookshelf
 	end
 
   # 管理者用
