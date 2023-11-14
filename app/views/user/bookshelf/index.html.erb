@@ -1,7 +1,12 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6">
-      <h5><span style="background-color: #dcdcdc;">本棚</span></h5>
+     <h5>
+        <span>
+          <%= link_to "#{current_user.nickname}", my_page_path, class: "background: linear-gradient(transparent 70% , yellow 70%" %>
+          の本棚
+        </span>
+    </h5>
     </div>
   </div>
 
@@ -17,11 +22,14 @@
             <tr>
               <td style="border: 1px solid black;">
                 <% if bookshelf.book.image_url %>
-                  <%= image_tag bookshelf.book.image_url, width: 50, height: 50 %>
+                  <%= image_tag bookshelf.book.image_url, width: 128, height: 188 %>
                 <% else %>
-                  <%= image_tag "no_image.jpg", width: 50, height: 50 %>
+                  <%= image_tag "no_image.jpg", width: 128, height: 188 %>
                 <% end %>
                 <%= bookshelf.book.title if bookshelf.book.present? %>
+              </td>
+              <td style="border: 1px solid black;">
+                <%= bookshelf.book.author if bookshelf.book.present? %>
               </td>
               <td style="border: 1px solid black; text-align: center;">
                 <%= link_to bookshelf_path(bookshelf), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に消しますか？"  do %>

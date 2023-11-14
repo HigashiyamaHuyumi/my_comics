@@ -13,7 +13,7 @@ class User::UsersController < ApplicationController
     @user = current_user
     if @user.update(user_params)
       flash[:notice] = '登録情報を更新しました'
-      redirect_to my_page_path
+      redirect_to bookshelf_index_path
     else
       render 'users_information_edit'
     end
