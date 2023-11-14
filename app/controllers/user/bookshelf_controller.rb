@@ -2,20 +2,23 @@ class User::BookshelfController < ApplicationController
   before_action :set_bookshelf, only: [:update, :destroy]
 
   def create
-    comics = Comics.find(bookshelf_params[:comics_id])
-    @user_bookshelf = current_user.bookshelf.find_by(comics: comics)
+    book = Book.find(bookshelf_params[:book_id])
+    @user_bookshelf = current_user.bookshelf.find_by(book: book)
 
     if @user_bookshelf
       flash[:error] = "既に本棚にあります。"
     else
-      @bookshelf = current_user.bookshelf.new(bookshelf_params)
+      @bookshelf = current_user.bookshelf.new(book: book)
+
       if @bookshelf.save
         flash[:success] = "本棚に追加しました。"
       else
         flash[:error] = "本棚に追加できませんでした。"
+        Rails.logger.debug(@bookshelf.errors.full_messages) # エラーがあればログに出力
       end
     end
-    redirect_to bookshelf_path
+
+    redirect_to bookshelf_index_path
   end
 
   def index
@@ -28,13 +31,13 @@ class User::BookshelfController < ApplicationController
     else
       flash[:error] = "本棚の更新に失敗しました。"
     end
-    redirect_to bookshelf_path
+    redirect_to bookshelf_index_path
   end
 
   def destroy
     @bookshelf.destroy
     flash[:success] = "漫画を本棚から削除しました。"
-    redirect_to bookshelf_path
+    redirect_to bookshelf_index_path
   end
 
   private
@@ -44,6 +47,7 @@ class User::BookshelfController < ApplicationController
   end
 
   def bookshelf_params
-    params.require(:bookshelf).permit(:comics_id, :book_id)
+    params.permit(:book_id, :isbn)
   end
+
 end
