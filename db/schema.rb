@@ -66,19 +66,15 @@ ActiveRecord::Schema.define(version: 2023_11_13_103553) do
     t.integer "user_id", null: false
     t.integer "comics_id"
     t.integer "book_id"
+    t.string "title"
+    t.string "author"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "comics", primary_key: "isbn", force: :cascade do |t|
+  create_table "comics", id: false, force: :cascade do |t|
     t.string "title", null: false
     t.string "author", null: false
-    t.string "url"
-    t.string "image_url"
-    t.string "publisher"
-    t.datetime "publication_date"
-    t.string "rakuten_books_url"
-    t.string "remarks"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

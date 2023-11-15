@@ -6,11 +6,7 @@
 
     <%= render 'layouts/comics_errors' , comics: @comics  %>
 
-  　<%= form_with model: @item,url: admin_item_path(@item), method: :patch do |f| %>
-
-      <%= f.label :"商品画像" %>
-      <%= f.file_field :image, accept: "image/*" %>
-      <br>
+  　<%= form_with model: @comics,url: admin_comics_path(@comics), method: :patch do |f| %>
 
       <%= f.label :"商品名" %>
       <%= f.text_field :name %>
@@ -20,9 +16,6 @@
       <%= f.text_area :introduction %>
       <br>
 
-      <%= f.label :"税抜価格" %>
-      <%= f.text_field :price %>円
-      <br>
     </div>
   </div>
 

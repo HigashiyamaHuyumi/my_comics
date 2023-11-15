@@ -11,10 +11,10 @@ class User::ComicsController < ApplicationController
   end
 
   def create #データを追加（保存）する
-    @comics = Comics.new(comics_params)
+    @comics = Comics.new(comic_params)
     if @comics.save
       flash[:notice] ='漫画を新しく投稿しました'
-      redirect_to comics_path(@comics)
+      redirect_to comics_path
     else
       render :new
     end
@@ -30,7 +30,7 @@ class User::ComicsController < ApplicationController
 
   def update #データを更新する
     @comics = Comics.find(params[:id])
-    if @comics.update(comics_params)
+    if @comics.update(comic_params)
      flash[:notice] ='漫画の情報を更新しました'
      redirect_to comics_path(@comics.id)
     else
@@ -44,11 +44,11 @@ class User::ComicsController < ApplicationController
     flash[:notice] ='選んだ漫画を本棚から削除しました'
     redirect_to comics_path # 投稿一覧画面へリダイレクト
   end
-  
+
   private
-  
-  def comics_params
-    params.require(:comics).permit(:title, :author, :isbn_code, :publicher, :publication_date, :rakuten_books_url, :remarks, :image)
+
+  def comic_params
+    params.require(:comics).permit(:title, :author, :user_id,)
   end
 
   def is_matching_login_user
@@ -57,5 +57,5 @@ class User::ComicsController < ApplicationController
       redirect_to comics_path
     end
   end
-  
+
 end

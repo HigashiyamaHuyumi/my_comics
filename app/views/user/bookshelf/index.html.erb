@@ -11,28 +11,40 @@
   </div>
 
   <div class="row">
+    <div class="col-4" style="text-align: right;">
+      <%= link_to new_bookshelf_path, class: "btn btn-outline-dark btn-circle text-dark" do %>
+        <i class="fas fa-plus"></i>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
     <div class="col-md-12">
       <table class="table" style="border: 1px solid black;">
         <thead>
-          <th style="border: 1px solid black;">タイトル</th>
-          <th style="border: 1px solid black;">著者</th>
+          <tr>
+            <th style="border: 1px solid black;">タイトル</th>
+            <th style="border: 1px solid black;">著者</th>
+            <th style="border: 1px solid black;">操作</th>
+          </tr>
         </thead>
         <tbody>
           <% @bookshelf.each do |bookshelf| %>
             <tr>
               <td style="border: 1px solid black;">
-                <% if bookshelf.book.image_url %>
-                  <%= image_tag bookshelf.book.image_url, width: 128, height: 188 %>
+                <% if bookshelf.book&.image_url.present? %>
+                  <%= image_tag url_for(bookshelf.book.image_url), width: 128, height: 188 %>
                 <% else %>
                   <%= image_tag "no_image.jpg", width: 128, height: 188 %>
                 <% end %>
-                <%= bookshelf.book.title if bookshelf.book.present? %>
+
+                <%= bookshelf.book&.title %>
               </td>
               <td style="border: 1px solid black;">
-                <%= bookshelf.book.author if bookshelf.book.present? %>
+                <%= bookshelf.book&.author %>
               </td>
               <td style="border: 1px solid black; text-align: center;">
-                <%= link_to bookshelf_path(bookshelf), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に消しますか？"  do %>
+                <%= link_to bookshelf_path(bookshelf), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に消しますか？" do %>
                   削除する
                 <% end %>
               </td>
@@ -42,5 +54,4 @@
       </table>
     </div>
   </div>
-
 </div>

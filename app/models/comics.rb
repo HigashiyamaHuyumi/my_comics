@@ -1,9 +1,6 @@
 class Comics < ApplicationRecord
 
   has_one_attached :image
-  belongs_to :user
-  belongs_to :book, primary_key: "isbn"
-
 
   def get_image
     unless image.attached?

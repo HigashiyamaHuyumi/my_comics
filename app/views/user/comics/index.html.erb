@@ -23,10 +23,10 @@
         </thead>
 
         <tbody>
-          <% @comics_all.each do |comic| %>
+          <% @comics_all.each do |comics| %>
             <tr>
-              <td><%= link_to comic.title, comic_path(comic) %></td>
-              <td><%= comic.author %></td>
+              <td><%= link_to comics.title, comics_path(@comics) %></td>
+              <td><%= comics.author %></td>
             </tr>
           <% end %>
         </tbody>

@@ -17,7 +17,6 @@ class User::BookshelfController < ApplicationController
         Rails.logger.debug(@bookshelf.errors.full_messages) # エラーがあればログに出力
       end
     end
-
     redirect_to bookshelf_index_path
   end
 
