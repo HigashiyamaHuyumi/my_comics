@@ -1,11 +1,6 @@
 class User::ComicsController < ApplicationController
   before_action :is_matching_login_user, only: [:edit, :update]
 
-  def index # データの一覧を表示する
-    @comics = Comics.new
-    @comics_all = Comics.all
-  end
-
   def new
     @comics = Comics.new
   end
@@ -16,9 +11,15 @@ class User::ComicsController < ApplicationController
       flash[:notice] ='漫画を新しく投稿しました'
       redirect_to comics_path
     else
-      render :new
+      @comic = Comics.all
+      render :index
     end
   end
+
+  def index # データの一覧を表示する
+    @comic = Comics.all
+  end
+
 
   def show #データの内容（詳細）を表示する
     @comics = Comics.find(params[:id])
@@ -48,7 +49,7 @@ class User::ComicsController < ApplicationController
   private
 
   def comic_params
-    params.require(:comics).permit(:title, :author, :user_id,)
+    params.require(:comics).permit(:title, :author, :publisher, :user_id)
   end
 
   def is_matching_login_user

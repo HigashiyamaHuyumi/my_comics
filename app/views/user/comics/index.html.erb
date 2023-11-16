@@ -18,15 +18,21 @@
           <tr>
             <th>タイトル</th>
             <th>著者</th>
-            <th></th>
+            <th>出版社</th>
           </tr>
         </thead>
 
         <tbody>
-          <% @comics_all.each do |comics| %>
+          <% @comics.each do |comic| %>
             <tr>
-              <td><%= link_to comics.title, comics_path(@comics) %></td>
-              <td><%= comics.author %></td>
+              <td><%= link_to comic.title, comic_path(comics) %></td>
+              <td><%= comic.author %></td>
+              <td><%= comic.publisher %></td>
+              <td>
+                <%= link_to comic_path(comic), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に消しますか？"  do %>
+                  削除する
+                <% end %>
+              </td>
             </tr>
           <% end %>
         </tbody>

@@ -6,14 +6,14 @@
 
     <%= render 'layouts/comics_errors' , comics: @comics  %>
 
-  　<%= form_with model: @comics,url: admin_comics_path(@comics), method: :patch do |f| %>
+  　<%= form_with model: @comics,url: comic_path(@comics), method: :patch do |f| %>
 
-      <%= f.label :"商品名" %>
-      <%= f.text_field :name %>
+      <%= f.label :"タイトル" %>
+      <%= f.text_field :title %>
       <br>
 
-      <%= f.label :"商品説明" %>
-      <%= f.text_area :introduction %>
+      <%= f.label :"著者" %>
+      <%= f.text_field :author %>
       <br>
 
     </div>

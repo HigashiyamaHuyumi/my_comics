@@ -8,11 +8,15 @@
       <%= form_with model: @comics,url: comics_path, method: :post, local: true, multipart: true do |f| %>
 
         <%= f.label :"タイトル" %>
-        <%= f.text_field :title, required: true %>
+        <%= f.text_field :title %>
         <br>
 
         <%= f.label :"著者" %>
-        <%= f.text_field :author, required: true %>
+        <%= f.text_field :author %>
+        <br>
+
+        <%= f.label :"出版社" %>
+        <%= f.text_field :publisher %>
         <br>
 
         <div class="row justify-content-center">
