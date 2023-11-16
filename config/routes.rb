@@ -14,7 +14,8 @@ Rails.application.routes.draw do
 		  get :confirm, on: :member # 退会
       patch :withdrawal, on: :member # 退会処理
 		end
-		resources :comics
+		resources :comic
+		resources :comic_detail
 		resources :bookshelf
 	end
 

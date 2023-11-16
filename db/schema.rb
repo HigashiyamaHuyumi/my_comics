@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_11_13_103553) do
+ActiveRecord::Schema.define(version: 2023_11_16_155904) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -71,11 +71,25 @@ ActiveRecord::Schema.define(version: 2023_11_13_103553) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "comics", force: :cascade do |t|
+  create_table "comic", force: :cascade do |t|
     t.integer "user_id", null: false
+    t.integer "comic_detail_id", null: false
     t.string "title", null: false
     t.string "author", null: false
     t.string "publisher", null: false
+    t.string "remarks"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "comic_details", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "volume_id"
+    t.integer "tag_id"
+    t.string "story"
+    t.string "purchase_place"
+    t.string "version"
+    t.string "comic_size"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

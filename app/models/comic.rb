@@ -1,7 +1,8 @@
-class Comics < ApplicationRecord
+class Comic < ApplicationRecord
 
   has_one_attached :image
   belongs_to :user
+  has_many :comic_details
 
   def get_image
     unless image.attached?

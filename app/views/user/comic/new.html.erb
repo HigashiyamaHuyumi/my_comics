@@ -4,8 +4,8 @@
   <div class="row justify-content-center">
     <div class="col-md-6">
 
-      <%= render 'layouts/comics_errors' , comics: @comics  %>
-      <%= form_with model: @comics,url: comics_path, method: :post, local: true, multipart: true do |f| %>
+      <%= render 'layouts/comics_errors' , comics: @comic  %>
+      <%= form_with model: @comic,url: comics_path, method: :post, local: true, multipart: true do |f| %>
 
         <%= f.label :"タイトル" %>
         <%= f.text_field :title %>
