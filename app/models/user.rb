@@ -12,6 +12,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :bookshelf
-  has_many :comics
+  has_many :comic
 
 end

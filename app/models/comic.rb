@@ -1,5 +1,4 @@
 class Comic < ApplicationRecord
-
   has_one_attached :image
   belongs_to :user
   has_many :comic_details
@@ -11,5 +10,4 @@ class Comic < ApplicationRecord
     end
     image
   end
-
 end

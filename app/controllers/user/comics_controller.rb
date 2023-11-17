@@ -1,4 +1,4 @@
-class User::ComicController < ApplicationController
+class User::ComicsController < ApplicationController
   before_action :is_matching_login_user, only: [:edit, :update]
 
   def new
@@ -43,7 +43,7 @@ class User::ComicController < ApplicationController
   end
 
   def destroy #データを削除する
-    @comic = Comic.find(params[:title])
+    @comic = Comic.find(params[:id])
     @comic.destroy  # データ（レコード）を削除
     flash[:notice] ='選んだ漫画を本棚から削除しました'
     redirect_to comics_path # 投稿一覧画面へリダイレクト
@@ -61,5 +61,4 @@ class User::ComicController < ApplicationController
       redirect_to comics_path
     end
   end
-
 end
