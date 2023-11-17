@@ -3,6 +3,12 @@ class User::UsersController < ApplicationController
 
   def my_page #顧客のマイページ
     @user = current_user
+    @bookshelf = @user.bookshelf
+    @comics = Comic.all
+  end
+
+  def show
+    @user = current_user
   end
 
   def infomation #顧客の登録情報編集画面
@@ -13,7 +19,7 @@ class User::UsersController < ApplicationController
     @user = current_user
     if @user.update(user_params)
       flash[:notice] = '登録情報を更新しました'
-      redirect_to bookshelf_index_path
+      redirect_to my_page_path
     else
       render 'users_information_edit'
     end

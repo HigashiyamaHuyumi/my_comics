@@ -10,16 +10,13 @@ class User::ComicsController < ApplicationController
     @comic.user_id = current_user.id # ログインしているユーザーのIDを設定
     if @comic.save
       flash[:notice] ='You have created book successfully.'
-      redirect_to comic_path(@comic)
+      redirect_to my_page_path
     else
-      @user = current_user
-      @comics = Comics.all
-      render :index
+      render :new
     end
   end
 
   def index # データの一覧を表示する
-    @comic = Comic.new
     @comics = Comic.all
     @user = current_user
   end
@@ -46,7 +43,7 @@ class User::ComicsController < ApplicationController
     @comic = Comic.find(params[:id])
     @comic.destroy  # データ（レコード）を削除
     flash[:notice] ='選んだ漫画を本棚から削除しました'
-    redirect_to comics_path # 投稿一覧画面へリダイレクト
+    redirect_to my_page_path # 投稿一覧画面へリダイレクト
   end
 
   private

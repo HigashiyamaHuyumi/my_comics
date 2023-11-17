@@ -1,0 +1,24 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table">
+
+        <tbody>
+          <% @bookshelf.each do |bookshelf| %>
+            <tr>
+              <td><%= bookshelf.book&.title %></td>
+              <td><%= bookshelf.book&.author %></td>
+              <td><%= bookshelf.book&.publisherName %></td>
+              <td style="text-align: center;">
+                <%= link_to bookshelf_path(bookshelf), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に消しますか？" do %>
+                  削除する
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

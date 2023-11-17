@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
 		get '/users/my_page', to: 'users#my_page', as: 'my_page' #マイページ用のルート
 		get '/users/my_page/infomation', to: 'users#infomation', as: 'infomation'
-    resources :users, only: [:update] do
+    resources :users, only: [:show, :update] do
 		  get :confirm, on: :member # 退会
       patch :withdrawal, on: :member # 退会処理
 		end

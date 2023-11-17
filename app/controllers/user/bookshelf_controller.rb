@@ -17,7 +17,7 @@ class User::BookshelfController < ApplicationController
         Rails.logger.debug(@bookshelf.errors.full_messages) # エラーがあればログに出力
       end
     end
-    redirect_to bookshelf_index_path
+    redirect_to my_page_path
   end
 
   def index
@@ -30,13 +30,13 @@ class User::BookshelfController < ApplicationController
     else
       flash[:error] = "本棚の更新に失敗しました。"
     end
-    redirect_to bookshelf_index_path
+    redirect_to my_page_path
   end
 
   def destroy
     @bookshelf.destroy
     flash[:success] = "漫画を本棚から削除しました。"
-    redirect_to bookshelf_index_path
+    redirect_to my_page_path
   end
 
   private

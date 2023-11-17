@@ -1,27 +1,41 @@
 <div class="container">
-  <div class="row">
-    <h5><span style="background-color: #dcdcdc;">登録情報</span></h5>
-    <%= link_to "編集する", infomation_path, class: "btn btn-success" %>
-  </div>
 
   <div class="row">
     <div class="col-md-6">
-      <table class="table">
-        <% if @user.present? %>
-          <tr>
-            <th>ニックネーム</th>
-            <td><%= @user.nickname %></td>
-          </tr>
-          <tr>
-            <th>メールアドレス</th>
-            <td><%= @user.email %></td>
-          </tr>
-        <% end %>
-      </table>
-
+      <h5>
+        <span>
+          <%= link_to "#{current_user.nickname}", infomation_path, class: "background: linear-gradient(transparent 70% , yellow 70%" %>
+          の本棚
+        </span>
+      </h5>
+    </div>
+    <div class="col-4" style="text-align: right;">
+      <%= link_to new_comic_path, class: "btn btn-outline-dark btn-circle text-dark" do %>
+        <i class="fas fa-plus"></i>
+      <% end %>
     </div>
   </div>
 
+
+  <div class="row">
+    
+     <table class = "table table-striped">
+
+        <thead>
+          <tr>
+            <th>タイトル</th>
+            <th>著者</th>
+            <th>出版社</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+    <h2>Bookshelf</h2>
+    <%= render partial: 'user/bookshelf/index', locals: { bookshelf: @bookshelf } %>
+
+    <h2>Comics</h2>
+    <%= render partial: 'user/comics/index', locals: { comics: @comics } %>
+     </table>
+  </div>
 </div>
 
 <%= render 'layouts/footer' %>
