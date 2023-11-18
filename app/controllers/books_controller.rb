@@ -24,6 +24,16 @@ class BooksController < ApplicationController
     end
   end
 
+  def add_to_bookshelf
+    @book = Book.find(params[:id])
+    current_user.bookshelf.books << @book
+    redirect_to book_path(@book), notice: '本を本棚に追加しました。'
+  end
+
+  def show #データの内容（詳細）を表示する
+    @book = Book.find_by(isbn: params[:id])
+  end
+
   private
 
   #「楽天APIのデータから必要なデータを絞り込む」、且つ「対応するカラムにデータを格納する」メソッドを設定していきます。

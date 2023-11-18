@@ -24,6 +24,8 @@ class User::BookshelfController < ApplicationController
     @bookshelf = current_user.bookshelf
   end
 
+
+
   def update
     if @bookshelf.update(bookshelf_params)
       flash[:success] = "本棚を更新しました。"
@@ -46,7 +48,7 @@ class User::BookshelfController < ApplicationController
   end
 
   def bookshelf_params
-    params.permit(:book_id, :isbn, :user_id)
+    params.require(:bookshelf).permit(:book_id, :isbn, :user_id)
   end
 
 end

@@ -2,9 +2,9 @@ class User::UsersController < ApplicationController
   before_action :is_matching_login_user, only: [:my_page, :infomation, :update, :confirm, :withdrawal]
 
   def my_page #顧客のマイページ
-    @user = current_user
     @bookshelf = @user.bookshelf
     @comics = Comic.all
+    @combined_data = @bookshelf + @comics
   end
 
   def show
