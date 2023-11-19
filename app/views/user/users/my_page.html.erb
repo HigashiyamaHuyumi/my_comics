@@ -1,41 +1,11 @@
 <div class="container">
-
   <div class="row">
-    <div class="col-md-6">
-      <h5>
-        <span>
-          <%= link_to "#{current_user.nickname}", infomation_path, class: "background: linear-gradient(transparent 70% , yellow 70%" %>
-          の本棚
-        </span>
-      </h5>
-    </div>
-    <div class="col-4" style="text-align: right;">
-      <%= link_to new_comic_path, class: "btn btn-outline-dark btn-circle text-dark" do %>
-        <i class="fas fa-plus"></i>
-      <% end %>
-    </div>
-  </div>
-
-
-  <div class="row">
-     <table class = "table table-striped">
-        <thead>
-          <tr>
-            <th>タイトル</th>
-            <th>著者</th>
-            <th>出版社</th>
-            <th>操作</th>
-          </tr>
-        </thead>
-        <h2>Combined Data</h2>
-        <div class="container">
-  <div class="row">
-    <div class="col-8">
-      <h5><span style="background-color: #dcdcdc;">漫画一覧と本棚</span></h5>
-    </div>
-
-    <div class="col-12">
-      <table class="table table-striped">
+    <div class="col-md-12">
+      <table class="table">
+        
+        <%= link_to "タイトル順", my_page_path(order: 'title') %>
+        <%= link_to "作者順", my_page_path(order: 'author') %>
+        
         <thead>
           <tr>
             <th>タイトル</th>
@@ -45,19 +15,27 @@
           </tr>
         </thead>
         <tbody>
-          <% if @combined_data.present? %>
-            <% @combined_data.each do |book| %>
+          <% @bookshelf.each do |bookshelf| %>
+            <tr>
+              <td><%= link_to bookshelf.book.title, bookshelf_path(bookshelf) %></td>
+              <td><%= bookshelf.book.author %></td>
+              <td><%= bookshelf.book.publisherName %></td>
+              <td style="text-align: center;">
+                <%= link_to bookshelf_path(bookshelf), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に消しますか？" do %>
+                  削除する
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+
+          <% if @comics.present? %>
+            <% @comics.each do |comic| %>
               <tr>
-                <td><%= link_to book.title, book_path(book) %></td>
-                <td><%= book.author %></td>
-        
-                <td>
-                  <%= link_to "編集する", edit_book_path(book), class: "btn btn-success" %>
-                </td>
-                <td>
-                  <%= link_to book_path(book), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に消しますか？"  do %>
-                    削除する
-                  <% end %>
+                <td><%= link_to comic.title, comic_path(comic) %></td>
+                <td><%= comic.author %></td>
+                <td><%= comic.publisher %></td>
+                <td style="text-align: center;">
+                  <!-- 漫画に対する操作のリンクなどを追加する場合はここに追加 -->
                 </td>
               </tr>
             <% end %>
@@ -70,7 +48,6 @@
       </table>
     </div>
   </div>
-  <!-- %= paginate @combined_data % -->
 </div>
 
 

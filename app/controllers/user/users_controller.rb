@@ -2,9 +2,10 @@ class User::UsersController < ApplicationController
   before_action :is_matching_login_user, only: [:my_page, :infomation, :update, :confirm, :withdrawal]
 
   def my_page #顧客のマイページ
-    @bookshelf = @user.bookshelf
-    @comics = Comic.all
-    @combined_data = @bookshelf + @comics
+    order_by = params[:order] || 'title' # パラメータがない場合はタイトル順にデフォルト
+    @bookshelf = current_user.bookshelf.order(order_by)
+    @comics = Comic.order(order_by)
+    @combined_data = (@bookshelf + @comics).compact.sort_by { |data| data&.title || '' }
   end
 
   def show

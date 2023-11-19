@@ -3,11 +3,18 @@
   <div class="row">
     <div class="col-md-12">
       <table class="table">
+        <thead>
+          <tr>
+            <th>タイトル</th>
+            <th>著者</th>
+            <th>出版社</th>
+          </tr>
+        </thead>
 
         <tbody>
           <% @bookshelf.each do |bookshelf| %>
             <tr>
-              <td><%= bookshelf.book.title %></td>
+              <td><%= link_to bookshelf.book.title, bookshelf_path(bookshelf) %></td>
               <td><%= bookshelf.book.author %></td>
               <td><%= bookshelf.book.publisherName %></td>
               <td style="text-align: center;">

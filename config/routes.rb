@@ -29,12 +29,7 @@ Rails.application.routes.draw do
   get '/about', to: 'homes#about', as: 'home_about'
   post '/homes/guest_sign_in', to: 'homes#guest_sign_in'
   get 'books/search', to: "books#search", as: 'books_search'
-  resources :books do
-    member do
-      post 'add_to_bookshelf'
-    end
-  end
+  resources :books
 end
 
 
-  

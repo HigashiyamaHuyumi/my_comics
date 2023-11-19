@@ -1,16 +1,14 @@
 <div class="container">
-  <h5><span style="background-color: #dcdcdc;">漫画詳細</span></h5>
   <div class="row">
-    <div class="col-md-8">
-      <div class="row">
-        <div class="col-md-4">タイトル</div>
-        <div class="col-md-8"><%= @comic.title %></div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">著者</div>
-        <div class="col-md-8"><%= @comic.author %></div>
-      </div>
+    <div class="col-md-8 offset-md-2">
+      <h1><%= @comic.title %></h1>
+      <p>著者: <%= @comic.author %></p>
+      <p>出版社: <%= @comic.publisher %></p>
+      <!-- 他に表示したい情報があればここに追加 -->
 
+      <%= link_to '編集', edit_comic_path(@comic), class: 'btn btn-primary' %>
+      <%= link_to '削除', comic_path(@comic), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+      <%= link_to '一覧に戻る', comics_path, class: 'btn btn-secondary' %>
     </div>
   </div>
 </div>

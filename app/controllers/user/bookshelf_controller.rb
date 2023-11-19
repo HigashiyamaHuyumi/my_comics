@@ -1,7 +1,7 @@
 class User::BookshelfController < ApplicationController
   before_action :set_bookshelf, only: [:update, :destroy]
 
-  def create
+  def index
     book = Book.find(bookshelf_params[:book_id])
     @user_bookshelf = current_user.bookshelf.find_by(book: book)
 
@@ -24,7 +24,9 @@ class User::BookshelfController < ApplicationController
     @bookshelf = current_user.bookshelf
   end
 
-
+  def show
+    @bookshelf = current_user.bookshelf.find(params[:id])
+  end
 
   def update
     if @bookshelf.update(bookshelf_params)
@@ -48,7 +50,7 @@ class User::BookshelfController < ApplicationController
   end
 
   def bookshelf_params
-    params.require(:bookshelf).permit(:book_id, :isbn, :user_id)
+    params.permit(:book_id, :isbn, :user_id)
   end
 
 end

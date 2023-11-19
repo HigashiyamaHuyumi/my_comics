@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>漫画一覧</h1>
+
+      <div class="col-12">
+        <table class = "table table-striped">
+          
+          <thead>
+            <tr>
+              <th>タイトル</th>
+              <th>著者</th>
+              <th>出版社</th>
+            </tr>
+          </thead>
+  
+          <tbody>
+            <% if @comics.present? %>
+              <% @comics.each do |comic| %>
+                <tr>
+                  <td><%= link_to comic.title, comic_path(comic) %></td>
+                  <td><%= comic.author %></td>
+                  <td><%= comic.publisher %></td>
+                </tr>
+              <% end %>
+            <% else %>
+            <tr>
+              <td colspan="4">データがありません。</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- %= paginate @comics % -->
+</div>

@@ -38,7 +38,10 @@
                     <%= book.salesDate %>
                   </td>
                   <td style="border: 1px solid black; text-align: center;">
-                    <%= link_to "本棚に入れる", add_to_bookshelf_book_path(book), method: :post, class: "btn btn-success" %>
+                    <%= form_with(model: @bookshelf, url: bookshelf_index_path, method: :post) do |f| %>
+                      <%= f.hidden_field :book_id, value: book.id %>
+                      <%= f.submit "本棚に入れる", class: "btn btn-success" %>
+                    <% end %>
                   </td>
                 </tr>
               <% end %>

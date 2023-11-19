@@ -11,7 +11,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  belongs_to :bookshelf, dependent: :destroy
+  has_many :bookshelf, dependent: :destroy
   has_many :comic
 
 end

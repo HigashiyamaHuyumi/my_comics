@@ -1,0 +1,32 @@
+<%= form_with(model: comic, local: true) do |form| %>
+  <% if comic.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(comic.errors.count, "error") %> prohibited this comic from being saved:</h2>
+
+      <ul>
+        <% comic.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :タイトル %>
+    <%= form.text_field :title, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :著者 %>
+    <%= form.text_field :author, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :出版社 %>
+    <%= form.text_field :publisher, class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit '保存', class: 'btn btn-primary' %>
+  </div>
+<% end %>

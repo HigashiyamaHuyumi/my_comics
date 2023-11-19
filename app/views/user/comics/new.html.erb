@@ -1,29 +1,10 @@
 <div class="container">
-  <h5><span style="background-color: #dcdcdc;">新規登録</span></h5>
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h1>新しい漫画を追加</h1>
 
-  <div class="row justify-content-center">
-    <div class="col-md-6">
+      <%= render 'form', comic: @comic %>
 
-      <%= render 'layouts/comics_errors' , comics: @comic  %>
-      <%= form_with model: @comic,url: comics_path, method: :post, local: true, multipart: true do |f| %>
-
-        <%= f.label :"タイトル" %>
-        <%= f.text_field :title %>
-        <br>
-
-        <%= f.label :"著者" %>
-        <%= f.text_field :author %>
-        <br>
-
-        <%= f.label :"出版社" %>
-        <%= f.text_field :publisher %>
-        <br>
-
-        <div class="row justify-content-center">
-          <%= f.submit'新規登録', class: "btn btn-success" %>
-        </div>
-
-      <% end %>
     </div>
   </div>
 </div>
