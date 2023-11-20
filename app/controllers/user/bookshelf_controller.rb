@@ -1,7 +1,7 @@
 class User::BookshelfController < ApplicationController
   before_action :set_bookshelf, only: [:update, :destroy]
 
-  def index
+  def create
     book = Book.find(bookshelf_params[:book_id])
     @user_bookshelf = current_user.bookshelf.find_by(book: book)
 
