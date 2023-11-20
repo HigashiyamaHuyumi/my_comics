@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_11_17_124943) do
+ActiveRecord::Schema.define(version: 2023_11_20_114540) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -95,6 +95,13 @@ ActiveRecord::Schema.define(version: 2023_11_17_124943) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "tags", id: false, force: :cascade do |t|
+    t.integer "comic_id", null: false
+    t.integer "tag_id", null: false
+    t.index ["comic_id"], name: "index_tags_on_comic_id"
+    t.index ["tag_id"], name: "index_tags_on_tag_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "nickname", null: false
     t.boolean "is_active", default: true
@@ -111,4 +118,6 @@ ActiveRecord::Schema.define(version: 2023_11_17_124943) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "tags", "comics"
+  add_foreign_key "tags", "tags"
 end

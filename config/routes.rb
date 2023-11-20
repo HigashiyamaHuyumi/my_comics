@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   post '/homes/guest_sign_in', to: 'homes#guest_sign_in'
   get 'books/search', to: "books#search", as: 'books_search'
   resources :books
+  resources :tags
 end
 
 

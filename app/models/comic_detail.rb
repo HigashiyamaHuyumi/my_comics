@@ -1,6 +1,7 @@
 class ComicDetail < ApplicationRecord
   belongs_to :comic
 
+
   enum story: { hardcover: 0, separate_volumes: 1, single_story: 2 }
   enum purchase_place: { book_store: 0, e_book: 1, others: 2 }
   enum version: { normal_version: 0, special_edition: 1, limited_edition: 2, others: 3 }
