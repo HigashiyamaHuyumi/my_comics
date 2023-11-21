@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_11_20_114540) do
+ActiveRecord::Schema.define(version: 2023_11_21_084141) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -84,6 +84,15 @@ ActiveRecord::Schema.define(version: 2023_11_20_114540) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "comic_tags", force: :cascade do |t|
+    t.integer "comic_id", null: false
+    t.integer "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["comic_id"], name: "index_comic_tags_on_comic_id"
+    t.index ["tag_id"], name: "index_comic_tags_on_tag_id"
+  end
+
   create_table "comics", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "comic_detail_id"
@@ -96,7 +105,7 @@ ActiveRecord::Schema.define(version: 2023_11_20_114540) do
   end
 
   create_table "tags", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -117,4 +126,6 @@ ActiveRecord::Schema.define(version: 2023_11_20_114540) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "comic_tags", "comics"
+  add_foreign_key "comic_tags", "tags"
 end

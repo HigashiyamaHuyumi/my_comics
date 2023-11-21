@@ -10,3 +10,13 @@ Admin.create!(
   email: 'admin@mail', # 任意のメールアドレス
   password: '000000' # 任意のパスワード
 )
+
+Tag.create([
+  { name: '女性漫画' },
+  { name: '少女漫画' },
+  { name: '青年漫画' },
+  { name: '少年漫画' },
+  { name: 'TL漫画' },
+  { name: 'BL漫画' },
+  { name: '大人漫画' }
+])

@@ -3,14 +3,25 @@ class User::ComicsController < ApplicationController
 
   def new
     @comic = Comic.new
+    @tags = Tag.all
   end
 
   def create #データを追加（保存）する
     @comic = Comic.new(comic_params)
     @comic.user_id = current_user.id # ログインしているユーザーのIDを設定
+
+    # 既存のタグが選択されている場合
+    if params[:comic][:tag_ids].present?
+      @comic.tag_ids = params[:comic][:tag_ids]
+    end
+
+    # 新しいタグが入力されている場合
+    if params[:comic][:new_tag].present?
+      @comic.tags << Tag.find_or_create_by(name: params[:comic][:new_tag])
+    end
+
     if @comic.save
-      flash[:notice] ='You have created book successfully.'
-      redirect_to my_page_path
+      redirect_to my_page_path, notice: '漫画が作成されました'
     else
       render :new
     end
@@ -23,19 +34,32 @@ class User::ComicsController < ApplicationController
 
   def show #データの内容（詳細）を表示する
     @comic = Comic.find(params[:id])
+    @tags = @comic.tags.pluck(:name).join(',')
   end
 
   def edit #データを更新するためのフォームを表示す
     @comic = Comic.find(params[:id])
+    @tags = Tag.all
   end
 
-  def update #データを更新する
+  def update
     @comic = Comic.find(params[:id])
+
     if @comic.update(comic_params)
-     flash[:notice] ='漫画の情報を更新しました'
-     redirect_to comic_path(@comic.id)
+      # 既存のタグが選択されている場合
+      if params[:comic][:tag_ids].present?
+        @comic.tag_ids = params[:comic][:tag_ids]
+      end
+
+      # 新しいタグが入力されている場合
+      if params[:comic][:new_tag].present?
+        @comic.tags << Tag.find_or_create_by(name: params[:comic][:new_tag])
+      end
+
+      flash[:notice] = '漫画の情報を更新しました'
+      redirect_to comic_path(@comic.id)
     else
-     render :edit
+      render :edit
     end
   end
 
@@ -49,7 +73,7 @@ class User::ComicsController < ApplicationController
   private
 
   def comic_params
-    params.require(:comic).permit(:title, :author, :publisher, :remarks, tag_ids: [])
+    params.require(:comic).permit(:title, :author, :publisher, :remarks, :tag, :new_tag)
   end
 
   def is_matching_login_user

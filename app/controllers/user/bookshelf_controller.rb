@@ -27,14 +27,18 @@ class User::BookshelfController < ApplicationController
   def show
     @bookshelf = current_user.bookshelf.find(params[:id])
   end
+  
+  def edit
+    @bookshelf = Bookshelf.find(params[:id])
+  end
 
   def update
+    @bookshelf = Bookshelf.find(params[:id])
     if @bookshelf.update(bookshelf_params)
-      flash[:success] = "本棚を更新しました。"
+      redirect_to bookshelves_path, notice: '本の情報を更新しました'
     else
-      flash[:error] = "本棚の更新に失敗しました。"
+      render :edit
     end
-    redirect_to my_page_path
   end
 
   def destroy

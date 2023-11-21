@@ -1,0 +1,14 @@
+<%= form_for @bookshelf do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+  <%= f.label :author %>
+  <%= f.text_field :author %>
+
+  <%= f.label :publisher %>
+  <%= f.text_field :publisherName %>
+
+  <!-- 他の属性に対するフォーム入力を追加 -->
+
+  <%= f.submit '更新する' %>
+<% end %>

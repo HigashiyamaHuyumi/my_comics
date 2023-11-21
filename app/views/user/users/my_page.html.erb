@@ -2,10 +2,10 @@
   <div class="row">
     <div class="col-md-12">
       <table class="table">
-        
+
         <%= link_to "タイトル順", my_page_path(order: 'title') %>
         <%= link_to "作者順", my_page_path(order: 'author') %>
-        
+
         <thead>
           <tr>
             <th>タイトル</th>
@@ -20,7 +20,7 @@
               <td><%= link_to bookshelf.book.title, bookshelf_path(bookshelf) %></td>
               <td><%= bookshelf.book.author %></td>
               <td><%= bookshelf.book.publisherName %></td>
-              <td style="text-align: center;">
+              <td>
                 <%= link_to bookshelf_path(bookshelf), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に消しますか？" do %>
                   削除する
                 <% end %>
@@ -34,8 +34,10 @@
                 <td><%= link_to comic.title, comic_path(comic) %></td>
                 <td><%= comic.author %></td>
                 <td><%= comic.publisher %></td>
-                <td style="text-align: center;">
-                  <!-- 漫画に対する操作のリンクなどを追加する場合はここに追加 -->
+                <td>
+                  <%= link_to comic_path(comic), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に消しますか？" do %>
+                    削除する
+                  <% end %>
                 </td>
               </tr>
             <% end %>

@@ -5,7 +5,9 @@
       <p><strong>著者:</strong> <%= @bookshelf.book.author %></p>
       <p><strong>出版社:</strong> <%= @bookshelf.book.publisherName %></p>
       <!-- 他に表示したい情報があればここに追加 -->
-
+      
+      <%= link_to '編集', edit_bookshelf_path(@bookshelf), class: 'btn btn-primary' %>
+      <%= link_to '削除', bookshelf_path(@bookshelf), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
       <%= link_to "戻る", bookshelf_index_path, class: "btn btn-primary" %>
     </div>
   </div>
