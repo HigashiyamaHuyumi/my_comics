@@ -5,7 +5,7 @@ class Comic < ApplicationRecord
   # タグ付けのアソシエーション
   has_many :comic_tags, dependent: :destroy
   has_many :tags, through: :comic_tags
-  
+
   attr_accessor :new_tag
 
   # タグ付けの新規投稿用メソッド
@@ -33,14 +33,12 @@ class Comic < ApplicationRecord
   end
 
   private
-
+  
   def assign_tags
-    return unless tag_list
+    return unless new_tag.present?
 
-    tag_names = tag_list.split(',').map(&:strip)
-
-    self.tags = tag_names.map do |tag_name|
-      Tag.find_or_create_by(name: tag_name)
-    end
+    tag_names = new_tag.split(',').map(&:strip)
+    self.tags = tag_names.map { |tag_name| Tag.find_or_create_by(name: tag_name) }
   end
+
 end

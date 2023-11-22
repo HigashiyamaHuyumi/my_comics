@@ -11,12 +11,9 @@ Admin.create!(
   password: '000000' # 任意のパスワード
 )
 
-Tag.create([
-  { name: '女性漫画' },
-  { name: '少女漫画' },
-  { name: '青年漫画' },
-  { name: '少年漫画' },
-  { name: 'TL漫画' },
-  { name: 'BL漫画' },
-  { name: '大人漫画' }
-])
+tags = ['女性漫画','少女漫画','青年漫画','少年漫画','TL漫画','BL漫画','大人漫画','恋愛', 'サスペンス・ミステリー',
+'青春','学園','日常','異世界','人外','ホラー','ギャグ・コメディー','グルメ','スポーツ','SF・ファンタジー']
+
+tags.each do |tag_name|
+  Tag.find_or_create_by(name: tag_name)
+end

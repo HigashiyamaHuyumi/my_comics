@@ -6,21 +6,13 @@ class User::ComicsController < ApplicationController
     @tags = Tag.all
   end
 
-  def create #データを追加（保存）する
+  def create
     @comic = Comic.new(comic_params)
-    @comic.user_id = current_user.id # ログインしているユーザーのIDを設定
-
-    # 既存のタグが選択されている場合
-    if params[:comic][:tag_ids].present?
-      @comic.tag_ids = params[:comic][:tag_ids]
-    end
-
-    # 新しいタグが入力されている場合
-    if params[:comic][:new_tag].present?
-      @comic.tags << Tag.find_or_create_by(name: params[:comic][:new_tag])
-    end
+    @comic.user_id = current_user.id
 
     if @comic.save
+      # 保存成功時にも@tagsをセット
+      @tags = Tag.all
       redirect_to my_page_path, notice: '漫画が作成されました'
     else
       render :new
@@ -73,7 +65,7 @@ class User::ComicsController < ApplicationController
   private
 
   def comic_params
-    params.require(:comic).permit(:title, :author, :publisher, :remarks, :tag, :new_tag)
+    params.require(:comic).permit(:title, :author, :publisher, :remarks, :tag_ids, :new_tag)
   end
 
   def is_matching_login_user
