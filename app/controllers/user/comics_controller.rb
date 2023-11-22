@@ -3,7 +3,6 @@ class User::ComicsController < ApplicationController
 
   def new
     @comic = Comic.new
-    @tags = Tag.all
   end
 
   def create
@@ -11,7 +10,6 @@ class User::ComicsController < ApplicationController
     @comic.user_id = current_user.id
 
     if @comic.save
-      # 保存成功時にも@tagsをセット
       @tags = Tag.all
       redirect_to my_page_path, notice: '漫画が作成されました'
     else
@@ -38,6 +36,8 @@ class User::ComicsController < ApplicationController
     @comic = Comic.find(params[:id])
 
     if @comic.update(comic_params)
+      @tags = Tag.all 
+      
       # 既存のタグが選択されている場合
       if params[:comic][:tag_ids].present?
         @comic.tag_ids = params[:comic][:tag_ids]

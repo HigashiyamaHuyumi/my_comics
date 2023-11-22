@@ -1,10 +1,13 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
+      <%= link_to "#{current_user.nickname}の本棚" , user_path(@user) %>
       <table class="table">
 
         <%= link_to "タイトル順", my_page_path(order: 'title') %>
         <%= link_to "作者順", my_page_path(order: 'author') %>
+        
+        
 
         <thead>
           <tr>

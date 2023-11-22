@@ -38,7 +38,13 @@ class Comic < ApplicationRecord
     return unless new_tag.present?
 
     tag_names = new_tag.split(',').map(&:strip)
-    self.tags = tag_names.map { |tag_name| Tag.find_or_create_by(name: tag_name) }
+
+    # 既存のタグと一致するものを取得
+    existing_tags = Tag.where(name: tag_names)
+
+    # 重複していないタグのみを追加
+    tags_to_add = tag_names - existing_tags.pluck(:name)
+    self.tags = existing_tags + tags_to_add.map { |tag_name| Tag.create(name: tag_name) }
   end
 
 end

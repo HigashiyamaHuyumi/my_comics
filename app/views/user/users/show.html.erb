@@ -1,5 +1,7 @@
- <div class="row">
+<div class="container">
+  <div class="row">
     <div class="col-md-6">
+      
       <table class="table">
         <% if @user.present? %>
           <tr>
@@ -12,5 +14,15 @@
           </tr>
         <% end %>
       </table>
+      
+        <%= link_to infomation_path(@user), class: "btn btn-success" do %>
+          編集する
+        <% end %>
+        
+        <%= link_to confirm_user_path(@user), class: "btn btn-danger" do %>
+          削除する
+        <% end %>
+        
     </div>
   </div>
+</div>

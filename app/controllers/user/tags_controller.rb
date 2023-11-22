@@ -1,16 +1,16 @@
-class TagsController < ApplicationController
+class User::TagsController < ApplicationController
   before_action :set_tags, only: [:new, :edit]
 
   def index
-    @tags = Tag.all
+    @tags = current_user.tags
   end
 
   def new
-    @tag = Tag.new
+    @tag = current_user.tags.new
   end
 
   def create
-    @tag = Tag.new(tag_params)
+    @tag = current_user.tags.new(tag_params)
     if @tag.save
       redirect_to tags_path, notice: '新しいタグが作成されました'
     else
@@ -44,7 +44,7 @@ class TagsController < ApplicationController
     params.require(:tag).permit(:name)
   end
 
-  def set_tag
+  def set_tags
     @tags = Tag.all
   end
 end
