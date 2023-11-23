@@ -11,8 +11,15 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :bookshelf, dependent: :destroy
-  has_many :comic
+  has_many :bookshelves
+  has_many :books, through: :bookshelves
+  
+   # bookshelf_books メソッドを追加
+  def bookshelf_books
+    Book.where(id: bookshelves.pluck(:book_id))
+  end
+  
+  has_many :comics
   has_many :tags
 
 end

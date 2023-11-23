@@ -5,7 +5,7 @@ class User::UsersController < ApplicationController
     @user = current_user
     order_by = params[:order] || 'title' # パラメータがない場合はタイトル順にデフォルト
     @bookshelf = current_user.bookshelf.order(order_by)
-    @comics = Comic.order(order_by)
+    @comics = current_user.comic.order(order_by)
     @combined_data = (@bookshelf + @comics).compact.sort_by { |data| data&.title || '' }
   end
 

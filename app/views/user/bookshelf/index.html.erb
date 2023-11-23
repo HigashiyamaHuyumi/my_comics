@@ -12,8 +12,9 @@
         </thead>
 
         <tbody>
-          <% @bookshelf.each do |bookshelf| %>
+          <% @bookshelf_books.each do |bookshelf| %>
             <tr>
+              <%= debug bookshelf %>
               <td><%= link_to bookshelf.book.title, bookshelf_path(bookshelf) %></td>
               <td><%= bookshelf.book.author %></td>
               <td><%= bookshelf.book.publisherName %></td>

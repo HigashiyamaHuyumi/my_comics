@@ -1,34 +1,24 @@
 class User::TagsController < ApplicationController
-  before_action :set_tags, only: [:new, :edit]
-
-  def index
-    @tags = current_user.tags
-  end
 
   def new
-    @tag = current_user.tags.new
+    @tags = current_user.tags
+    @tag = Tag.new
   end
 
   def create
-    @tag = current_user.tags.new(tag_params)
+    @tag = Tag.new(tag_params)
+    @tag.user_id = current_user.id
     if @tag.save
       redirect_to tags_path, notice: '新しいタグが作成されました'
     else
+      @user = current_user
+      @tags =Tag.all
       render :new
     end
   end
-
-  def edit
-    @tag = Tag.find(params[:id])
-  end
-
-  def update
-    @tag = Tag.find(params[:id])
-    if @tag.update(tag_params)
-      redirect_to tags_path, notice: 'タグが更新されました'
-    else
-      render :edit
-    end
+  
+  def index
+    @tags = current_user.tags
   end
 
   def destroy
@@ -44,7 +34,4 @@ class User::TagsController < ApplicationController
     params.require(:tag).permit(:name)
   end
 
-  def set_tags
-    @tags = Tag.all
-  end
 end

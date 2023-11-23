@@ -7,21 +7,25 @@ class User::BookshelfController < ApplicationController
 
     if @user_bookshelf
       flash[:error] = "既に本棚にあります。"
-    else
-      @bookshelf = current_user.bookshelf.new(book: book)
-
-      if @bookshelf.save
-        flash[:success] = "本棚に追加しました。"
-      else
-        flash[:error] = "本棚に追加できませんでした。"
-        Rails.logger.debug(@bookshelf.errors.full_messages) # エラーがあればログに出力
-      end
+      redirect_to my_page_path
+      return
     end
+    
+    @bookshelf = current_user.bookshelf.new(book: book)
+    
+    if @bookshelf.save
+      flash[:success] = "本棚に追加しました。"
+    else
+      flash[:error] = "本棚に追加できませんでした。"
+      Rails.logger.error(@bookshelf.errors.full_messages.join(', ')) # エラーがあればログに出力
+    end
+    
     redirect_to my_page_path
   end
 
   def index
-    @bookshelf = current_user.bookshelf
+    @bookshelf_books = current_user.bookshelf_books
+    @bookshelf = Bookshelf.new
   end
 
   def show
@@ -29,13 +33,13 @@ class User::BookshelfController < ApplicationController
   end
   
   def edit
-    @bookshelf = Bookshelf.find(params[:id])
+    @bookshelf_book = current_user.bookshelf_books.find(params[:id])
   end
 
   def update
-    @bookshelf = Bookshelf.find(params[:id])
-    if @bookshelf.update(bookshelf_params)
-      redirect_to bookshelves_path, notice: '本の情報を更新しました'
+    @bookshelf_book = current_user.bookshelf_books.find(params[:id])
+    if @bookshelf_book.update(bookshelf_params)
+      redirect_to my_page_path, notice: '書籍が更新されました'
     else
       render :edit
     end
@@ -50,11 +54,11 @@ class User::BookshelfController < ApplicationController
   private
 
   def set_bookshelf
-    @bookshelf = current_user.bookshelf.find(params[:id])
+    @bookshelf = Bookshelf.find(params[:id])
   end
 
   def bookshelf_params
-    params.permit(:book_id, :isbn, :user_id)
+    params.require(:bookshelf).permit(:your_attributes)
   end
 
 end

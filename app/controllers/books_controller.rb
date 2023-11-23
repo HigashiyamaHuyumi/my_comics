@@ -17,9 +17,9 @@ class BooksController < ApplicationController
       end
     end
 
-    @books.each do |book|  #「@books」内の各データをそれぞれ保存していきます。
-      unless Book.all.include?(book)  #すでに保存済の本は除外するためにunlessの構文を記載しています。
-        book.save
+    @books.each do |book|
+      unless Bookshelf.exists?(user_id: current_user.id, book_id: book.id)
+        Bookshelf.create(user_id: current_user.id, book_id: book.id)
       end
     end
   end
