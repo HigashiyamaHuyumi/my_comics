@@ -1,19 +1,13 @@
 class User::TagsController < ApplicationController
-
-  def new
-    @tags = current_user.tags
-    @tag = Tag.new
-  end
-
+  
   def create
-    @tag = Tag.new(tag_params)
-    @tag.user_id = current_user.id
+    @tag = current_user.tags.build(tag_params)
     if @tag.save
       redirect_to tags_path, notice: '新しいタグが作成されました'
     else
-      @user = current_user
-      @tags =Tag.all
-      render :new
+      puts @tag.errors.full_messages
+      @tags = current_user.tags 
+      render :index
     end
   end
   

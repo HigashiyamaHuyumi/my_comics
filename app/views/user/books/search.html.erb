@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row">
+    <%= form_tag(books_search_path, method: :get) do %>
+      <%= text_field_tag :title, @title %>
+      <%= button_tag "検索", type: "submit" %>
+    <% end %>
+  </div>
+
+  <div class="row">
+  <div class="col-md-12">
+    <%= form_tag(bookshelf_index_path, method: :post) do %>
+      <table class="table" style="border: 1px solid black;">
+        <thead>
+          <th style="border: 1px solid black;">タイトル</th>
+          <th style="border: 1px solid black;">著者</th>
+          <th style="border: 1px solid black;">出版日</th>
+          <th style="border: 1px solid black;"></th>
+        </thead>
+        <tbody>
+          <% @books.each do |book| %>
+            <tr>
+              <td style="border: 1px solid black;">
+                <% if book.image_url.present? %>
+                  <%= image_tag book.image_url, width: 128, height: 188 %>
+                <% else %>
+                  <%= image_tag "no_image.jpg", width: 128, height: 188 %>
+                <% end %>
+              </td>
+              <td style="border: 1px solid black; text-align: center;">
+                <%= book.title %>
+                <br>
+                <%= book.author %>
+                <br>
+                <%= book.publisherName %>
+              </td>
+              <td style="border: 1px solid black; text-align: center;">
+                <%= book.salesDate %>
+              </td>
+              <td style="border: 1px solid black; text-align: center;">
+                <%= check_box_tag "book_ids[]", book.id %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= button_tag "選択した本を本棚に追加", type: "submit", class: "btn btn-success" %>
+    <% end %>
+  </div>
+</div>

@@ -1,25 +1,23 @@
-class BooksController < ApplicationController
+class User::BooksController < ApplicationController
 
   def search
     @books = []
     @title = params[:title]
+
     if @title.present?
-      #この部分でresultsに楽天APIから取得したデータ（jsonデータ）を格納します。
-      #今回は書籍のタイトルを検索して、一致するデータを格納するように設定しています。
       results = RakutenWebService::Books::Book.search({
         title: @title,
         applicationId: "1044821469818202176"
       })
 
       results.each do |result|
-        book = Book.new(read(result))  #read(result)については、privateメソッドとして、設定
-        @books << book #「@books」にAPIからの取得したJSONデータを格納
-      end
-    end
+        book = Book.find_or_create_by(isbn: result["isbn"]) do |new_book|
+          new_book.attributes = read(result)
+        end
 
-    @books.each do |book|
-      unless Bookshelf.exists?(user_id: current_user.id, book_id: book.id)
-        Bookshelf.create(user_id: current_user.id, book_id: book.id)
+        # ユーザーのbookshelfに追加
+        current_user.bookshelves.find_or_create_by(book: book)
+        @books << book
       end
     end
   end
@@ -27,6 +25,31 @@ class BooksController < ApplicationController
   def show #データの内容（詳細）を表示する
     @book = Book.find_by(isbn: params[:id])
   end
+  
+  def bookshelf
+    book_ids = params[:book_ids]
+  
+    if book_ids.blank?
+      flash[:error] = "本を選択してください。"
+    else
+      book_ids.each do |book_id|
+        book = Book.find(book_id)
+        
+        # ユーザが既に本を本棚に追加しているか確認
+        if current_user.bookshelves.find_by(book: book)
+          flash[:error] = "#{book.title} は既に本棚にあります。"
+        else
+          # ユーザの本棚に本を追加
+          current_user.bookshelves.create(book: book)
+          flash[:success] ||= []
+          flash[:success] << "#{book.title} を本棚に追加しました。"
+        end
+      end
+    end
+  
+    redirect_to my_page_path
+  end
+
 
   private
 

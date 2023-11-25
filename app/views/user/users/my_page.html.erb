@@ -16,11 +16,11 @@
           </tr>
         </thead>
         <tbody>
-          <% @bookshelf.each do |bookshelf| %>
+          <% @bookshelf_books.each do |bookshelf| %>
             <tr>
-              <td><%= link_to bookshelf.book.title, bookshelf_path(bookshelf) %></td>
-              <td><%= bookshelf.book.author %></td>
-              <td><%= bookshelf.book.publisherName %></td>
+              <td><%= link_to bookshelf.title, bookshelf_path(bookshelf) %></td>
+              <td><%= bookshelf.author %></td>
+              <td><%= bookshelf.publisherName %></td>
               <td>
                 <%= link_to bookshelf_path(bookshelf), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に消しますか？" do %>
                   削除する

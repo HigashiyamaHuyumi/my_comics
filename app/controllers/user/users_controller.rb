@@ -4,9 +4,9 @@ class User::UsersController < ApplicationController
   def my_page #顧客のマイページ
     @user = current_user
     order_by = params[:order] || 'title' # パラメータがない場合はタイトル順にデフォルト
-    @bookshelf = current_user.bookshelf.order(order_by)
-    @comics = current_user.comic.order(order_by)
-    @combined_data = (@bookshelf + @comics).compact.sort_by { |data| data&.title || '' }
+    @bookshelf_books = current_user.bookshelves.order(order_by).map(&:book)
+    @comics = current_user.comics
+    @combined_data = (@bookshelf_books + @comics).compact.sort_by { |data| data&.title || '' }
   end
 
   def show

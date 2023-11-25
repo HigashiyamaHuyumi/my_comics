@@ -18,6 +18,10 @@ Rails.application.routes.draw do
 		resources :comic_detail
 		resources :bookshelf
 		resources :tags
+		get 'books/search', to: "books#search", as: 'books_search'
+    resources :books do
+      post 'bookshelf', on: :member
+    end
 	end
 
   # 管理者用
@@ -29,7 +33,6 @@ Rails.application.routes.draw do
   root to: "homes#top"
   get '/about', to: 'homes#about', as: 'home_about'
   post '/homes/guest_sign_in', to: 'homes#guest_sign_in'
-  get 'books/search', to: "books#search", as: 'books_search'
-  resources :books
+
 
 end

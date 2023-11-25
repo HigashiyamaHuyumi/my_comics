@@ -36,8 +36,8 @@ class User::ComicsController < ApplicationController
     @comic = Comic.find(params[:id])
 
     if @comic.update(comic_params)
-      @tags = Tag.all 
-      
+      @tags = Tag.all
+
       # 既存のタグが選択されている場合
       if params[:comic][:tag_ids].present?
         @comic.tag_ids = params[:comic][:tag_ids]
@@ -45,7 +45,10 @@ class User::ComicsController < ApplicationController
 
       # 新しいタグが入力されている場合
       if params[:comic][:new_tag].present?
-        @comic.tags << Tag.find_or_create_by(name: params[:comic][:new_tag])
+        new_tag = Tag.find_or_create_by(name: params[:comic][:new_tag])
+        new_tag.user = current_user
+        new_tag.save
+        @comic.tags << new_tag
       end
 
       flash[:notice] = '漫画の情報を更新しました'
