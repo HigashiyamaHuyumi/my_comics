@@ -20,7 +20,7 @@
                 <tr>
                   <td><%= link_to comic.title, comic_path(comic) %></td>
                   <td><%= comic.author %></td>
-                  <td><%= comic.publisher %></td>
+                  <td><%= comic.publisherName %></td>
                   <td>
                     <%= link_to comic_path(comic), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に消しますか？" do %>
                       削除する

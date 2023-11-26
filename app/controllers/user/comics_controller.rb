@@ -33,30 +33,39 @@ class User::ComicsController < ApplicationController
 
   def update
     @comic = Comic.find(params[:id])
-
-    if @comic.update(comic_params)
-      @tags = Tag.all
-
-      # 既存のタグが選択されている場合
-      if params[:comic][:tag_ids].present?
-        @comic.tag_ids = params[:comic][:tag_ids]
-      end
-
-      # 新しいタグが入力されている場合
-      if params[:comic][:new_tag].present?
-        new_tags = params[:comic][:new_tag].split(',').map(&:strip)
-        new_tags.each do |new_tag_name|
-          new_tag = Tag.find_or_create_by(name: new_tag_name)
-          new_tag.user = current_user
-          new_tag.save
-          @comic.tags << new_tag
+  
+    begin
+      if @comic.update(comic_params)
+        @tags = Tag.all
+  
+        # 既存のタグが選択されている場合
+        if params[:comic][:tag_ids].present?
+          @comic.tag_ids = params[:comic][:tag_ids]
         end
+  
+        # 新しいタグが入力されている場合
+        if params[:comic][:new_tag].present?
+          new_tags = params[:comic][:new_tag].split(',').map(&:strip)
+          new_tags.each do |new_tag_name|
+            # 既に存在するタグと同じ名前の場合は重複を避ける
+            existing_tag = Tag.find_by(name: new_tag_name)
+            unless existing_tag
+              new_tag = Tag.find_or_create_by(name: new_tag_name)
+              new_tag.user = current_user
+              new_tag.save
+              @comic.tags << new_tag
+            end
+          end
+        end
+  
+        flash[:notice] = '漫画の情報を更新しました'
+        redirect_to comic_path(@comic.id)
+      else
+        render :edit
       end
-
-      flash[:notice] = '漫画の情報を更新しました'
+    rescue ActiveRecord::RecordInvalid
+      flash[:alert] = 'エラーが発生しました。重複するタグが存在する可能性があります。'
       redirect_to comic_path(@comic.id)
-    else
-      render :edit
     end
   end
 
@@ -70,7 +79,7 @@ class User::ComicsController < ApplicationController
   private
 
   def comic_params
-    params.require(:comic).permit(:title, :author, :publisher, :remarks, new_tag: [] , tag_names: [])
+    params.require(:comic).permit(:title, :author, :publisherName, :story, :purchase_place, :comics_size, :remarks, new_tag: [] , tag_names: [])
   end
 
   def is_matching_login_user

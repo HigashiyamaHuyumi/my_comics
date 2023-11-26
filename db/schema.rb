@@ -73,18 +73,6 @@ ActiveRecord::Schema.define(version: 2023_11_21_084141) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "comic_details", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "volume_id"
-    t.integer "tag_id"
-    t.string "story"
-    t.string "purchase_place"
-    t.string "version"
-    t.string "comic_size"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "comic_tags", force: :cascade do |t|
     t.integer "comic_id", null: false
     t.integer "tag_id", null: false
@@ -97,10 +85,12 @@ ActiveRecord::Schema.define(version: 2023_11_21_084141) do
 
   create_table "comics", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "comic_detail_id"
     t.string "title", null: false
     t.string "author", null: false
-    t.string "publisher", null: false
+    t.string "publisherName", null: false
+    t.integer "story"
+    t.integer "purchase_place"
+    t.integer "comics_size"
     t.string "remarks"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
