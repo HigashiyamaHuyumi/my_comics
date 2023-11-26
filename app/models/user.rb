@@ -12,12 +12,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :bookshelves, dependent: :destroy
-
-  # bookshelf_books メソッドを追加
-  def bookshelf_books
-    Book.where(id: bookshelves.pluck(:book_id))
-  end
-  
   has_many :comics
   has_many :tags
 

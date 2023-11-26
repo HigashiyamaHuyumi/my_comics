@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 2023_11_21_084141) do
     t.integer "tag_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["comic_id", "tag_id"], name: "index_comic_tags_on_comic_id_and_tag_id", unique: true
     t.index ["comic_id"], name: "index_comic_tags_on_comic_id"
     t.index ["tag_id"], name: "index_comic_tags_on_tag_id"
   end

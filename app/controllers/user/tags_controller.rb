@@ -1,12 +1,11 @@
 class User::TagsController < ApplicationController
-  
   def create
     @tag = current_user.tags.build(tag_params)
     if @tag.save
       redirect_to tags_path, notice: '新しいタグが作成されました'
     else
-      puts @tag.errors.full_messages
-      @tags = current_user.tags 
+      flash[:notice] ='タグ名が空白か、既に存在します'
+      @tags = current_user.tags
       render :index
     end
   end

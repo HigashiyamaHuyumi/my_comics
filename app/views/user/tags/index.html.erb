@@ -1,13 +1,11 @@
 <h1>タグ一覧</h1>
 
 <%= form_with(model: Tag.new, url: tags_path, local: true) do |form| %>
-  <% if form.object.errors.any? %>
-    <p>タグ名が空白か、既に存在します。</p>
-  <% end %>
   <%= form.label :name, '新しいタグの名前:' %>
   <%= form.text_field :name %>
   <%= form.submit '作成する' %>
 <% end %>
+
 
 <% @tags.each do |tag| %>
   <div class="tag">

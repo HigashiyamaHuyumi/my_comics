@@ -18,8 +18,7 @@ class User::ComicsController < ApplicationController
   end
 
   def index # データの一覧を表示する
-    @comics = Comic.all
-    @user = current_user
+    @comics = current_user.comics
   end
 
   def show #データの内容（詳細）を表示する
@@ -29,7 +28,7 @@ class User::ComicsController < ApplicationController
 
   def edit #データを更新するためのフォームを表示す
     @comic = Comic.find(params[:id])
-    @tags = Tag.all
+    @tags = Tag.where(user_id: current_user.id)
   end
 
   def update
@@ -68,7 +67,7 @@ class User::ComicsController < ApplicationController
   private
 
   def comic_params
-    params.require(:comic).permit(:title, :author, :publisher, :remarks, :tag_ids, :new_tag)
+    params.require(:comic).permit(:title, :author, :publisher, :remarks, new_tag: [] )
   end
 
   def is_matching_login_user

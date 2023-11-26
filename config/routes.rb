@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 		resources :comics
 		resources :comic_detail
 		resources :bookshelf
-		resources :tags
+		resources :tags, only: [:index, :create, :destroy]
 		get 'books/search', to: "books#search", as: 'books_search'
     resources :books do
       post 'bookshelf', on: :member
