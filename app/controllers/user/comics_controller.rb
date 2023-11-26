@@ -44,10 +44,13 @@ class User::ComicsController < ApplicationController
 
       # 新しいタグが入力されている場合
       if params[:comic][:new_tag].present?
-        new_tag = Tag.find_or_create_by(name: params[:comic][:new_tag])
-        new_tag.user = current_user
-        new_tag.save
-        @comic.tags << new_tag
+        new_tags = params[:comic][:new_tag].split(',').map(&:strip)
+        new_tags.each do |new_tag_name|
+          new_tag = Tag.find_or_create_by(name: new_tag_name)
+          new_tag.user = current_user
+          new_tag.save
+          @comic.tags << new_tag
+        end
       end
 
       flash[:notice] = '漫画の情報を更新しました'
@@ -67,7 +70,7 @@ class User::ComicsController < ApplicationController
   private
 
   def comic_params
-    params.require(:comic).permit(:title, :author, :publisher, :remarks, new_tag: [] )
+    params.require(:comic).permit(:title, :author, :publisher, :remarks, new_tag: [] , tag_names: [])
   end
 
   def is_matching_login_user
