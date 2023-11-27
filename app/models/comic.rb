@@ -1,9 +1,9 @@
 class Comic < ApplicationRecord
   enum story: { hardcover: 0, separate_volumes: 1, single_story: 2 }
   enum purchase_place: { book_store: 0, e_book: 1, others: 2 }
-  
+
   belongs_to :user
-  
+
   has_many :comic_volumes, dependent: :destroy
   has_many :volumes, through: :comic_volumes
 
@@ -37,4 +37,27 @@ class Comic < ApplicationRecord
     end
   end
 
+   # 巻数の新規投稿用メソッド
+  def save_volumes(volume_params)
+    self.volumes = volume_params.split(',') if volume_params.present?
+  end
+
+    # 巻数の更新用メソッド
+  def update_volumes(latest_volumes)
+    return unless latest_volumes.present?
+  
+    # 既存の巻数も更新対象の巻数もある場合は差分更新
+    current_volumes = self.volumes.pluck(:name)
+    old_volumes = current_volumes - Array(latest_volumes)
+    new_volumes = Array(latest_volumes) - current_volumes
+  
+    old_volumes.each do |old_volume|
+      volume = self.volumes.find_by(name: old_volume)
+      self.volumes.delete(volume) if volume.present?
+    end
+  
+    new_volumes.each do |new_volume|
+      Volume.find_or_create_by(name: new_volume)
+    end
+  end
 end

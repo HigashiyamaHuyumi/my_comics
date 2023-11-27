@@ -129,7 +129,7 @@ ActiveRecord::Schema.define(version: 2023_11_27_081345) do
   end
 
   create_table "volumes", force: :cascade do |t|
-    t.string "volume", null: false
+    t.string "name", null: false
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

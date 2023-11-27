@@ -48,7 +48,7 @@
         </div>
         
         <h4>巻数</h4>
-        <%= f.collection_check_boxes(:volume_ids, @volumes, :id, :volume) %>
+        <%= f.collection_check_boxes(:volume_ids, @volumes, :id, :name) %>
         
         <h4>新しい巻</h4>
         <%= f.text_field :new_volume, class: 'form-control', placeholder: '1, 2, ...' %>

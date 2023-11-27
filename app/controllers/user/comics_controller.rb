@@ -11,6 +11,7 @@ class User::ComicsController < ApplicationController
 
     if @comic.save
       @tags = Tag.all
+      @volumes = Volume.all
       redirect_to my_page_path, notice: '漫画が作成されました'
     else
       render :new
@@ -30,44 +31,55 @@ class User::ComicsController < ApplicationController
   def edit #データを更新するためのフォームを表示す
     @comic = Comic.find(params[:id])
     @tags = Tag.where(user_id: current_user.id)
-    @volumes = Volume.all
+    @volumes = Volume.where(user_id: current_user.id)
   end
 
   def update
     @comic = Comic.find(params[:id])
     @comic.purchase_place_custom = params[:comic][:purchase_place_custom]
-    begin
-      if @comic.update(comic_params)
-        @tags = Tag.all
-  
-        # 既存のタグが選択されている場合
-        if params[:comic][:tag_ids].present?
-          @comic.tag_ids = params[:comic][:tag_ids]
+
+    if @comic.update(comic_params)
+      @tags = Tag.all
+
+      # 既存のタグが選択されている場合
+      @comic.tag_ids = params[:comic][:tag_ids].presence || []
+
+      # 新しいタグが入力されている場合
+      if params[:comic][:new_tag].present?
+        new_tags = params[:comic][:new_tag].split(',').map(&:strip)
+        new_tags.each do |new_tag_name|
+          # 既に存在するタグと同じ名前の場合は重複を避ける
+          existing_tag = Tag.find_by(name: new_tag_name)
+          unless existing_tag
+            new_tag = Tag.find_or_create_by(name: new_tag_name)
+            new_tag.user = current_user
+            new_tag.save
+            @comic.tags << new_tag
+          end
         end
-  
-        # 新しいタグが入力されている場合
-        if params[:comic][:new_tag].present?
-          new_tags = params[:comic][:new_tag].split(',').map(&:strip)
-          new_tags.each do |new_tag_name|
-            # 既に存在するタグと同じ名前の場合は重複を避ける
-            existing_tag = Tag.find_by(name: new_tag_name)
-            unless existing_tag
-              new_tag = Tag.find_or_create_by(name: new_tag_name)
-              new_tag.user = current_user
-              new_tag.save
-              @comic.tags << new_tag
+      end
+
+      if params[:comic][:new_volume].present?
+        new_volumes = params[:comic][:new_volume].split(',').map(&:strip)
+        new_volumes.each do |new_volume|
+          # 既に存在する巻数と同じ番号の場合は重複を避ける
+          existing_volume = Volume.find_by(name: new_volume)
+          unless existing_volume || new_volume.blank?
+            volume = Volume.find_or_create_by(name: new_volume, user_id: current_user.id)
+            if volume
+              @comic.volumes << volume
+            else
+              Rails.logger.error("Failed to create or find Volume with volume: #{new_volume}")
             end
           end
         end
-  
-        flash[:notice] = '漫画の情報を更新しました'
-        redirect_to comic_path(@comic.id)
-      else
-        render :edit
       end
-    rescue ActiveRecord::RecordInvalid
-      flash[:alert] = 'エラーが発生しました。重複するタグが存在する可能性があります。'
+
+      flash[:notice] = '漫画の情報を更新しました'
       redirect_to comic_path(@comic.id)
+    else
+      Rails.logger.error(@comic.errors.full_messages.join(', '))
+      render :edit
     end
   end
 
