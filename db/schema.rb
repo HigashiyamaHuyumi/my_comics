@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_11_21_084141) do
+ActiveRecord::Schema.define(version: 2023_11_27_081345) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -83,6 +83,15 @@ ActiveRecord::Schema.define(version: 2023_11_21_084141) do
     t.index ["tag_id"], name: "index_comic_tags_on_tag_id"
   end
 
+  create_table "comic_volumes", force: :cascade do |t|
+    t.integer "comic_id", null: false
+    t.integer "volume_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["comic_id"], name: "index_comic_volumes_on_comic_id"
+    t.index ["volume_id"], name: "index_comic_volumes_on_volume_id"
+  end
+
   create_table "comics", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "title", null: false
@@ -90,6 +99,7 @@ ActiveRecord::Schema.define(version: 2023_11_21_084141) do
     t.string "publisherName", null: false
     t.integer "story"
     t.integer "purchase_place"
+    t.string "purchase_place_custom"
     t.integer "comics_size"
     t.string "remarks"
     t.datetime "created_at", precision: 6, null: false
@@ -118,9 +128,20 @@ ActiveRecord::Schema.define(version: 2023_11_21_084141) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "volumes", force: :cascade do |t|
+    t.string "volume", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_volumes_on_user_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comic_tags", "comics"
   add_foreign_key "comic_tags", "tags"
+  add_foreign_key "comic_volumes", "comics"
+  add_foreign_key "comic_volumes", "volumes"
   add_foreign_key "tags", "users"
+  add_foreign_key "volumes", "users"
 end

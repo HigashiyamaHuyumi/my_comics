@@ -1,9 +1,11 @@
 class Comic < ApplicationRecord
   enum story: { hardcover: 0, separate_volumes: 1, single_story: 2 }
   enum purchase_place: { book_store: 0, e_book: 1, others: 2 }
-  enum comics_size: { paperback_version: 0, shinsho_version: 1, b6_version: 2, a5_version: 3, others: 4 }
   
   belongs_to :user
+  
+  has_many :comic_volumes, dependent: :destroy
+  has_many :volumes, through: :comic_volumes
 
   # タグ付けのアソシエーション
   has_many :comic_tags, dependent: :destroy

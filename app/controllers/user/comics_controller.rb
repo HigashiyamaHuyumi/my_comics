@@ -24,16 +24,18 @@ class User::ComicsController < ApplicationController
   def show #データの内容（詳細）を表示する
     @comic = Comic.find(params[:id])
     @tags = @comic.tags.pluck(:name).join(',')
+    @volumes = @comic.volumes.pluck(:volume).join(',')
   end
 
   def edit #データを更新するためのフォームを表示す
     @comic = Comic.find(params[:id])
     @tags = Tag.where(user_id: current_user.id)
+    @volumes = Volume.all
   end
 
   def update
     @comic = Comic.find(params[:id])
-  
+    @comic.purchase_place_custom = params[:comic][:purchase_place_custom]
     begin
       if @comic.update(comic_params)
         @tags = Tag.all
@@ -79,7 +81,7 @@ class User::ComicsController < ApplicationController
   private
 
   def comic_params
-    params.require(:comic).permit(:title, :author, :publisherName, :story, :purchase_place, :comics_size, :remarks, new_tag: [] , tag_names: [])
+    params.require(:comic).permit(:title, :author, :publisherName, :story, :purchase_place, :purchase_place_custom, :comics_size, :remarks, new_tag: [] , tag_names: [], new_volume: [], volume_ids: [])
   end
 
   def is_matching_login_user
