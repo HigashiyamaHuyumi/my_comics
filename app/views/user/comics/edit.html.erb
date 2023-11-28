@@ -1,66 +1,75 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-8 offset-md-2">
-      <h1>漫画情報を編集</h1>
+    <div class="col-md-4">
+    <h1>漫画情報を編集</h1>
 
-      <%= render 'error', comic: @comic %>
+    <%= render 'error', comic: @comic %>
 
-      <%= form_with model: @comic do |f| %>
-        <h4>タイトル(必須)</h4>
-        <%= f.text_area :title, class: 'form-control' %>
+    <%= form_with model: @comic do |f| %>
+      <h4>タイトル(必須)</h4>
+      <%= f.text_area :title, required: true %>
 
-        <h4>著者(必須)</h4>
-        <%= f.text_field :author, class: 'form-control' %>
+      <h4>著者(必須)</h4>
+      <%= f.text_field :author, required: true %>
 
-        <h4>出版社(必須)</h4>
-        <%= f.text_field :publisherName, class: 'form-control' %>
+      <h4>出版社(必須)</h4>
+      <%= f.text_field :publisherName, required: true %>
 
-        <h4>タグ</h4>
-        <%= f.collection_check_boxes(:tag_ids, @tags, :id, :name) %>
+    </div>
+    <div class="col-md-8">
 
-        <h4>新しいタグ</h4>
-        <%= f.text_field :new_tag, class: 'form-control', placeholder: 'タグ1, タグ2, ...' %>
-        
-        <h4>購入場所</h4>
-        <div>
-          <%= f.radio_button :purchase_place, "book_store", id: :purchase_place_book_store, required: true %>
-          <%= f.label :purchase_place_book_store, "本屋" %>
- 
-          <%= f.radio_button :purchase_place, "e_book", id: :purchase_place_e_book, required: true %>
-          <%= f.label :purchase_place_e_book, "電子書籍" %>
-          
-          <%= f.radio_button :purchase_place, "others", id: :purchase_place_others, required: true %>
-          <%= f.label :purchase_place_others, "他" %>
-          
-          <%= f.text_field :purchase_place_custom, placeholder: '自由記入', required: true %>
-        </div>
-        
-        <h4>形式</h4>
-        <div>
-          <%= f.radio_button :story, "hardcover", id: :story_hardcovear, required: true %>
-          <%= f.label :story_hardcover, "単行本" %>
- 
-          <%= f.radio_button :story, "separate_volumes", id: :story_separate_volumes, required: true %>
-          <%= f.label :story_separate_volumes, "分冊版" %>
-          
-          <%= f.radio_button :story, "single_story", id: :story_single_story, required: true %>
-          <%= f.label :story_single_story, "単話" %>
-        </div>
-        
-        <h4>巻数</h4>
-        <%= f.collection_check_boxes(:volume_ids, @volumes, :id, :name) %>
-        
-        <h4>新しい巻</h4>
-        <%= f.text_field :new_volume, class: 'form-control', placeholder: '1, 2, ...' %>
-        
-        <h4>備考欄</h4>
-        <%= f.text_field :remarks, class: 'form-control' %>
+      <h4>タグ</h4>
+      <%= f.collection_check_boxes(:tag_ids, @tags, :id, :name) %>
 
+      <h4>新しいタグ</h4>
+      <%= f.text_field :new_tag, class: 'form-control', placeholder: 'タグ1, タグ2, ...' %>
+
+      <h4>購入場所</h4>
+      <div>
+        <%= f.radio_button :purchase_place, "book_store", id: :purchase_place_book_store %>
+        <%= f.label :purchase_place_book_store, "本屋" %>
+
+        <%= f.radio_button :purchase_place, "e_book", id: :purchase_place_e_book %>
+        <%= f.label :purchase_place_e_book, "電子書籍" %>
+
+        <%= f.radio_button :purchase_place, "others", id: :purchase_place_others %>
+        <%= f.label :purchase_place_others, "他" %>
+
+        <%= f.text_field :purchase_place_custom, placeholder: '自由記入' %>
+      </div>
+
+      <h4>形式</h4>
+      <div>
+        <%= f.radio_button :story, "hardcover", id: :story_hardcovear, required: true %>
+        <%= f.label :story_hardcover, "単行本" %>
+
+        <%= f.radio_button :story, "separate_volumes", id: :story_separate_volumes, required: true %>
+        <%= f.label :story_separate_volumes, "分冊版" %>
+
+        <%= f.radio_button :story, "single_story", id: :story_single_story, required: true %>
+        <%= f.label :story_single_story, "単話" %>
+      </div>
+
+      <h4>巻数</h4>
+      <%= f.collection_check_boxes(:volume_ids, @volumes, :id, :name) %>
+
+      <h4>新しい巻</h4>
+      <%= f.text_field :new_volume, class: 'form-control', placeholder: '1, 2, ...' %>
+
+      <h4>備考欄</h4>
+      <%= f.text_field :remarks, class: 'form-control' %>
+
+    </div>
+    
+  </div>
+
+    <div class="row center">
+      <div class="col-md-6">
         <div class="actions">
           <%= f.submit '保存', class: 'btn btn-primary' %>
         </div>
       <% end %>
-
+      </div>
     </div>
   </div>
 </div>

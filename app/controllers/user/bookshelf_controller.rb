@@ -1,69 +1,63 @@
 class User::BookshelfController < ApplicationController
   before_action :set_bookshelf, only: [:update, :destroy]
 
+  def index
+    @bookshelves = current_user.bookshelves
+  end
+  
   def create
-    book = Book.find_by(isbn: params[:isbn])
-    user_bookshelf_book = current_user.bookshelves.find_by(book: book)
-
-    if user_bookshelf_book
-      flash[:error] = "既に本棚にあります。"
-    else
-      bookshelf_book = current_user.bookshelves.create(book: book)
-      if bookshelf_book.valid?
-        flash[:success] = "本棚に追加しました。"
-      else
-        flash[:error] = "本棚に追加できませんでした。"
-        Rails.logger.error(bookshelf_book.errors.full_messages.join(', '))
-      end
+    @book = Book.find_or_create_by(isbn: params[:isbn]) do |new_book|
+      new_book.attributes = read(params[:book])
     end
 
-    redirect_to my_page_path
-  end
+    current_user.bookshelves.find_or_create_by(book: @book)
 
-  def index
-    @bookshelf_books = current_user.bookshelf_books
+    redirect_to user_bookshelves_path, notice: '本が本棚に追加されました。'
   end
 
   def show
-    @bookshelf_book = current_user.bookshelf_books.find(params[:id])
+    @bookshelf = current_user.bookshelves.find(params[:id])
   end
 
   def edit
-    @bookshelf_book = current_user.bookshelf_books.find(params[:id])
+    @bookshelf = current_user.bookshelfves.find(params[:id])
   end
 
   def update
-    # 本棚の本を更新
+    @bookshelf = current_user.bookshelves.find(params[:id])
+
     if @bookshelf.update(bookshelf_params)
-      flash[:success] = "本の情報が更新されました。"
-      redirect_to bookshelf_path(@bookshelf)
+      redirect_to bookshelves_path, notice: 'Bookshelf updated successfully.'
     else
       render :edit
     end
   end
 
   def destroy
-    # 本棚から本を削除
+    @bookshelf = current_user.bookshelves.find(params[:id])
     @bookshelf.destroy
     flash[:success] = "本を本棚から削除しました。"
     redirect_to my_page_path
   end
 
   private
-
-  def set_bookshelf
-    # 特定の本棚を取得
-    @bookshelf = Bookshelf.find_by(id: params[:id])
   
-    unless @bookshelf
-      flash[:error] = "指定された本棚が見つかりませんでした。"
-      redirect_to my_page_path
-    end
-  end
-
   def bookshelf_params
     # ストロングパラメータを正しく設定
-    params.require(:bookshelf_book).permit(:your_attributes, :another_attribute)
+    params.require(:bookshelf).permit(:custom_attribute)
+  end
+  
+  def read(book_params)
+    # 必要なデータを抽出してハッシュとして返す
+    {
+      title: book_params["title"],
+      author: book_params["author"],
+      publisherName: book_params["publisherName"],
+      url: book_params["itemUrl"],
+      isbn: book_params["isbn"],
+      image_url: book_params["mediumImageUrl"]&.gsub('?_ex=120x120', ''),
+      salesDate: book_params["salesDate"],
+    }
   end
 
 end

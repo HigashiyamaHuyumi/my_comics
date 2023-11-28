@@ -12,22 +12,12 @@
             <th>タイトル</th>
             <th>著者</th>
             <th>出版社</th>
+            <th>所持巻数</th>
             <th>操作</th>
           </tr>
         </thead>
         <tbody>
-          <% @bookshelf_books.each do |bookshelf| %>
-            <tr>
-              <td><%= link_to bookshelf.title, bookshelf_path(bookshelf) %></td>
-              <td><%= bookshelf.author %></td>
-              <td><%= bookshelf.publisherName %></td>
-              <td>
-                <%= link_to bookshelf_path(bookshelf), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に消しますか？" do %>
-                  削除する
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
+
 
           <% if @comics.present? %>
             <% @comics.each do |comic| %>
@@ -35,10 +25,11 @@
                 <td><%= link_to comic.title, comic_path(comic) %></td>
                 <td><%= comic.author %></td>
                 <td><%= comic.publisherName %></td>
+                <td><%= comic.volumes.join(', ') %></td>
                 <td>
-                  <%= link_to comic_path(comic), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に消しますか？" do %>
-                    削除する
-                  <% end %>
+          
+                  <%= link_to '編集', edit_comic_path(comic), class: 'btn btn-primary' %>
+    
                 </td>
               </tr>
             <% end %>
