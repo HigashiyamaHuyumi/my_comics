@@ -57,6 +57,10 @@
               <% elsif admin_signed_in? %><!-- 管理者がログインしている場合のメニュー項目 -->
 
                 <li class="nav-item">
+                  <%= link_to "会員一覧", admin_users_path, class: "btn btn-outline-dark" %>
+                </li>
+
+                <li class="nav-item">
                   <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-outline-dark" %>
                 </li>
 
