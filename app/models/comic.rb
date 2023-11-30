@@ -65,12 +65,12 @@ class Comic < ApplicationRecord
     volumes.length
   end
   
-  def self.filter_by_genre(genre)
-    where(genre: genre)
-  end
-
-  def self.filter_by_author(author)
-    where(author: author)
+  def self.search(query)
+    where(
+      "title LIKE ? OR author LIKE ? OR publisherName LIKE ? OR story LIKE ? OR purchase_place LIKE ? OR purchase_place_custom LIKE ? OR tags.name LIKE ? OR remarks LIKE ?",
+      "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%"
+    ).joins("LEFT JOIN comic_tags ON comics.id = comic_tags.comic_id")
+     .joins("LEFT JOIN tags ON tags.id = comic_tags.tag_id")
   end
   
 end

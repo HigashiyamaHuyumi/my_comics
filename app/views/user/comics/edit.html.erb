@@ -17,27 +17,7 @@
 
     </div>
     <div class="col-md-8">
-
-      <h4>タグ</h4>
-      <%= f.collection_check_boxes(:tag_ids, @tags, :id, :name) %>
-
-      <h4>新しいタグ</h4>
-      <%= f.text_field :new_tag, class: 'form-control', placeholder: 'タグ1, タグ2, ...' %>
-
-      <h4>購入場所</h4>
-      <div>
-        <%= f.radio_button :purchase_place, "book_store", id: :purchase_place_book_store %>
-        <%= f.label :purchase_place_book_store, "本屋" %>
-
-        <%= f.radio_button :purchase_place, "e_book", id: :purchase_place_e_book %>
-        <%= f.label :purchase_place_e_book, "電子書籍" %>
-
-        <%= f.radio_button :purchase_place, "others", id: :purchase_place_others %>
-        <%= f.label :purchase_place_others, "他" %>
-
-        <%= f.text_field :purchase_place_custom, placeholder: '自由記入' %>
-      </div>
-
+      
       <h4>形式</h4>
       <div>
         <%= f.radio_button :story, "hardcover", id: :story_hardcovear, required: true %>
@@ -55,7 +35,27 @@
 
       <h4>新しい巻</h4>
       <%= f.text_field :new_volume, class: 'form-control', placeholder: '1, 2, ...' %>
+      
+      <h4 class="background: 1px solid #000;">購入場所</h4>
+      <div>
+        <%= f.radio_button :purchase_place, "book_store", id: :purchase_place_book_store %>
+        <%= f.label :purchase_place_book_store, "本屋" %>
 
+        <%= f.radio_button :purchase_place, "e_book", id: :purchase_place_e_book %>
+        <%= f.label :purchase_place_e_book, "電子書籍" %>
+
+        <%= f.radio_button :purchase_place, "others", id: :purchase_place_others %>
+        <%= f.label :purchase_place_others, "他" %>
+
+        <%= f.text_field :purchase_place_custom, placeholder: '自由記入' %>
+      </div>
+
+      <h4>タグ</h4>
+      <%= f.collection_check_boxes(:tag_ids, @tags, :id, :name) %>
+
+      <h4>新しいタグ</h4>
+      <%= f.text_field :new_tag, class: 'form-control', placeholder: 'タグ1, タグ2, ...' %>
+      
       <h4>備考欄</h4>
       <%= f.text_field :remarks, class: 'form-control' %>
 

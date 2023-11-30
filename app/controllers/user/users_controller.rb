@@ -5,6 +5,12 @@ class User::UsersController < ApplicationController
     @user = current_user
     order_by = params[:order] || 'title' # パラメータがない場合はタイトル順にデフォルト
     @comics = current_user.comics.order(order_by)
+    
+    # 検索クエリに基づいてコミックを絞り込む
+    @search_query = params[:search]
+    if @search_query.present?
+      @filtered_comics = @user.comics.search(@search_query)
+    end
   end
 
   def show

@@ -11,6 +11,12 @@
     </div>
   </div>
   
+  <!-- 作者、タグ、および検索での絞り込みフォーム -->
+  <%= form_tag(my_page_path(current_user), method: :get) do %>
+    <%= text_field_tag :search, params[:search], placeholder: '検索する' %>
+    <%= submit_tag '検索' %>
+  <% end %>
+  
   <div class="row">
     <div class="col-md-12">
       <table class="table">
@@ -27,30 +33,40 @@
         </thead>
         
         <tbody>
-          <% if @comics.present? %>
+          <% if @filtered_comics.present? %>
+            <% @filtered_comics.each do |comic| %>
+              <tr>
+                <td><%= link_to comic.title, comic_path(comic) %></td>
+                <td><%= comic.author %></td>
+                <td><%= comic.publisherName %></td>
+                <td><%= comic.volumes.join(', ') %></td>
+                <td><%= comic.total_volumes %></td>
+                <td><%= link_to '編集', edit_comic_path(comic), class: 'btn btn-primary' %></td>
+              </tr>
+            <% end %>
+          <% elsif @comics.present? %>
             <% @comics.each do |comic| %>
               <tr>
                 <td><%= link_to comic.title, comic_path(comic) %></td>
                 <td><%= comic.author %></td>
                 <td><%= comic.publisherName %></td>
                 <td><%= comic.volumes.join(', ') %></td>
-                <td><strong><%= comic.total_volumes %></strong></td>
+                <td><%= comic.total_volumes %></td>
                 <td><%= link_to '編集', edit_comic_path(comic), class: 'btn btn-primary' %></td>
               </tr>
             <% end %>
           <% else %>
             <tr>
-              <td colspan="4">データがありません。</td>
+              <td colspan="6">データがありません。</td>
             </tr>
           <% end %>
         </tbody>
         <tfoot>
-          <td><strong><%= @comics.sum(&:total_volumes) %></strong></td>
+          <td><strong>総合計：<%= @comics.sum(&:total_volumes) %></strong></td>
         </tfoot>
       </table>
     </div>
   </div>
-  
 </div>
 
 <%= render 'layouts/footer' %>
