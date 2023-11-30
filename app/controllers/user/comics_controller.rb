@@ -18,10 +18,6 @@ class User::ComicsController < ApplicationController
     end
   end
 
-  def index # データの一覧を表示する
-    @comics = current_user.comics
-  end
-
   def show #データの内容（詳細）を表示する
     @comic = Comic.find(params[:id])
     @tags = @comic.tags.pluck(:name).join(',')

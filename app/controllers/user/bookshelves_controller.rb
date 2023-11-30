@@ -1,4 +1,4 @@
-class User::BookshelfController < ApplicationController
+class User::BookshelvesController < ApplicationController
   before_action :set_bookshelf, only: [:update, :destroy]
 
   def index

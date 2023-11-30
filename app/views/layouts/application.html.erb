@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    
+    <script src="https://kit.fontawesome.com/1a020bd911.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -27,7 +29,9 @@
 
               <% if user_signed_in? %><!-- 顧客がログインしている場合のメニュー項目 -->
                 <li class="nav-item">
-                  <%= link_to "本を探す", books_search_path , class: "btn btn-outline-dark" %>
+                  <%= link_to books_search_path , class: "btn btn-outline-dark" do %>
+                    <i class="fa-solid fa-magnifying-glass"></i>本を探す
+                  <% end %>
                 </li>
 
                 <li class="nav-item">
@@ -35,19 +39,13 @@
                 </li>
 
                 <li class="nav-item">
-                  <%= link_to "tag", tags_path , class: "btn btn-outline-dark" %>
-                </li>
-
-                <li class="nav-item">
-                  <%= link_to "本1", comics_path , class: "btn btn-outline-dark" %>
+                  <%= link_to tags_path , class: "btn btn-outline-dark" do %>
+                    <i class="fa fa-tag"></i> tag
+                  <% end %>
                 </li>
 
                 <li class="nav-item">
                   <%= link_to "本2", bookshelves_path , class: "btn btn-outline-dark" %>
-                </li>
-
-                <li class="nav-item">
-                  <%= link_to "本の作成", new_comic_path , class: "btn btn-outline-dark" %>
                 </li>
 
                 <li class="nav-item">
@@ -57,7 +55,9 @@
               <% elsif admin_signed_in? %><!-- 管理者がログインしている場合のメニュー項目 -->
 
                 <li class="nav-item">
-                  <%= link_to "会員一覧", admin_users_path, class: "btn btn-outline-dark" %>
+                  <%= link_to admin_users_path, class: "btn btn-outline-dark" do %>
+                    <i class="fa-solid fa-users"></i>会員一覧
+                  <% end %>
                 </li>
 
                 <li class="nav-item">

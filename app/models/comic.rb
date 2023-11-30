@@ -7,7 +7,6 @@ class Comic < ApplicationRecord
   has_many :comic_volumes, dependent: :destroy
   has_many :volumes, through: :comic_volumes
 
-  # タグ付けのアソシエーション
   has_many :comic_tags, dependent: :destroy
   has_many :tags, through: :comic_tags
 
@@ -60,4 +59,18 @@ class Comic < ApplicationRecord
       Volume.find_or_create_by(name: new_volume)
     end
   end
+  
+  # タイトルごとの巻数合計
+  def total_volumes
+    volumes.length
+  end
+  
+  def self.filter_by_genre(genre)
+    where(genre: genre)
+  end
+
+  def self.filter_by_author(author)
+    where(author: author)
+  end
+  
 end

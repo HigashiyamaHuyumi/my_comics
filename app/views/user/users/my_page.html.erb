@@ -1,24 +1,32 @@
 <div class="container">
+  
+  <div class="row">
+    <div class="col-8">
+      <h5><%= link_to "#{current_user.nickname}の本棚" , user_path(@user) %></h5>
+    </div>
+    <div class="col-4" style="text-align: right;">
+      <%= link_to new_comic_path, class: "btn btn-outline-dark btn-circle text-dark" do %>
+        <i class="fas fa-plus"></i>
+      <% end %>
+    </div>
+  </div>
+  
   <div class="row">
     <div class="col-md-12">
-      <%= link_to "#{current_user.nickname}の本棚" , user_path(@user) %>
       <table class="table">
-
-        <%= link_to "タイトル順", my_page_path(order: 'title') %>
-        <%= link_to "作者順", my_page_path(order: 'author') %>
-
+        
         <thead>
           <tr>
-            <th>タイトル</th>
-            <th>著者</th>
+            <th>タイトル<%= link_to "順▼", my_page_path(order: 'title') %></th>
+            <th>著者<%= link_to "順▼", my_page_path(order: 'author') %></th>
             <th>出版社</th>
             <th>所持巻数</th>
+            <th>合計巻数</th>
             <th>操作</th>
           </tr>
         </thead>
+        
         <tbody>
-
-
           <% if @comics.present? %>
             <% @comics.each do |comic| %>
               <tr>
@@ -26,11 +34,8 @@
                 <td><%= comic.author %></td>
                 <td><%= comic.publisherName %></td>
                 <td><%= comic.volumes.join(', ') %></td>
-                <td>
-          
-                  <%= link_to '編集', edit_comic_path(comic), class: 'btn btn-primary' %>
-    
-                </td>
+                <td><strong><%= comic.total_volumes %></strong></td>
+                <td><%= link_to '編集', edit_comic_path(comic), class: 'btn btn-primary' %></td>
               </tr>
             <% end %>
           <% else %>
@@ -39,10 +44,13 @@
             </tr>
           <% end %>
         </tbody>
+        <tfoot>
+          <td><strong><%= @comics.sum(&:total_volumes) %></strong></td>
+        </tfoot>
       </table>
     </div>
   </div>
+  
 </div>
-
 
 <%= render 'layouts/footer' %>
