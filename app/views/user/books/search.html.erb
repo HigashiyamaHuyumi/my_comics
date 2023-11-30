@@ -11,10 +11,12 @@
 
       <table class="table" style="border: 1px solid black;">
         <thead>
-          <th style="border: 1px solid black;">タイトル</th>
-          <th style="border: 1px solid black;">著者</th>
-          <th style="border: 1px solid black;">出版日</th>
-          <th style="border: 1px solid black;"></th>
+          <tr>
+            <th></th>
+            <th>タイトル,著者,出版社</th>
+            <th>出版日</th>
+            <th>操作</th>
+          </tr>
         </thead>
         <tbody>
           <% @books.each do |book| %>
@@ -39,7 +41,7 @@
               <td style="border: 1px solid black; text-align: center;">
                 <%= form_tag(bookshelves_path, method: :post) do %>
                   <%= hidden_field_tag :isbn, book.isbn %>
-                  <%= submit_tag '本棚に追加', class: 'btn btn-primary' %>
+                  <%= submit_tag '★', class: 'btn btn-primary' %>
                 <% end %>
               </td>
      

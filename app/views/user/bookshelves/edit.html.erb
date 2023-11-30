@@ -1,14 +1,13 @@
-<%= form_for @bookshelf do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
+<%= form_for(@bookshelf) do |f| %>
+  <h4 style="text-decoration: underline;">タイトル(必須)</h4>
+  <%= f.text_area :title, required: true %>
 
-  <%= f.label :author %>
-  <%= f.text_field :author %>
+  <h4 style="text-decoration: underline;">著者(必須)</h4>
+  <%= f.text_field :author, required: true %>
 
-  <%= f.label :publisher %>
-  <%= f.text_field :publisherName %>
+  <h4 style="text-decoration: underline;">出版社(必須)</h4>
+  <%= f.text_field :publisherName, required: true %>
 
-  <!-- 他の属性に対するフォーム入力を追加 -->
+  <%= f.submit '更新', class: 'btn btn-primary' %>
 
-  <%= f.submit '更新する' %>
 <% end %>

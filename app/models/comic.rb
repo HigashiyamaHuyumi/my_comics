@@ -1,4 +1,8 @@
 class Comic < ApplicationRecord
+  validates :title, presence: true
+  validates :author, presence: true
+  validates :publisherName, presence: true
+  
   enum story: { hardcover: 0, separate_volumes: 1, single_story: 2 }
   enum purchase_place: { book_store: 0, e_book: 1, others: 2 }
 

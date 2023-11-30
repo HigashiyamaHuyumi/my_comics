@@ -5,18 +5,33 @@
       <table class="table">
         <thead>
           <tr>
-            <th>タイトル</th>
-            <th>著者</th>
-            <th>出版社</th>
+            <th></th>
+            <th>タイトル,著者,出版社</th>
+            <th>出版日</th>
+            <th>操作</th>
           </tr>
         </thead>
 
         <tbody>
           <% @bookshelves.each do |bookshelf| %>
             <tr>
-              <td><%= link_to bookshelf.book.title, bookshelf_path(bookshelf) %></td>
-              <td><%= bookshelf.book.author %></td>
-              <td><%= bookshelf.book.publisherName %></td>
+              <td>
+                <% if bookshelf.book.image_url.present? %>
+                  <%= image_tag bookshelf.book.image_url, width: 128, height: 188 %>
+                <% else %>
+                  <%= image_tag "no_image.jpg", width: 128, height: 188 %>
+                <% end %>
+              </td>
+              <td>
+                <%= bookshelf.book.title %>
+                <br>
+                <%= bookshelf.book.author %>
+                <br>
+                <%= bookshelf.book.publisherName %>
+              </td>
+              <td>
+                <%= bookshelf.book.salesDate %>
+              </td>
               <td style="text-align: center;">
                 <%= link_to bookshelf_path(bookshelf), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に消しますか？" do %>
                   削除する

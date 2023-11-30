@@ -1,5 +1,5 @@
 class User::BookshelvesController < ApplicationController
-  before_action :set_bookshelf, only: [:update, :destroy]
+  before_action :set_bookshelves, only: [:update, :destroy]
 
   def index
     @bookshelves = current_user.bookshelves
@@ -9,10 +9,8 @@ class User::BookshelvesController < ApplicationController
     @book = Book.find_or_create_by(isbn: params[:isbn]) do |new_book|
       new_book.attributes = read(params[:book])
     end
-
     current_user.bookshelves.find_or_create_by(book: @book)
-
-    redirect_to user_bookshelves_path, notice: '本が本棚に追加されました。'
+    redirect_to bookshelves_path, notice: '本が本棚に追加されました。'
   end
 
   def show
@@ -20,7 +18,8 @@ class User::BookshelvesController < ApplicationController
   end
 
   def edit
-    @bookshelf = current_user.bookshelfves.find(params[:id])
+    @bookshelf = current_user.bookshelves.find(params[:id])
+    Rails.logger.debug(@bookshelf.inspect)
   end
 
   def update
@@ -34,17 +33,17 @@ class User::BookshelvesController < ApplicationController
   end
 
   def destroy
-    @bookshelf = current_user.bookshelves.find(params[:id])
-    @bookshelf.destroy
-    flash[:success] = "本を本棚から削除しました。"
-    redirect_to my_page_path
+    @bookshelves = current_user.bookshelves.find(params[:id])
+    @bookshelves.destroy
+    flash[:success] = "選んだ本を削除しました。"
+    redirect_to  bookshelves_path
   end
 
   private
   
   def bookshelf_params
     # ストロングパラメータを正しく設定
-    params.require(:bookshelf).permit(:custom_attribute)
+    params.require(:bookshelf).permit(:title, :author, :publisherName)
   end
   
   def read(book_params)
@@ -53,11 +52,14 @@ class User::BookshelvesController < ApplicationController
       title: book_params["title"],
       author: book_params["author"],
       publisherName: book_params["publisherName"],
-      url: book_params["itemUrl"],
       isbn: book_params["isbn"],
       image_url: book_params["mediumImageUrl"]&.gsub('?_ex=120x120', ''),
       salesDate: book_params["salesDate"],
     }
+  end
+  
+  def set_bookshelves
+    @bookshelves = current_user.bookshelves.find(params[:id])
   end
 
 end

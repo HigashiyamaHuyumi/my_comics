@@ -1,39 +1,36 @@
 <div class="container">
-  <h5><span style="background-color: #dcdcdc;">会員一覧</span></h5>
+  <h5><span style="background-color: #eaedf7;">会員一覧</span></h5>
   <div class="row justify-content-center">
-
-    <div class="col-8">
-
-    <table class = "table table-striped">
-
-      <thead>
-        <tr>
-          <th>会員ID</th>
-          <th>ニックネーム</th>
-          <th>メールアドレス</th>
-          <th>ステータス</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @users.each do |user| %>
+    <div class="col-md-12">
+      <table class = "table">
+        <thead>
           <tr>
-            <td><%= user.id %></td>
-            <td><%= link_to user.nickname , admin_user_path(user) %></td>
-            <td><%= user.email %></td>
-            <td>
-              <% if user.is_active? %>
-                <span class='active-status'>有効</span>
-              <% else %>
-                <span class='inactive-status'>退会</span>
-              <% end %>
-            </td>
+            <th>会員ID</th>
+            <th>ニックネーム</th>
+            <th>メールアドレス</th>
+            <th>ステータス</th>
           </tr>
-        <% end %>
-      </tbody>
-
-    </table>
-
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td><%= user.id %></td>
+              <td><%= link_to user.nickname , admin_user_path(user) %></td>
+              <td><%= user.email %></td>
+              <td>
+                <% if user.is_active? %>
+                  <span class='active-status'>有効</span>
+                <% else %>
+                  <span class='inactive-status'>退会</span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
+  <%= paginate @users %>
 </div>
+
+<%= render 'layouts/footer' %>

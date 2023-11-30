@@ -29,12 +29,6 @@
 
               <% if user_signed_in? %><!-- 顧客がログインしている場合のメニュー項目 -->
                 <li class="nav-item">
-                  <%= link_to books_search_path , class: "btn btn-outline-dark" do %>
-                    <i class="fa-solid fa-magnifying-glass"></i>本を探す
-                  <% end %>
-                </li>
-
-                <li class="nav-item">
                   <%= link_to "マイページ", my_page_path , class: "btn btn-outline-dark" %>
                 </li>
 
@@ -43,9 +37,15 @@
                     <i class="fa fa-tag"></i> tag
                   <% end %>
                 </li>
+                
+                <li class="nav-item">
+                  <%= link_to books_search_path , class: "btn btn-outline-dark" do %>
+                    <i class="fa-solid fa-magnifying-glass"></i>本を探す
+                  <% end %>
+                </li>
 
                 <li class="nav-item">
-                  <%= link_to "本2", bookshelves_path , class: "btn btn-outline-dark" %>
+                  <%= link_to "★リスト", bookshelves_path , class: "btn btn-outline-dark" %>
                 </li>
 
                 <li class="nav-item">
@@ -53,6 +53,10 @@
                 </li>
 
               <% elsif admin_signed_in? %><!-- 管理者がログインしている場合のメニュー項目 -->
+
+                <li class="nav-item">
+                <%= link_to "About", home_about_path, class: "btn btn-outline-dark" %>
+                </li>
 
                 <li class="nav-item">
                   <%= link_to admin_users_path, class: "btn btn-outline-dark" do %>

@@ -10,6 +10,9 @@ class User::UsersController < ApplicationController
     @search_query = params[:search]
     if @search_query.present?
       @filtered_comics = @user.comics.search(@search_query)
+      unless @filtered_comics.present?
+        flash[:notice] = '検索に一致するデータがありませんでした'
+      end
     end
   end
 

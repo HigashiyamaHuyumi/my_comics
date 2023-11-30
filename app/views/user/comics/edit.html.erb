@@ -6,37 +6,37 @@
     <%= render 'error', comic: @comic %>
 
     <%= form_with model: @comic do |f| %>
-      <h4>タイトル(必須)</h4>
+      <h4 style="text-decoration: underline;">タイトル(必須)</h4>
       <%= f.text_area :title, required: true %>
 
-      <h4>著者(必須)</h4>
+      <h4 style="text-decoration: underline;">著者(必須)</h4>
       <%= f.text_field :author, required: true %>
 
-      <h4>出版社(必須)</h4>
+      <h4 style="text-decoration: underline;">出版社(必須)</h4>
       <%= f.text_field :publisherName, required: true %>
 
     </div>
     <div class="col-md-8">
       
-      <h4>形式</h4>
+      <h4 style="text-decoration: underline;">形式</h4>
       <div>
-        <%= f.radio_button :story, "hardcover", id: :story_hardcovear, required: true %>
+        <%= f.radio_button :story, "hardcover", id: :story_hardcovear %>
         <%= f.label :story_hardcover, "単行本" %>
 
-        <%= f.radio_button :story, "separate_volumes", id: :story_separate_volumes, required: true %>
+        <%= f.radio_button :story, "separate_volumes", id: :story_separate_volumes %>
         <%= f.label :story_separate_volumes, "分冊版" %>
 
-        <%= f.radio_button :story, "single_story", id: :story_single_story, required: true %>
+        <%= f.radio_button :story, "single_story", id: :story_single_story %>
         <%= f.label :story_single_story, "単話" %>
       </div>
 
-      <h4>巻数</h4>
+      <h4 style="text-decoration: underline;">巻数</h4>
       <%= f.collection_check_boxes(:volume_ids, @volumes, :id, :name) %>
 
-      <h4>新しい巻</h4>
+      <h4 style="text-decoration: underline;">新しい巻</h4>
       <%= f.text_field :new_volume, class: 'form-control', placeholder: '1, 2, ...' %>
       
-      <h4 class="background: 1px solid #000;">購入場所</h4>
+      <h4 style="text-decoration: underline;">購入場所</h4>
       <div>
         <%= f.radio_button :purchase_place, "book_store", id: :purchase_place_book_store %>
         <%= f.label :purchase_place_book_store, "本屋" %>
@@ -50,13 +50,13 @@
         <%= f.text_field :purchase_place_custom, placeholder: '自由記入' %>
       </div>
 
-      <h4>タグ</h4>
+      <h4 style="text-decoration: underline;">タグ</h4>
       <%= f.collection_check_boxes(:tag_ids, @tags, :id, :name) %>
 
-      <h4>新しいタグ</h4>
+      <h4 style="text-decoration: underline;">新しいタグ</h4>
       <%= f.text_field :new_tag, class: 'form-control', placeholder: 'タグ1, タグ2, ...' %>
       
-      <h4>備考欄</h4>
+      <h4 style="text-decoration: underline;">備考欄</h4>
       <%= f.text_field :remarks, class: 'form-control' %>
 
     </div>

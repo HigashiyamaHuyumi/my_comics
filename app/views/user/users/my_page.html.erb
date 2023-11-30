@@ -13,7 +13,7 @@
   
   <!-- 作者、タグ、および検索での絞り込みフォーム -->
   <%= form_tag(my_page_path(current_user), method: :get) do %>
-    <%= text_field_tag :search, params[:search], placeholder: '検索する' %>
+    <%= text_field_tag :search, params[:search], placeholder: 'タイトル,著者,出版社,タグ' %>
     <%= submit_tag '検索' %>
   <% end %>
   
@@ -25,7 +25,7 @@
           <tr>
             <th>タイトル<%= link_to "順▼", my_page_path(order: 'title') %></th>
             <th>著者<%= link_to "順▼", my_page_path(order: 'author') %></th>
-            <th>出版社</th>
+            <th>出版社<%= link_to "順▼", my_page_path(order: 'publisherName') %></th>
             <th>所持巻数</th>
             <th>合計巻数</th>
             <th>操作</th>
