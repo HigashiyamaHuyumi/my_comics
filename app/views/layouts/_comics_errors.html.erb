@@ -1,8 +1,8 @@
 <!-- エラーチェック -->
-<% if comics.errors.any? %>
-  <%= comics.errors.count %> errors prohibited this comics from being saved:
+<% if comic.errors.any? %>
+  <%= comic.errors.count %> errors prohibited this comics from being saved:
   <ul>
-    <% comics.errors.full_messages.each do |message| %>
+    <% comic.errors.full_messages.each do |message| %>
       <li><%= message %></li>
     <% end %>
   </ul>

@@ -3,33 +3,33 @@
 
   <div class="row">
     <div class="col-md-8">
-
-    <table class = "table">
-      <tbody>
-        <% if @user.present? %>
-          <tr>
-            <th>会員ID</th>
-            <td><%= @user.id %></td>
-          </tr>
-          <tr>
-            <th>氏名</th>
-            <td><%= @user.nickname %></td>
-          </tr>
-          <tr>
-            <th>メールアドレス</th>
-            <td><%= @user.email %>
-          </tr>
-          <tr>
-            <th>会員ステータス</th>
-            <td><%= @user.is_active ? "有効" : "退会" %>
-          </tr>
-
-        <% end %>
-      </tbody>
-    </table>
-
-    <%= link_to "編集する", edit_admin_user_path, class: "btn btn-success" %>
-
-   </div>
+      <table class = "table">
+        <tbody>
+          <% if @user.present? %>
+            <tr>
+              <th>会員ID</th>
+              <td><%= @user.id %></td>
+            </tr>
+            <tr>
+              <th>氏名</th>
+              <td><%= @user.nickname %></td>
+            </tr>
+            <tr>
+              <th>メールアドレス</th>
+              <td><%= @user.email %>
+            </tr>
+            <tr>
+              <th>会員ステータス</th>
+              <td><%= @user.is_active ? "有効" : "退会" %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= link_to "編集する", edit_admin_user_path, class: "btn btn-success" %>
+      <%= link_to "一覧に戻る", admin_users_path, class: "btn btn-secondary" %>
+    </div>
   </div>
+  
 </div>
+
+<%= render 'layouts/footer' %>

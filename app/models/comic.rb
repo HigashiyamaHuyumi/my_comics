@@ -15,6 +15,7 @@ class Comic < ApplicationRecord
   has_many :tags, through: :comic_tags
 
   attr_accessor :new_tag
+  attr_accessor :new_volume
 
   # タグ付けの新規投稿用メソッド
   def save_tags(tag_params)

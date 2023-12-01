@@ -15,5 +15,6 @@ class User < ApplicationRecord
   has_many :bookshelves, dependent: :destroy
   has_many :comics
   has_many :tags
+  has_many :volumes
 
 end

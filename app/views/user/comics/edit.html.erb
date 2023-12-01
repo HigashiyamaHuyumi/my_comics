@@ -3,7 +3,7 @@
     <div class="col-md-4">
     <h1>漫画情報を編集</h1>
 
-    <%= render 'error', comic: @comic %>
+    <%= render 'layouts/comics_errors', comic: @comic %>
 
     <%= form_with model: @comic do |f| %>
       <h4 style="text-decoration: underline;">タイトル(必須)</h4>
@@ -31,10 +31,10 @@
       </div>
 
       <h4 style="text-decoration: underline;">巻数</h4>
-      <%= f.collection_check_boxes(:volume_ids, @volumes, :id, :name) %>
+      <%= f.collection_check_boxes(:volume_ids, Volume.all, :id, :name) %>
 
       <h4 style="text-decoration: underline;">新しい巻</h4>
-      <%= f.text_field :new_volume, class: 'form-control', placeholder: '1, 2, ...' %>
+      <%= f.text_field :new_volume, placeholder: '1, 2, ...' %>
       
       <h4 style="text-decoration: underline;">購入場所</h4>
       <div>
@@ -54,10 +54,10 @@
       <%= f.collection_check_boxes(:tag_ids, @tags, :id, :name) %>
 
       <h4 style="text-decoration: underline;">新しいタグ</h4>
-      <%= f.text_field :new_tag, class: 'form-control', placeholder: 'タグ1, タグ2, ...' %>
+      <%= f.text_field :new_tag, placeholder: 'タグ1, タグ2, ...' %>
       
       <h4 style="text-decoration: underline;">備考欄</h4>
-      <%= f.text_field :remarks, class: 'form-control' %>
+      <%= f.text_field :remarks %>
 
     </div>
     

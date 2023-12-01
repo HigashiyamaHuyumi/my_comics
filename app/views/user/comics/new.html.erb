@@ -3,7 +3,7 @@
     <div class="col-md-8 offset-md-2">
       <h1>新しい漫画を追加</h1>
 
-      <%= render 'error', comic: @comic %>
+      <%= render 'layouts/comics_errors', comic: @comic %>
 
       <%= form_with model: @comic do |f| %>
         <h4>タイトル(必須)</h4>

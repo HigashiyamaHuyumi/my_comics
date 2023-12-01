@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    
+
     <script src="https://kit.fontawesome.com/1a020bd911.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -29,7 +29,9 @@
 
               <% if user_signed_in? %><!-- 顧客がログインしている場合のメニュー項目 -->
                 <li class="nav-item">
-                  <%= link_to "マイページ", my_page_path , class: "btn btn-outline-dark" %>
+                  <%= link_to my_page_path , class: "btn btn-outline-dark" do %>
+                  <i class="fa fa-book-open-reader"></i>マイページ
+                  <% end %>
                 </li>
 
                 <li class="nav-item">
@@ -39,17 +41,19 @@
                 </li>
                 
                 <li class="nav-item">
+                  <%= link_to "★リスト", bookshelves_path , class: "btn btn-outline-dark" %>
+                </li>
+
+                <li class="nav-item">
                   <%= link_to books_search_path , class: "btn btn-outline-dark" do %>
                     <i class="fa-solid fa-magnifying-glass"></i>本を探す
                   <% end %>
                 </li>
 
                 <li class="nav-item">
-                  <%= link_to "★リスト", bookshelves_path , class: "btn btn-outline-dark" %>
-                </li>
-
-                <li class="nav-item">
-                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline-dark" %>
+                  <%= link_to destroy_user_session_path, method: :delete, class: "btn btn-outline-dark" do %>
+                    <i class="fa-solid fa-right-from-bracket"></i>ログアウト
+                  <% end %>
                 </li>
 
               <% elsif admin_signed_in? %><!-- 管理者がログインしている場合のメニュー項目 -->
@@ -65,7 +69,9 @@
                 </li>
 
                 <li class="nav-item">
-                  <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-outline-dark" %>
+                  <%= link_to destroy_user_session_path, method: :delete, class: "btn btn-outline-dark" do %>
+                    <i class="fa-solid fa-right-from-bracket"></i>ログアウト
+                  <% end %>
                 </li>
 
 
@@ -75,11 +81,15 @@
                 </li>
 
                 <li class="nav-item">
-                  <%= link_to "新規登録", new_user_registration_path, class: "btn btn-outline-dark" %>
+                  <%= link_to new_user_registration_path, class: "btn btn-outline-dark" do %>
+                    <i class="fa fa-arrow-right-to-bracket"></i>新規登録
+                  <% end %>
                 </li>
 
                 <li class="nav-item">
-                  <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-dark" %>
+                  <%= link_to new_user_session_path, class: "btn btn-outline-dark" do %>
+                    <i class="fa fa-right-to-bracket"></i>ログイン
+                  <% end %>
                 </li>
                <% end %>
 

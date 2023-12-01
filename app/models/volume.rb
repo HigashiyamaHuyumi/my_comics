@@ -3,7 +3,6 @@ class Volume < ApplicationRecord
 
   belongs_to :user
   has_many :comic_volumes
-  has_many :comics, through: :comic_volumes
   
   def to_s
     name

@@ -34,8 +34,11 @@ class User::ComicsController < ApplicationController
     @comic = Comic.find(params[:id])
     @comic.purchase_place_custom = params[:comic][:purchase_place_custom]
 
+    Rails.logger.debug("Update Action Params: #{params}")
+
     if @comic.update(comic_params)
       @tags = Tag.all
+      @volumes = Volume.all
 
       # 既存のタグが選択されている場合
       @comic.tag_ids = params[:comic][:tag_ids].presence || []
@@ -55,18 +58,18 @@ class User::ComicsController < ApplicationController
         end
       end
 
+      # 既存の巻が選択されている場合
+      @comic.volume_ids = params[:comic][:volume_ids].presence || []
+
+      # 新しいタグが入力されている場合
       if params[:comic][:new_volume].present?
         new_volumes = params[:comic][:new_volume].split(',').map(&:strip)
-        new_volumes.each do |new_volume|
+        new_volumes.each do |new_volume_name|
           # 既に存在する巻数と同じ番号の場合は重複を避ける
-          existing_volume = Volume.find_by(name: new_volume)
-          unless existing_volume || new_volume.blank?
-            volume = Volume.find_or_create_by(name: new_volume, user_id: current_user.id)
-            if volume
-              @comic.volumes << volume
-            else
-              Rails.logger.error("Failed to create or find Volume with volume: #{new_volume}")
-            end
+          existing_volume = Volume.find_by(user_id: current_user.id, name: new_volume_name).first
+          unless existing_volume
+            new_volume = Volume.create(name: new_volume_name, user_id: current_user.id)
+            @comic.volumes << new_volume
           end
         end
       end
@@ -74,7 +77,7 @@ class User::ComicsController < ApplicationController
       flash[:notice] = '漫画の情報を更新しました'
       redirect_to comic_path(@comic.id)
     else
-      Rails.logger.error(@comic.errors.full_messages.join(', '))
+      Rails.logger.debug(@comic.errors.full_messages.join(', '))
       render :edit
     end
   end
@@ -89,7 +92,7 @@ class User::ComicsController < ApplicationController
   private
 
   def comic_params
-    params.require(:comic).permit(:title, :author, :publisherName, :story, :purchase_place, :purchase_place_custom, :comics_size, :remarks, new_tag: [] , tag_names: [], new_volume: [], volume_ids: [])
+    params.require(:comic).permit(:title, :author, :publisherName, :story, :purchase_place, :purchase_place_custom, :comics_size, :remarks, new_tag: [], tag_names: [], new_volume: [], volume_ids: [])
   end
 
   def is_matching_login_user

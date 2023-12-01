@@ -15,8 +15,11 @@ class User::BooksController < ApplicationController
           new_book.attributes = read(result)
         end
 
-        # ユーザーのbookshelfに追加
-        current_user.bookshelves.find_or_create_by(book: book)
+        # 選択された本のIDがあれば本棚に追加
+        if params[:selected_book_id] == book.id.to_s
+          current_user.bookshelves.find_or_create_by(book: book)
+        end
+
         @books << book
       end
     end

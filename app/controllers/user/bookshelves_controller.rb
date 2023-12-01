@@ -10,7 +10,7 @@ class User::BookshelvesController < ApplicationController
       new_book.attributes = read(params[:book])
     end
     current_user.bookshelves.find_or_create_by(book: @book)
-    redirect_to bookshelves_path, notice: '本が本棚に追加されました。'
+    redirect_to bookshelves_path, notice: '本が★リストに追加されました。'
   end
 
   def show

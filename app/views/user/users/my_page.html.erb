@@ -2,7 +2,7 @@
   
   <div class="row">
     <div class="col-8">
-      <h5><%= link_to "#{current_user.nickname}の本棚" , user_path(@user) %></h5>
+      <h5><%= link_to "#{current_user.nickname}" , user_path(@user) %>の本棚</h5>
     </div>
     <div class="col-4" style="text-align: right;">
       <%= link_to new_comic_path, class: "btn btn-outline-dark btn-circle text-dark" do %>
