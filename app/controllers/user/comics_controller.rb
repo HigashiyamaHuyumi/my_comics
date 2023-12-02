@@ -66,7 +66,7 @@ class User::ComicsController < ApplicationController
         new_volumes = params[:comic][:new_volume].split(',').map(&:strip)
         new_volumes.each do |new_volume_name|
           # 既に存在する巻数と同じ番号の場合は重複を避ける
-          existing_volume = Volume.find_by(user_id: current_user.id, name: new_volume_name).first
+          existing_volume = Volume.find_by(user_id: current_user.id, name: new_volume_name)
           unless existing_volume
             new_volume = Volume.create(name: new_volume_name, user_id: current_user.id)
             @comic.volumes << new_volume

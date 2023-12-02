@@ -6,30 +6,30 @@
         <thead>
           <tr>
             <th></th>
-            <th>タイトル,著者,出版社</th>
-            <th>出版日</th>
-            <th>操作</th>
+            <th class="text-center">タイトル,著者,出版社</th>
+            <th class="text-center">出版日</th>
+            <th class="text-center">操作</th>
           </tr>
         </thead>
 
         <tbody>
           <% @bookshelves.each do |bookshelf| %>
             <tr>
-              <td>
+              <td class="text-center">
                 <% if bookshelf.book.image_url.present? %>
                   <%= image_tag bookshelf.book.image_url, width: 128, height: 188 %>
                 <% else %>
                   <%= image_tag "no_image.jpg", width: 128, height: 188 %>
                 <% end %>
               </td>
-              <td>
+              <td class="text-center">
                 <%= bookshelf.book.title %>
                 <br>
                 <%= bookshelf.book.author %>
                 <br>
                 <%= bookshelf.book.publisherName %>
               </td>
-              <td>
+              <td class="text-center">
                 <%= bookshelf.book.salesDate %>
               </td>
               <td style="text-align: center;">

@@ -9,7 +9,7 @@
           <%= "単行本" %>
         <% elsif @comic.story == "separate_volumes" %>
           <%= "分冊本" %>
-        <% else @comic.story == "single_story" %>
+        <% elsif @comic.story == "single_story" %>
           <%= "単話" %>
         <% end %>
       </p>
