@@ -1,15 +1,25 @@
-<h1>タグ一覧</h1>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-10">
 
-<%= form_with(model: Tag.new, url: tags_path, local: true) do |form| %>
-  <%= form.label :name, '新しいタグの名前:' %>
-  <%= form.text_field :name %>
-  <%= form.submit '作成する' %>
-<% end %>
+      <h1>タグ一覧</h1>
+      
+      <%= form_with(model: Tag.new, url: tags_path, local: true) do |form| %>
+        <%= form.label :name, '新しいタグの名前:' %>
+        <%= form.text_field :name %>
+        <%= form.submit '作成する' %>
+      <% end %>
+      
+      
+      <% @tags.each do |tag| %>
+        <div class="tag">
+          <%= tag.name %>|
+          <%= link_to '削除', tag, method: :delete, data: { confirm: 'このタグが付いている漫画からもこのタグは削除されます。本当に削除しますか？' } %>
+        </div>
+      <% end %>
 
-
-<% @tags.each do |tag| %>
-  <div class="tag">
-    <%= link_to tag.name %>|
-    <%= link_to '削除', tag, method: :delete, data: { confirm: '本当に削除しますか？' } %>
+    </div>
   </div>
-<% end %>
+</div>
+
+<%= render 'layouts/footer' %>

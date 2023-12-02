@@ -16,21 +16,19 @@
     <header>
       <nav class="navbar navbar-expand-lg text-black">
         <div class="container">
-          <div class="navbar-brand" href="/">
-            <%= link_to "my comics", root_path, style: "font-size: 2rem;" %>
-          </div>
-
+          <%= link_to "my comics", root_path, class: "navbar-brand", style: "font-size: 3rem;" %>
+    
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-
+    
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
 
               <% if user_signed_in? %><!-- 顧客がログインしている場合のメニュー項目 -->
                 <li class="nav-item">
                   <%= link_to my_page_path , class: "btn btn-outline-dark" do %>
-                  <i class="fa fa-book-open-reader"></i>マイページ
+                  <i class="fa fa-book-open-reader"></i> マイページ
                   <% end %>
                 </li>
 
@@ -41,18 +39,24 @@
                 </li>
                 
                 <li class="nav-item">
-                  <%= link_to "★リスト", bookshelves_path , class: "btn btn-outline-dark" %>
-                </li>
-
-                <li class="nav-item">
-                  <%= link_to books_search_path , class: "btn btn-outline-dark" do %>
-                    <i class="fa-solid fa-magnifying-glass"></i>本を探す
+                  <%= link_to bookshelves_path , class: "btn btn-outline-dark" do %>
+                    <i class="fa fa-bookmark"></i> ブックマーク
                   <% end %>
                 </li>
 
                 <li class="nav-item">
+                  <%= link_to books_search_path , class: "btn btn-outline-dark" do %>
+                    <i class="fa fa-magnifying-glass"></i> 本を探す
+                  <% end %>
+                </li>
+
+                <li class="nav-item">
+                  <%= link_to "About", home_about_path, class: "btn btn-outline-dark" %>
+                </li>
+
+                <li class="nav-item">
                   <%= link_to destroy_user_session_path, method: :delete, class: "btn btn-outline-dark" do %>
-                    <i class="fa-solid fa-right-from-bracket"></i>ログアウト
+                    <i class="fa fa-right-from-bracket"></i> ログアウト
                   <% end %>
                 </li>
 
@@ -64,31 +68,31 @@
 
                 <li class="nav-item">
                   <%= link_to admin_users_path, class: "btn btn-outline-dark" do %>
-                    <i class="fa-solid fa-users"></i>会員一覧
+                    <i class="fa fa-users"></i> 会員一覧
                   <% end %>
                 </li>
 
                 <li class="nav-item">
                   <%= link_to destroy_user_session_path, method: :delete, class: "btn btn-outline-dark" do %>
-                    <i class="fa-solid fa-right-from-bracket"></i>ログアウト
+                    <i class="fa fa-right-from-bracket"></i> ログアウト
                   <% end %>
                 </li>
 
 
               <% else %>
                 <li class="nav-item">
-                <%= link_to "About", home_about_path, class: "btn btn-outline-dark" %>
+                  <%= link_to "About", home_about_path, class: "btn btn-outline-dark" %>
                 </li>
 
                 <li class="nav-item">
                   <%= link_to new_user_registration_path, class: "btn btn-outline-dark" do %>
-                    <i class="fa fa-arrow-right-to-bracket"></i>新規登録
+                    <i class="fa fa-arrow-right-to-bracket"></i> 新規登録
                   <% end %>
                 </li>
 
                 <li class="nav-item">
                   <%= link_to new_user_session_path, class: "btn btn-outline-dark" do %>
-                    <i class="fa fa-right-to-bracket"></i>ログイン
+                    <i class="fa fa-right-to-bracket"></i> ログイン
                   <% end %>
                 </li>
                <% end %>
