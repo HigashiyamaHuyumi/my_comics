@@ -1,33 +1,38 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-12">
+      <div class="text-center">
+        <h3><span style="background-color: #eaedf7;">会員情報編集</span></h3>
+  
+        <%= form_for @user, url: user_path(@user), method: :patch do |f| %>
+  
+          <%= render 'layouts/user_errors', user: @user %>
+  
+          <div class="field">
+            <%= f.label :ニックネーム, class: "col-lg-2" %>
+            <%= f.text_field :nickname, autofocus: true, autocomplete: "nickname" %>
+          </div>
+  
+          <div class="field">
+            <%= f.label :メールアドレス, class: "col-lg-2" %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+          </div>
 
-    <h5><span style="background-color: #dcdcdc;">会員情報編集</span></h5>
-
-    <%= form_for @user, url: user_path(@user), method: :patch do |f| %>
-
-      <%= render 'layouts/user_errors' , user: @user  %>
-
-      <div class="field">
-        <%= f.label :ニックネーム %>
-        <%= f.text_field :nickname, autofocus: true, autocomplete: "nickname" %>
-      </div>
-
-      <div class="field">
-        <%= f.label :メールアドレス %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+          <div class="row justify-content-center text-center">
+            <div class="col-md-2">
+              <div class="actions">
+                <%= f.submit "編集内容を保存", class: "btn btn-success" %>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <%= link_to "退会する", confirm_user_path(current_user), class: "btn btn-danger" %>
+            </div>
+          </div>
+        
+        <% end %>
+        
       </div>
     </div>
-
-    <div class="row">
-      <div class="actions">
-        <%= f.submit "編集内容を保存" ,class: "btn btn-success" %>
-      </div>
-    <% end %>
-
-    <%= link_to "退会する", confirm_user_path(current_user), class: "btn btn-danger" %>
-    </div>
-
   </div>
 </div>
 
