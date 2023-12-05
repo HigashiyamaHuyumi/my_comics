@@ -34,8 +34,6 @@ class User::ComicsController < ApplicationController
     @comic = Comic.find(params[:id])
     @comic.purchase_place_custom = params[:comic][:purchase_place_custom]
 
-    Rails.logger.debug("Update Action Params: #{params}")
-
     if @comic.update(comic_params)
       @tags = Tag.all
       @volumes = Volume.all
@@ -59,7 +57,7 @@ class User::ComicsController < ApplicationController
       # 既存の巻が選択されている場合
       @comic.volume_ids = params[:comic][:volume_ids].presence || []
       
-      # 新しいタグが入力されている場合
+      # 新しい巻が入力されている場合
       if params[:comic][:new_volume].present?
         new_volumes = params[:comic][:new_volume].split(',').map(&:strip)
         new_volumes.each do |new_volume_name|

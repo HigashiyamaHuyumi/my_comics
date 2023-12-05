@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
+
   validates :nickname, presence: true
   validates :email, presence: true
 
@@ -8,9 +11,6 @@ class User < ApplicationRecord
       user.nickname = 'ゲスト'
     end
   end
-
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
 
   has_many :bookshelves, dependent: :destroy
   has_many :comics

@@ -11,7 +11,15 @@ class User::TagsController < ApplicationController
   end
   
   def index
-    @tags = current_user.tags
+    allowed_orders = ['name', 'comic_tags_count'] # 許可された順序のリスト
+    order_by = params[:order].in?(allowed_orders) ? params[:order] : 'name' # パラメータが不正な場合はデフォルトで 'name'
+    
+    case order_by
+    when 'name'
+      @tags = current_user.tags.order(:name)
+    when 'comic_tags_count'
+      @tags = current_user.tags.left_joins(:comic_tags).group(:id).order('COUNT(comic_tags.tag_id) DESC')
+    end
   end
   
   def comics
