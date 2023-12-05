@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-10 ">
+
+      <h1><%= @tag.name %>に関連する漫画一覧</h1>
+
+      <% @comics.each do |comic| %>
+        <%= link_to comic.title, comic_path(comic) %>
+        <!-- ここに漫画の表示に関するコードを追加することができます -->
+      <% end %>
+      
+   </div>
+  </div>
+</div>
+
+<%= render 'layouts/footer' %>

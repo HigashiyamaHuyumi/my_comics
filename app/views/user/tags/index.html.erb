@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-10">
+    <div class="col-10 ">
 
       <h1>タグ一覧</h1>
       
@@ -13,8 +13,13 @@
       
       <% @tags.each do |tag| %>
         <div class="tag">
-          <%= tag.name %>|
-          <%= link_to '削除', tag, method: :delete, data: { confirm: 'このタグが付いている漫画からもこのタグは削除されます。本当に削除しますか？' } %>
+          <%= tag.name %>
+          <span>
+            <%= link_to comics_tag_path(tag), class: "tag-link" do %>
+              (<%= tag.comic_tags.count %>)
+            <% end %>
+          </span>
+          |<%= link_to '削除', tag, method: :delete, data: { confirm: 'このタグが付いている漫画からもこのタグは削除されます。本当に削除しますか？' } %>
         </div>
       <% end %>
 

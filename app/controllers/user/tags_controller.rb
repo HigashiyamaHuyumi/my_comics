@@ -13,6 +13,11 @@ class User::TagsController < ApplicationController
   def index
     @tags = current_user.tags
   end
+  
+  def comics
+    @tag = Tag.find(params[:id])
+    @comics = @tag.comics
+  end
 
   def destroy
     @tag = Tag.find(params[:id])

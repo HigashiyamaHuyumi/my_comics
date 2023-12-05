@@ -42,25 +42,23 @@ class User::ComicsController < ApplicationController
 
       # 既存のタグが選択されている場合
       @comic.tag_ids = params[:comic][:tag_ids].presence || []
-
+      
       # 新しいタグが入力されている場合
       if params[:comic][:new_tag].present?
         new_tags = params[:comic][:new_tag].split(',').map(&:strip)
         new_tags.each do |new_tag_name|
           # 既に存在するタグと同じ名前の場合は重複を避ける
-          existing_tag = Tag.find_by(name: new_tag_name)
+          existing_tag = Tag.find_by(name: new_tag_name, user_id: current_user.id)
           unless existing_tag
-            new_tag = Tag.find_or_create_by(name: new_tag_name)
-            new_tag.user = current_user
-            new_tag.save
+            new_tag = Tag.find_or_create_by(name: new_tag_name, user_id: current_user.id)
             @comic.tags << new_tag
           end
         end
       end
-
+      
       # 既存の巻が選択されている場合
       @comic.volume_ids = params[:comic][:volume_ids].presence || []
-
+      
       # 新しいタグが入力されている場合
       if params[:comic][:new_volume].present?
         new_volumes = params[:comic][:new_volume].split(',').map(&:strip)

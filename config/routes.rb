@@ -14,10 +14,14 @@ Rails.application.routes.draw do
 		  get :confirm, on: :member # 退会確認
       patch :withdrawal, on: :member # 退会処理
 		end
-		resources :comics
+		resources :comics do
+		  get 'tag', on: :member
+    end
 		resources :comic_detail
 		resources :bookshelves
-		resources :tags, only: [:index, :create, :destroy]
+		resources :tags, only: [:index, :create, :destroy] do
+	    get 'comics', on: :member
+    end
 		get 'books/search', to: "books#search", as: 'books_search'
     resources :books do
       post 'bookshelf', on: :member

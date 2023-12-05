@@ -4,6 +4,7 @@ class Tag < ApplicationRecord
 
   belongs_to :user
   has_many :comic_tags, dependent: :destroy
+  has_many :comics, through: :comic_tags
 
   def to_s
     name
