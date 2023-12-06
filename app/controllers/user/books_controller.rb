@@ -25,7 +25,6 @@ class User::BooksController < ApplicationController
     end
   end
 
-
   private
 
   #「楽天APIのデータから必要なデータを絞り込む」、且つ「対応するカラムにデータを格納する」メソッドを設定していきます。

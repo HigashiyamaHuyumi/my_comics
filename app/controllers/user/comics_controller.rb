@@ -73,7 +73,6 @@ class User::ComicsController < ApplicationController
       flash[:notice] = '漫画の情報を更新しました'
       redirect_to comic_path(@comic.id)
     else
-      Rails.logger.debug(@comic.errors.full_messages.join(', '))
       render :edit
     end
   end

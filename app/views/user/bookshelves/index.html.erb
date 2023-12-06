@@ -23,7 +23,7 @@
                 <% end %>
               </td>
               <td class="text-center">
-                <%= bookshelf.book.title %>
+                <%= link_to bookshelf.book.title , bookshelf_path(bookshelf) %>
                 <br>
                 <%= bookshelf.book.author %>
                 <br>

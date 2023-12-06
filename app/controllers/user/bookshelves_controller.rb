@@ -1,5 +1,4 @@
 class User::BookshelvesController < ApplicationController
-  before_action :set_bookshelves, only: [:update, :destroy]
 
   def index
     @bookshelves = current_user.bookshelves
@@ -19,22 +18,20 @@ class User::BookshelvesController < ApplicationController
 
   def edit
     @bookshelf = current_user.bookshelves.find(params[:id])
-    Rails.logger.debug(@bookshelf.inspect)
   end
 
   def update
     @bookshelf = current_user.bookshelves.find(params[:id])
-
     if @bookshelf.update(bookshelf_params)
-      redirect_to bookshelves_path, notice: 'Bookshelf updated successfully.'
+      redirect_to bookshelves_path, notice: '本を更新しました'
     else
       render :edit
     end
   end
 
   def destroy
-    @bookshelves = current_user.bookshelves.find(params[:id])
-    @bookshelves.destroy
+    @bookshelf = current_user.bookshelves.find(params[:id])
+    @bookshelf.destroy
     flash[:success] = "選んだ本を削除しました。"
     redirect_to  bookshelves_path
   end
@@ -42,7 +39,6 @@ class User::BookshelvesController < ApplicationController
   private
   
   def bookshelf_params
-    # ストロングパラメータを正しく設定
     params.require(:bookshelf).permit(:title, :author, :publisherName)
   end
   
@@ -56,10 +52,6 @@ class User::BookshelvesController < ApplicationController
       image_url: book_params["mediumImageUrl"]&.gsub('?_ex=120x120', ''),
       salesDate: book_params["salesDate"],
     }
-  end
-  
-  def set_bookshelves
-    @bookshelves = current_user.bookshelves.find(params[:id])
   end
 
 end
