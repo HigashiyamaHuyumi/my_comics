@@ -21,13 +21,13 @@ class User::ComicsController < ApplicationController
   def show #データの内容（詳細）を表示する
     @comic = Comic.find(params[:id])
     @tags = @comic.tags.pluck(:name).join(',')
-    @volumes = @comic.volumes.pluck(:volume).join(',')
+    @volumes = @comic.volumes.sort_by { |volume| volume.name.to_i }.pluck(:name).join(',')
   end
 
   def edit #データを更新するためのフォームを表示す
     @comic = Comic.find(params[:id])
     @tags = Tag.where(user_id: current_user.id)
-    @volumes = Volume.where(user_id: current_user.id)
+    @volumes = Volume.where(user_id: current_user.id).sort_by { |volume| [volume.name.to_i, volume.name] }
   end
 
   def update
@@ -45,9 +45,11 @@ class User::ComicsController < ApplicationController
       if params[:comic][:new_tag].present?
         new_tags = params[:comic][:new_tag].split(',').map(&:strip)
         new_tags.each do |new_tag_name|
-          # 既に存在するタグと同じ名前の場合は重複を避ける
+          # 既に存在するタグと同じ名前の場合は既存のタグを追加するだけにする
           existing_tag = Tag.find_by(name: new_tag_name, user_id: current_user.id)
-          unless existing_tag
+          if existing_tag
+            @comic.tags << existing_tag
+          else
             new_tag = Tag.find_or_create_by(name: new_tag_name, user_id: current_user.id)
             @comic.tags << new_tag
           end
@@ -61,9 +63,11 @@ class User::ComicsController < ApplicationController
       if params[:comic][:new_volume].present?
         new_volumes = params[:comic][:new_volume].split(',').map(&:strip)
         new_volumes.each do |new_volume_name|
-          # 既に存在する巻数と同じ番号の場合は重複を避ける
+          # 既に存在する巻数と同じ番号の場合は既存の巻数を追加するだけにする
           existing_volume = Volume.find_by(user_id: current_user.id, name: new_volume_name)
-          unless existing_volume
+          if existing_volume
+            @comic.volumes << existing_volume
+          else
             new_volume = Volume.create(name: new_volume_name, user_id: current_user.id)
             @comic.volumes << new_volume
           end
@@ -87,7 +91,7 @@ class User::ComicsController < ApplicationController
   private
 
   def comic_params
-    params.require(:comic).permit(:title, :author, :publisherName, :story, :purchase_place, :purchase_place_custom, :comics_size, :remarks, new_tag: [], tag_names: [], new_volume: [], volume_ids: [])
+    params.require(:comic).permit(:title, :initial, :author, :publisherName, :situation, :story, :purchase_place, :purchase_place_custom, :comics_size, :remarks, new_tag: [], tag_names: [], new_volume: [], volume_ids: [])
   end
 
   def is_matching_login_user

@@ -1,24 +1,39 @@
 <div class="container">
+  <h1 style="text-align: center;">漫画情報を編集</h1>
   <div class="row">
+    
     <div class="col-md-4">
-    <h1>漫画情報を編集</h1>
 
     <%= render 'layouts/comics_errors', comic: @comic %>
 
     <%= form_with model: @comic do |f| %>
-      <h4 style="text-decoration: underline;">タイトル(必須)</h4>
+      <h4>タイトル(必須)</h4>
+      <%= f.text_field :initial %>
       <%= f.text_area :title, required: true %>
 
-      <h4 style="text-decoration: underline;">著者(必須)</h4>
-      <%= f.text_field :author, required: true %>
+      <h4>著者</h4>
+      <%= f.text_field :author %>
 
-      <h4 style="text-decoration: underline;">出版社(必須)</h4>
-      <%= f.text_field :publisherName, required: true %>
+      <h4 style="text-decoration: underline;">出版社</h4>
+      <%= f.text_field :publisherName %>
 
     </div>
+    
     <div class="col-md-8">
       
-      <h4 style="text-decoration: underline;">形式</h4>
+      <h4>連載状況</h4>
+      <div>
+        <%= f.radio_button :situation, "serialization", id: :situation_serialization %>
+        <%= f.label :situation_serialization, "連載中" %>
+
+        <%= f.radio_button :situation, "completed", id: :situation_completed %>
+        <%= f.label :situation_completed, "完結" %>
+
+        <%= f.radio_button :situation, "suspended", id: :situation_suspended %>
+        <%= f.label :situation_suspended, "休載中" %>
+      </div>
+      
+      <h4>形式</h4>
       <div>
         <%= f.radio_button :story, "hardcover", id: :story_hardcovear %>
         <%= f.label :story_hardcover, "単行本" %>
@@ -30,13 +45,13 @@
         <%= f.label :story_single_story, "単話" %>
       </div>
 
-      <h4 style="text-decoration: underline;">巻数</h4>
+      <h4>巻数</h4>
       <%= f.collection_check_boxes(:volume_ids, @volumes, :id, :name) %>
 
-      <h4 style="text-decoration: underline;">新しい巻</h4>
+      <h4>新しい巻</h4>
       <%= f.text_field :new_volume, placeholder: '1, 2, ...' %>
       
-      <h4 style="text-decoration: underline;">購入場所</h4>
+      <h4>購入場所</h4>
       <div>
         <%= f.radio_button :purchase_place, "book_store", id: :purchase_place_book_store %>
         <%= f.label :purchase_place_book_store, "本屋" %>
@@ -50,26 +65,25 @@
         <%= f.text_field :purchase_place_custom, placeholder: '自由記入' %>
       </div>
 
-      <h4 style="text-decoration: underline;">タグ</h4>
+      <h4>タグ</h4>
       <%= f.collection_check_boxes(:tag_ids, @tags, :id, :name) %>
 
-      <h4 style="text-decoration: underline;">新しいタグ</h4>
+      <h4>新しいタグ</h4>
       <%= f.text_field :new_tag, placeholder: 'タグ1, タグ2, ...' %>
       
-      <h4 style="text-decoration: underline;">備考欄</h4>
+      <h4>備考欄</h4>
       <%= f.text_field :remarks %>
 
     </div>
-    
   </div>
-
-    <div class="row center">
-      <div class="col-md-6">
-        <div class="actions">
-          <%= f.submit '保存', class: 'btn btn-primary' %>
-        </div>
-      <% end %>
+  
+  <div class="row center">
+    <div class="col-md-6">
+      <div class="actions">
+        <%= f.submit '保存', class: 'btn btn-primary' %>
       </div>
+    <% end %>
     </div>
   </div>
+
 </div>

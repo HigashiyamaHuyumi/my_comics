@@ -23,9 +23,11 @@
         
         <thead>
           <tr>
+            <th>a<%= link_to "順▼", my_page_path(order: 'initial') %></th>
             <th>タイトル<%= link_to "順▼", my_page_path(order: 'title') %></th>
             <th>著者<%= link_to "順▼", my_page_path(order: 'author') %></th>
             <th>出版社<%= link_to "順▼", my_page_path(order: 'publisherName') %></th>
+            <th></th>
             <th>所持巻数</th>
             <th>合計巻数</th>
             <th>操作</th>
@@ -36,10 +38,20 @@
           <% if @filtered_comics.present? %>
             <% @filtered_comics.each do |comic| %>
               <tr>
+                <td><%= comic.initial %></td>
                 <td><%= link_to comic.title, comic_path(comic) %></td>
                 <td><%= comic.author %></td>
                 <td><%= comic.publisherName %></td>
-                <td><%= comic.volumes.join(', ') %></td>
+                <td>
+                  <% if comic.story == "hardcover" %>
+                    <%= "単行本" %>
+                  <% elsif comic.story == "separate_volumes" %>
+                    <%= "分冊本" %>
+                  <% elsif comic.story == "single_story" %>
+                    <%= "単話" %>
+                  <% end %>
+                </td>
+                <td><%= comic.volumes.sort_by { |volume| volume.name.to_i }.pluck(:name).join(',') %></td>
                 <td><%= comic.total_volumes %></td>
                 <td><%= link_to '編集', edit_comic_path(comic), class: 'btn btn-primary' %></td>
               </tr>
@@ -47,10 +59,20 @@
           <% elsif @comics.present? %>
             <% @comics.each do |comic| %>
               <tr>
+                <td><%= comic.initial %></td>
                 <td><%= link_to comic.title, comic_path(comic) %></td>
                 <td><%= comic.author %></td>
                 <td><%= comic.publisherName %></td>
-                <td><%= comic.volumes.join(', ') %></td>
+                <td>
+                  <% if comic.story == "hardcover" %>
+                    <%= "単行本" %>
+                  <% elsif comic.story == "separate_volumes" %>
+                    <%= "分冊本" %>
+                  <% elsif comic.story == "single_story" %>
+                    <%= "単話" %>
+                  <% end %>
+                </td>
+                <td><%= comic.volumes.sort_by { |volume| volume.name.to_i }.pluck(:name).join(',') %></td>
                 <td><%= comic.total_volumes %></td>
                 <td><%= link_to '編集', edit_comic_path(comic), class: 'btn btn-primary' %></td>
               </tr>

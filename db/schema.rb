@@ -95,8 +95,10 @@ ActiveRecord::Schema.define(version: 2023_11_27_081345) do
   create_table "comics", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "title", null: false
-    t.string "author", null: false
-    t.string "publisherName", null: false
+    t.string "initial"
+    t.string "author"
+    t.string "publisherName"
+    t.integer "situation"
     t.integer "story"
     t.integer "purchase_place"
     t.string "purchase_place_custom"

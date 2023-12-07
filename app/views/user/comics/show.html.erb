@@ -2,8 +2,18 @@
   <div class="row">
     <div class="col-md-8 offset-md-2">
       <h1><%= @comic.title %></h1>
+      <p>タイトル頭文字: <%= @comic.initial %></p>
       <p>著者: <%= @comic.author %></p>
       <p>出版社: <%= @comic.publisherName %></p>
+      <p>連載状況:
+        <% if @comic.situation == "serialization" %>
+          <%= "連載中" %>
+        <% elsif @comic.situation == "completed" %>
+          <%= "完結" %>
+        <% elsif @comic.situation == "hsuspended" %>
+          <%= "休載中" %>
+        <% end %>
+      </p>
       <p>形式:
         <% if @comic.story == "hardcover" %>
           <%= "単行本" %>
@@ -13,7 +23,7 @@
           <%= "単話" %>
         <% end %>
       </p>
-      <p>所持巻数: <%= @comic.volumes.join(', ') %></p>
+      <p>所持巻数: <%= @volumes %></p>
       <p>購入場所:
         <% if @comic.purchase_place == "book_store" %>
           <%= "本屋" %>
