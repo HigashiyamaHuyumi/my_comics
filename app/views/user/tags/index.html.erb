@@ -23,11 +23,13 @@
         <% @tags.each do |tag| %>
           <div class="col-md-6 mb-3">
             <div class="tag">
-              <span>
+              <% if tag.id.present? %>
                 <%= link_to comics_tag_path(tag), class: "tag-link" do %>
                   <%= tag.name %>(<%= tag.comic_tags.count %>)
                 <% end %>
-              </span>
+              <% else %>
+                <%= tag.name %>(<%= tag.comic_tags.count %>)
+              <% end %>
               |
               <%= link_to '削除', tag, method: :delete, data: { confirm: 'このタグが付いている漫画からもこのタグは削除されます。本当に削除しますか？' } %>
             </div>

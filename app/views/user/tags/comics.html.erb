@@ -2,7 +2,9 @@
   <div class="row justify-content-center">
     <div class="col-12 ">
 
-      <h3>「<%= @tag.name %>」のタグが付いている漫画一覧</h3>
+      <h3 style="text-align: center;">
+        「<%= @tag.name %>」のタグが付いている漫画一覧(<%= @tag.comic_tags.count %>)
+      </h3>
 
       <table class="table">
         <tbody>
