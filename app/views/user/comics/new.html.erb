@@ -1,70 +1,84 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-4">
-      <h1>新しい漫画を追加</h1>
+    <div class="col-md-10">
+      <h5 style="text-align: center;"><span style="background-color: #eaedf7;">新しい漫画を追加</span></h5>
 
       <%= render 'layouts/comics_errors', comic: @comic %>
       
       <%= form_with model: @comic do |f| %>
-        <h4>タイトル(必須)</h4>
-        <%= f.text_field :initial, size: 2 %>
-        <%= f.text_area :title, required: true, cols: 40 %>
-  
-        <h4>著者</h4>
-        <%= f.text_field :author %>
-  
-        <h4>出版社</h4>
-        <%= f.text_field :publisherName %>
-  
-      </div>
-      <div class="col-md-8">
-        
-        <h4>連載状況</h4>
-        <div>
-          <%= f.radio_button :situation, "serialization", id: :situation_serialization %>
-          <%= f.label :situation_serialization, "連載中" %>
-  
-          <%= f.radio_button :situation, "completed", id: :situation_completed %>
-          <%= f.label :situation_completed, "完結" %>
-  
-          <%= f.radio_button :situation, "suspended", id: :situation_suspended %>
-          <%= f.label :situation_suspended, "休載中" %>
-        </div>
-        
-        <h4>形式</h4>
-        <div>
-          <%= f.radio_button :story, "hardcover", id: :story_hardcovear %>
-          <%= f.label :story_hardcover, "単行本" %>
-  
-          <%= f.radio_button :story, "separate_volumes", id: :story_separate_volumes %>
-          <%= f.label :story_separate_volumes, "分冊版" %>
-  
-          <%= f.radio_button :story, "single_story", id: :story_single_story %>
-          <%= f.label :story_single_story, "単話" %>
-        </div>
-  
-        <h4>購入場所</h4>
-        <div>
-          <%= f.radio_button :purchase_place, "book_store", id: :purchase_place_book_store %>
-          <%= f.label :purchase_place_book_store, "本屋" %>
-  
-          <%= f.radio_button :purchase_place, "e_book", id: :purchase_place_e_book %>
-          <%= f.label :purchase_place_e_book, "電子書籍" %>
-  
-          <%= f.radio_button :purchase_place, "others", id: :purchase_place_others %>
-          <%= f.label :purchase_place_others, "他" %>
-  
-          <%= f.text_field :purchase_place_custom, placeholder: '自由記入' %>
+
+        <div class="field row">
+          <%= f.label "タイトル(必須)", class: "col-lg-2" %>
+          <%= f.text_field :initial, size: 2 , placeholder: '頭文字' %>
+          <%= f.text_area :title, required: true, class: "col-lg-5" %>
         </div>
 
-        <h4>備考欄</h4>
-        <%= f.text_field :remarks %>
-     
-        <div class="actions">
-          <%= f.submit '保存', class: 'btn btn-primary' %>
+        <div class="field row">
+          <%= f.label :著者, class: "col-lg-2" %>
+          <%= f.text_field :author, class: "col-lg-5" %>
         </div>
+        
+        <div class="field row">
+          <%= f.label :出版社, class: "col-lg-2" %>
+          <%= f.text_field :publisherName, class: "col-lg-5" %>
+        </div>
+        
+        <div class="field row">
+          <%= f.label "連載状況", class: "col-lg-2" %>
+          <div class="col-lg-5">
+            <%= f.radio_button :situation, "serialization", id: :situation_serialization %>
+            <%= f.label :situation_serialization, "連載中" %>
+        
+            <%= f.radio_button :situation, "completed", id: :situation_completed %>
+            <%= f.label :situation_completed, "完結" %>
+        
+            <%= f.radio_button :situation, "suspended", id: :situation_suspended %>
+            <%= f.label :situation_suspended, "休載中" %>
+          </div>
+        </div>
+        
+        <div class="field row">
+          <%= f.label "形式", class: "col-lg-2" %>
+          <div class="col-lg-5">
+            <%= f.radio_button :story, "hardcover", id: :story_hardcovear %>
+            <%= f.label :story_hardcover, "単行本" %>
+    
+            <%= f.radio_button :story, "separate_volumes", id: :story_separate_volumes %>
+            <%= f.label :story_separate_volumes, "分冊版" %>
+    
+            <%= f.radio_button :story, "single_story", id: :story_single_story %>
+            <%= f.label :story_single_story, "単話" %>
+          </div>
+        </div>
+        
+        <div class="field row">
+          <%= f.label "購入場所", class: "col-lg-2" %>
+          <div class="col-lg-5">
+            <%= f.radio_button :purchase_place, "book_store", id: :purchase_place_book_store %>
+            <%= f.label :purchase_place_book_store, "本屋" %>
+    
+            <%= f.radio_button :purchase_place, "e_book", id: :purchase_place_e_book %>
+            <%= f.label :purchase_place_e_book, "電子書籍" %>
+    
+            <%= f.radio_button :purchase_place, "others", id: :purchase_place_others %>
+            <%= f.label :purchase_place_others, "他" %>
+    
+            <%= f.text_field :purchase_place_custom, placeholder: '自由記入' %>
+          </div>
+        </div>
+        
+        <div class="field row">
+          <%= f.label :備考欄, class: "col-lg-2" %>
+          <%= f.text_field :remarks, class: "col-lg-5" %>
+        </div>
+        
+        <div class="text-center">
+          <div class="actions">
+            <%= f.submit '保存', class: 'btn btn-primary', style: 'margin: 1rem;' %>
+          </div>
+        </div>
+
       <% end %>
-
     </div>
   </div>
 </div>
