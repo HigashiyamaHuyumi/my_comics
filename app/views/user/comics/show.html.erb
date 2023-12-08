@@ -14,6 +14,15 @@
           <%= "休載中" %>
         <% end %>
       </p>
+      <p>購入場所:
+        <% if @comic.purchase_place == "book_store" %>
+          <%= "本屋" %>
+        <% elsif @comic.purchase_place == "e_book" %>
+          <%= "電子書籍" %>
+        <% else @comic.purchase_place == "others" %>
+          <%= @comic.purchase_place_custom %>
+        <% end %>
+      </p>
       <p>形式:
         <% if @comic.story == "hardcover" %>
           <%= "単行本" %>
@@ -24,15 +33,6 @@
         <% end %>
       </p>
       <p>所持巻数: <%= @volumes %></p>
-      <p>購入場所:
-        <% if @comic.purchase_place == "book_store" %>
-          <%= "本屋" %>
-        <% elsif @comic.purchase_place == "e_book" %>
-          <%= "電子書籍" %>
-        <% else @comic.purchase_place == "others" %>
-          <%= @comic.purchase_place_custom %>
-        <% end %>
-      </p>
       <p>タグ: <%= @comic.tags.join(', ') %></p>
       <p>備考欄: <%= @comic.remarks %></p>
 

@@ -64,9 +64,14 @@ class Comic < ApplicationRecord
     end
   end
   
-  # タイトルごとの巻数合計
-  def total_volumes
-    volumes.length
+  # 単行本の場合に巻数を数えるメソッド
+  def hardcover_volumes_count
+    return "-" unless story == 'hardcover'
+    comic_volumes.count
+  end
+  
+  def total_hardcover_volumes
+    comics.hardcover.sum(&:hardcover_volumes_count)
   end
   
   def self.search(query)

@@ -36,6 +36,22 @@
         </div>
         
         <div class="field row">
+          <%= f.label "購入場所", class: "col-lg-2" %>
+          <div class="col-lg-5">
+            <%= f.radio_button :purchase_place, "book_store", id: :purchase_place_book_store %>
+            <%= f.label :purchase_place_book_store, "本屋" %>
+    
+            <%= f.radio_button :purchase_place, "e_book", id: :purchase_place_e_book %>
+            <%= f.label :purchase_place_e_book, "電子書籍" %>
+    
+            <%= f.radio_button :purchase_place, "others", id: :purchase_place_others %>
+            <%= f.label :purchase_place_others, "他" %>
+    
+            <%= f.text_field :purchase_place_custom, placeholder: '自由記入' %>
+          </div>
+        </div>
+        
+        <div class="field row">
           <%= f.label "形式", class: "col-lg-2" %>
           <div class="col-lg-5">
             <%= f.radio_button :story, "hardcover", id: :story_hardcovear %>
@@ -60,22 +76,6 @@
           <%= f.label :新しい巻, class: "col-lg-2" %>
           <div class="col-lg-5">
             <%= f.text_field :new_volume, placeholder: '1, 2, ...' %>
-          </div>
-        </div>
-        
-        <div class="field row">
-          <%= f.label "購入場所", class: "col-lg-2" %>
-          <div class="col-lg-5">
-            <%= f.radio_button :purchase_place, "book_store", id: :purchase_place_book_store %>
-            <%= f.label :purchase_place_book_store, "本屋" %>
-    
-            <%= f.radio_button :purchase_place, "e_book", id: :purchase_place_e_book %>
-            <%= f.label :purchase_place_e_book, "電子書籍" %>
-    
-            <%= f.radio_button :purchase_place, "others", id: :purchase_place_others %>
-            <%= f.label :purchase_place_others, "他" %>
-    
-            <%= f.text_field :purchase_place_custom, placeholder: '自由記入' %>
           </div>
         </div>
         

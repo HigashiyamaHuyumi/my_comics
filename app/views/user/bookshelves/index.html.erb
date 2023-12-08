@@ -8,7 +8,7 @@
             <th></th>
             <th class="text-center">タイトル,著者,出版社</th>
             <th class="text-center">出版日</th>
-            <th class="text-center">操作</th>
+            <th class="text-center"></th>
           </tr>
         </thead>
 
@@ -34,7 +34,7 @@
               </td>
               <td style="text-align: center;">
                 <%= link_to bookshelf_path(bookshelf), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に消しますか？" do %>
-                  削除する
+                  削除
                 <% end %>
               </td>
             </tr>
@@ -44,3 +44,5 @@
     </div>
   </div>
 </div>
+
+<%= render 'layouts/footer' %>

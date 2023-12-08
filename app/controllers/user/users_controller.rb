@@ -5,6 +5,7 @@ class User::UsersController < ApplicationController
     @user = current_user
     order_by = params[:order] || 'title' # パラメータがない場合はタイトル順にデフォルト
     @comics = current_user.comics.order(order_by)
+    @total_hardcover_volumes = @user.total_hardcover_volumes
     
     # 検索クエリに基づいてコミックを絞り込む
     @search_query = params[:search]

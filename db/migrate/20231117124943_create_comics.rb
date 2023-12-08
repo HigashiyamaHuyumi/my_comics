@@ -10,7 +10,7 @@ class CreateComics < ActiveRecord::Migration[6.1]
       t.integer :story
       t.integer :purchase_place
       t.string :purchase_place_custom
-      t.integer :comics_size
+      t.integer :comic_size
       t.string :remarks
       t.timestamps
     end
