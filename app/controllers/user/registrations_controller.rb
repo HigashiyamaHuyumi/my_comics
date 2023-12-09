@@ -11,17 +11,18 @@ class User::RegistrationsController < Devise::RegistrationsController
   def after_sign_out_path_for(resource)
     root_path
   end
+
+  protected
   
+  def configure_permitted_parameters
+   devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname])
+  end
+ 
   def ensure_normal_user
-    if resource.email == 'guest@example.com'
+    if current_user.email == 'guest@example.com'
       redirect_to root_path, alert: 'ゲストユーザーの更新・削除はできません。'
     end
   end
-
-  protected
-   def configure_permitted_parameters
-     devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname])
-   end
 
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]

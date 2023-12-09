@@ -1,5 +1,5 @@
 class User::ComicsController < ApplicationController
-  before_action :is_matching_login_user, only: [:edit, :update]
+  before_action :is_matching_login_user, only: [:edit, :update, :destroy]
 
   def new
     @comic = Comic.new
@@ -18,8 +18,16 @@ class User::ComicsController < ApplicationController
     end
   end
 
-  def show #データの内容（詳細）を表示する
-    @comic = Comic.find(params[:id])
+  def show
+    @comic = Comic.find_by(id: params[:id])
+  
+    # Comicが存在しない場合の処理
+    if @comic.nil?
+      flash[:alert] = "指定された漫画は存在しません。"
+      redirect_to my_page_path
+      return
+    end
+  
     @tags = @comic.tags.pluck(:name).join(',')
     @volumes = @comic.volumes.sort_by { |volume| volume.name.to_i }.pluck(:name).join(',')
   end

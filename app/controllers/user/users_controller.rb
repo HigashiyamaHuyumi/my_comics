@@ -31,7 +31,7 @@ class User::UsersController < ApplicationController
       flash[:notice] = '登録情報を更新しました'
       redirect_to my_page_path
     else
-      render 'users_information_edit'
+      render 'infomation'
     end
   end
 

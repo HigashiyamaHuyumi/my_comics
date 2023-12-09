@@ -1,7 +1,7 @@
 <!-- エラーチェック -->
 <% if user.errors.any? %>
-  <%= user.errors.count %> errors prohibited this user from being saved:
-  <ul>
+  <%= user.errors.count %> エラーがあったので更新できませんでした:
+  <ul class="example1">
   <% user.errors.full_messages.each do |message| %>
     <li><%= message %></li>
   <% end %>

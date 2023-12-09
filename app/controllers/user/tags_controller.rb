@@ -23,7 +23,16 @@ class User::TagsController < ApplicationController
   end
   
   def comics
-    @tag = Tag.find(params[:id])
+    # タグが存在するか確認
+    @tag = Tag.find_by(id: params[:id])
+  
+    if @tag.nil?
+      flash[:alert] = "指定されたタグは存在しません。"
+      redirect_to tags_path
+      return
+    end
+  
+    # タグに紐づく漫画を取得
     @comics = @tag.comics
   end
 

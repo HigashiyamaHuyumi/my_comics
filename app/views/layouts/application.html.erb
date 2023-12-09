@@ -19,7 +19,9 @@
           <%= link_to "my comics", root_path, class: "navbar-brand", style: "font-size: 3rem;" %>
     
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon", style: "font-size: 3rem;" >
+              <i class="fas fa-bars"></i>
+            </span>
           </button>
     
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -27,8 +29,12 @@
 
               <% if user_signed_in? %><!-- 顧客がログインしている場合のメニュー項目 -->
                 <li class="nav-item">
+                  <%= link_to "About", home_about_path, class: "btn btn-outline-dark" %>
+                </li>
+                
+                <li class="nav-item">
                   <%= link_to my_page_path , class: "btn btn-outline-dark" do %>
-                  <i class="fa fa-book-open-reader"></i> マイページ
+                    <i class="fa fa-book-open-reader"></i> マイページ
                   <% end %>
                 </li>
 
@@ -48,10 +54,6 @@
                   <%= link_to bookshelves_path , class: "btn btn-outline-dark" do %>
                     <i class="fa fa-bookmark"></i> ブックマーク
                   <% end %>
-                </li>
-
-                <li class="nav-item">
-                  <%= link_to "About", home_about_path, class: "btn btn-outline-dark" %>
                 </li>
 
                 <li class="nav-item">
@@ -77,7 +79,6 @@
                     <i class="fa fa-right-from-bracket"></i> ログアウト
                   <% end %>
                 </li>
-
 
               <% else %>
                 <li class="nav-item">

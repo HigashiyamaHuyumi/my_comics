@@ -4,6 +4,7 @@
       <h5 style="text-align: center;"><span style="background-color: #eaedf7;">漫画の編集</span></h5>
 
       <%= render 'layouts/comics_errors', comic: @comic %>
+      
       <%= form_with model: @comic do |f| %>
         <div class="field row">
           <%= f.label "タイトル(必須)", class: "col-lg-2" %>

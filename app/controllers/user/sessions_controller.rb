@@ -11,16 +11,10 @@ class User::SessionsController < Devise::SessionsController
       redirect_to home_about_path
     else
       flash[:alert] = "ログインできません。アカウントが無効になっているか、パスワードが正しくありません。"
-      render new_user_registration_path
+      render 'user/registrations/new'
     end
   end
   
-  def guest_sign_in
-    user = User.guest
-    sign_in user
-    redirect_to home_about_path, notice: 'ゲストユーザーとしてログインしました。'
-  end
-
   protected
 
   def user_state

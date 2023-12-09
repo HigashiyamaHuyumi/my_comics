@@ -12,7 +12,7 @@ class HomesController < ApplicationController
       user.nickname = 'ゲスト'
     end
     sign_in user
-    redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
+    redirect_to home_about_path, notice: 'ゲストユーザーとしてログインしました。'
   end
   
 end
