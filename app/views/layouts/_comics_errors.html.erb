@@ -1,6 +1,6 @@
 <!-- エラーチェック -->
 <% if comic.errors.any? %>
-  <%= comic.errors.count %> errors prohibited this comics from being saved:
+  <%= comic.errors.count %>エラーがあったので漫画が保存できませんでした:
   <ul>
     <% comic.errors.full_messages.each do |message| %>
       <li><%= message %></li>

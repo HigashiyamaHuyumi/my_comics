@@ -5,6 +5,7 @@
       <div class="text-center">
         <h3><span style="background-color: #eaedf7;">会員情報編集</span></h3>
         <%= form_for @user, url: user_path(@user), method: :patch do |f| %>
+        
           <%= render 'layouts/user_errors', user: @user %>
   
           <div class="field">
@@ -31,7 +32,6 @@
               <%= link_to "退会する", confirm_user_path(current_user), class: "btn btn-danger" %>
             </div>
           </div>
-        
         <% end %>
       </div>
 

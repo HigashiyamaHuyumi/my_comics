@@ -1,9 +1,9 @@
 <!-- エラーチェック -->
 <% if user.errors.any? %>
-  <%= user.errors.count %> エラーがあったので更新できませんでした:
+  <%= user.errors.count %> エラーがあったので更新できませんでした。
   <ul class="example1">
-  <% user.errors.full_messages.each do |message| %>
-    <li><%= message %></li>
-  <% end %>
+    <% user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
   </ul>
 <% end %>

@@ -64,12 +64,12 @@
                 <td><%= comic.author %></td>
                 <td><%= comic.publisherName %></td>
                 <td>
-                  <% if comic.purchase_place == "book_store" %>
-                    <%= "本屋" %>
-                  <% elsif comic.purchase_place == "e_book" %>
+                  <% if comic.medium == "paper" %>
+                    <%= "紙" %>
+                  <% elsif comic.medium == "e_book" %>
                     <%= "電子書籍" %>
-                  <% else comic.purchase_place == "others" %>
-                    <%= comic.purchase_place_custom %>
+                  <% elsif comic.medium == "others" %>
+                    <%= comic.medium_custom %>
                   <% end %>
                   <br>/
                   <% if comic.story == "hardcover" %>

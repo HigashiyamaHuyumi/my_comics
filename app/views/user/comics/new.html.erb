@@ -9,7 +9,7 @@
 
         <div class="field row">
           <%= f.label "タイトル(必須)", class: "col-lg-2" %>
-          <%= f.text_field :initial, size: 2 , placeholder: '頭文字' %>
+          <%= f.text_field :initial, required: true, size: 2 , placeholder: '頭文字' %>
           <%= f.text_area :title, required: true, class: "col-lg-5" %>
         </div>
 
@@ -38,18 +38,18 @@
         </div>
         
         <div class="field row">
-          <%= f.label "購入場所", class: "col-lg-2" %>
+          <%= f.label "媒体", class: "col-lg-2" %>
           <div class="col-lg-5">
-            <%= f.radio_button :purchase_place, "book_store", id: :purchase_place_book_store %>
-            <%= f.label :purchase_place_book_store, "本屋" %>
+            <%= f.radio_button :medium, "paper", id: :medium_paper %>
+            <%= f.label :medium_paper, "紙" %>
     
-            <%= f.radio_button :purchase_place, "e_book", id: :purchase_place_e_book %>
-            <%= f.label :purchase_place_e_book, "電子書籍" %>
+            <%= f.radio_button :medium, "e_book", id: :medium_e_book %>
+            <%= f.label :medium_e_book, "電子書籍" %>
     
-            <%= f.radio_button :purchase_place, "others", id: :purchase_place_others %>
-            <%= f.label :purchase_place_others, "他" %>
+            <%= f.radio_button :medium, "others", id: :medium_others %>
+            <%= f.label :medium_others, "他" %>
     
-            <%= f.text_field :purchase_place_custom, placeholder: '自由記入' %>
+            <%= f.text_field :medium_custom, placeholder: '自由記入' %>
           </div>
         </div>
         

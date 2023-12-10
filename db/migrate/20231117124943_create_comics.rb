@@ -8,9 +8,9 @@ class CreateComics < ActiveRecord::Migration[6.1]
       t.string :publisherName
       t.integer :situation
       t.integer :story
-      t.integer :purchase_place
+      t.integer :medium
       t.string :purchase_place_custom
-      t.integer :comic_size
+      t.string :comic_size
       t.string :remarks
       t.timestamps
     end

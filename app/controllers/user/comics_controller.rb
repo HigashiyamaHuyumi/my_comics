@@ -21,13 +21,12 @@ class User::ComicsController < ApplicationController
   def show
     @comic = Comic.find_by(id: params[:id])
   
-    # Comicが存在しない場合の処理
     if @comic.nil?
       flash[:alert] = "指定された漫画は存在しません。"
       redirect_to my_page_path
       return
     end
-  
+    
     @tags = @comic.tags.pluck(:name).join(',')
     @volumes = @comic.volumes.sort_by { |volume| volume.name.to_i }.pluck(:name).join(',')
   end
@@ -40,7 +39,7 @@ class User::ComicsController < ApplicationController
 
   def update
     @comic = Comic.find(params[:id])
-    @comic.purchase_place_custom = params[:comic][:purchase_place_custom]
+    @comic.medium_custom = params[:comic][:medium_custom]
 
     if @comic.update(comic_params)
       @tags = Tag.all
@@ -99,7 +98,7 @@ class User::ComicsController < ApplicationController
   private
 
   def comic_params
-    params.require(:comic).permit(:title, :initial, :author, :publisherName, :situation, :story, :purchase_place, :purchase_place_custom, :comics_size, :remarks, new_tag: [], tag_names: [], new_volume: [], volume_ids: [])
+    params.require(:comic).permit(:title, :initial, :author, :publisherName, :situation, :story, :medium, :medium_custom, :comics_size, :remarks, new_tag: [], new_volume: [], volume_ids: [])
   end
 
   def is_matching_login_user

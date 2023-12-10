@@ -17,6 +17,11 @@ ja:
             too_long: "は長すぎます（%{count}文字以下で入力してください）"
             confirmation: "が確認用と一致しません"
             invalid: "が無効です"
+        comic:
+          attributes:
+            initial:
+              blank: "は必須です"
+              wrong_length: "は1文字でなければなりません"
   devise:
     confirmations:
       confirmed: "Your email address has been successfully confirmed."

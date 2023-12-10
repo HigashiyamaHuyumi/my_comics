@@ -11,11 +11,11 @@
       <%= form_for(:admin, url: admin_session_path) do |f| %>
         <div class="field">
           <%= f.label :メールアドレス, class: "col-lg-4" %>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "col-lg-3" %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "col-lg-6" %>
         </div>
         <div class="field">
           <%= f.label :パスワード, class: "col-lg-4" %>
-          <%= f.password_field :password, autocomplete: "current-password", class: "col-lg-3" %>
+          <%= f.password_field :password, autocomplete: "current-password", class: "col-lg-6" %>
         </div>
 
         <div class="actions text-center">

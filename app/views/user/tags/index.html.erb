@@ -2,7 +2,9 @@
   <div class="row justify-content-center">
     <div class="col-10 ">
 
-      <h3 style="text-align: center;"><span style="background-color: #eaedf7;">タグ一覧</span></h3>
+      <h3 style="text-align: center;">
+        <span style="background-color: #eaedf7;">タグ一覧</span>
+      </h3>
       
       <div class="text-center">
         <%= form_with(model: Tag.new, url: tags_path, local: true) do |form| %>

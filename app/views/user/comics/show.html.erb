@@ -2,10 +2,10 @@
   <div class="row">
     <div class="col-md-8 offset-md-2">
       <h1><%= @comic.title %></h1>
-      <p>タイトル頭文字: <%= @comic.initial %></p>
-      <p>著者: <%= @comic.author %></p>
-      <p>出版社: <%= @comic.publisherName %></p>
-      <p>連載状況:
+      <p class="width-matched">タイトル頭文字: <%= @comic.initial %></p>
+      <p class="width-matched">著者: <%= @comic.author %></p>
+      <p class="width-matched">出版社: <%= @comic.publisherName %></p>
+      <p class="width-matched">連載状況:
         <% if @comic.situation == "serialization" %>
           <%= "連載中" %>
         <% elsif @comic.situation == "completed" %>
@@ -14,16 +14,16 @@
           <%= "休載中" %>
         <% end %>
       </p>
-      <p>購入場所:
-        <% if @comic.purchase_place == "book_store" %>
+      <p class="width-matched">媒体:
+        <% if @comic.medium == "paper" %>
           <%= "本屋" %>
-        <% elsif @comic.purchase_place == "e_book" %>
+        <% elsif @comic.medium == "e_book" %>
           <%= "電子書籍" %>
-        <% else @comic.purchase_place == "others" %>
-          <%= @comic.purchase_place_custom %>
+        <% else @comic.medium == "others" %>
+          <%= @comic.medium_custom %>
         <% end %>
       </p>
-      <p>形式:
+      <p class="width-matched">形式:
         <% if @comic.story == "hardcover" %>
           <%= "単行本" %>
         <% elsif @comic.story == "separate_volumes" %>
@@ -32,9 +32,9 @@
           <%= "単話" %>
         <% end %>
       </p>
-      <p>所持巻数: <%= @volumes %></p>
-      <p>タグ: <%= @comic.tags.join(', ') %></p>
-      <p>備考欄: <%= @comic.remarks %></p>
+      <p class="width-matched">所持巻数: <%= @volumes %></p>
+      <p class="width-matched">タグ: <%= @comic.tags.join(', ') %></p>
+      <p class="width-matched">備考欄: <%= @comic.remarks %></p>
 
       <%= link_to '編集', edit_comic_path(@comic), class: 'btn btn-primary' %>
       <%= link_to '削除', comic_path(@comic), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>

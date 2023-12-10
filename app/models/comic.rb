@@ -1,8 +1,9 @@
 class Comic < ApplicationRecord
   validates :title, presence: true
+  validates :initial, presence: true, length: { is: 1 }
   
   enum story: { hardcover: 0, separate_volumes: 1, single_story: 2 }
-  enum purchase_place: { book_store: 0, e_book: 1, others: 2 }
+  enum medium: { paper: 0, e_book: 1, others: 2 }
   enum situation: { serialization: 0, completed: 1, suspended: 2 }
 
   belongs_to :user
@@ -15,6 +16,7 @@ class Comic < ApplicationRecord
 
   attr_accessor :new_tag
   attr_accessor :new_volume
+  attr_accessor :medium_custom 
 
   # タグ付けの新規投稿用メソッド
   def save_tags(tag_params)
@@ -76,7 +78,7 @@ class Comic < ApplicationRecord
   
   def self.search(query)
     where(
-      "title LIKE ? OR author LIKE ? OR publisherName LIKE ? OR story LIKE ? OR purchase_place LIKE ? OR initial LIKE ? OR purchase_place_custom LIKE ? OR tags.name LIKE ? OR remarks LIKE ?",
+      "title LIKE ? OR author LIKE ? OR publisherName LIKE ? OR story LIKE ? OR medium LIKE ? OR initial LIKE ? OR medium_custom LIKE ? OR tags.name LIKE ? OR remarks LIKE ?",
       "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%"
     ).joins("LEFT JOIN comic_tags ON comics.id = comic_tags.comic_id")
      .joins("LEFT JOIN tags ON tags.id = comic_tags.tag_id")
