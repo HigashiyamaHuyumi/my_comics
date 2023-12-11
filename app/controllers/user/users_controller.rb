@@ -6,12 +6,13 @@ class User::UsersController < ApplicationController
     order_by = params[:order] || 'initial' # パラメータがない場合は頭文字順にデフォルト
     @comics = current_user.comics.order(order_by)
     @total_hardcover_volumes = @user.total_hardcover_volumes
+    @total_titles_count = Comic.total_titles_count
     
     # 検索クエリに基づいてコミックを絞り込む
     @search_query = params[:search]
     if @search_query.present?
-      @filtered_comics = @user.comics.search(@search_query)
-      unless @filtered_comics.present?
+      @comics = @user.comics.search(@search_query)
+      unless @comics.present?
         flash[:notice] = '検索に一致するデータがありませんでした'
       end
     end
@@ -29,7 +30,7 @@ class User::UsersController < ApplicationController
     @user = current_user
     if @user.update(user_params)
       flash[:notice] = '登録情報を更新しました'
-      redirect_to my_page_path
+      redirect_to user_path(@user)
     else
       render 'infomation'
     end
@@ -59,5 +60,5 @@ class User::UsersController < ApplicationController
       redirect_to user_path(current_user)
     end
   end
-
+  
 end

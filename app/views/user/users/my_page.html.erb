@@ -1,10 +1,10 @@
 <div class="container">
   
   <div class="row">
-    <div class="col-8">
+    <div class="col-10">
       <h5><%= link_to "#{current_user.nickname}" , user_path(@user) %>の本棚</h5>
     </div>
-    <div class="col-4" style="text-align: right;">
+    <div class="col-2" style="text-align: right;">
       <%= link_to new_comic_path, class: "btn btn-outline-dark btn-circle text-dark" do %>
         <i class="fas fa-plus"></i>
       <% end %>
@@ -23,40 +23,19 @@
         
         <thead>
           <tr>
-            <th>a<%= link_to "順▼", my_page_path(order: 'initial') %></th>
-            <th>タイトル<%= link_to "順▼", my_page_path(order: 'title') %></th>
-            <th>著者<%= link_to "順▼", my_page_path(order: 'author') %></th>
-            <th>出版社<%= link_to "順▼", my_page_path(order: 'publisherName') %></th>
-            <th></th>
-            <th>所持巻数</th>
-            <th>合計巻数</th>
-            <th></th>
+            <th class="col1">a<%= link_to "順▼", my_page_path(order: 'initial') %></th>
+            <th class="col2">タイトル<%= link_to "順▼", my_page_path(order: 'title') %></th>
+            <th class="col3">著者<%= link_to "順▼", my_page_path(order: 'author') %></th>
+            <th class="col4">出版社<%= link_to "順▼", my_page_path(order: 'publisherName') %></th>
+            <th class="col5"></th>
+            <th class="col6">所持巻数</th>
+            <th class="col7">合計巻数</th>
+            <th class="col8"></th>
           </tr>
         </thead>
-        
+
         <tbody>
-          <% if @filtered_comics.present? %>
-            <% @filtered_comics.each do |comic| %>
-              <tr>
-                <td><%= comic.initial %></td>
-                <td><%= link_to comic.title, comic_path(comic) %></td>
-                <td><%= comic.author %></td>
-                <td><%= comic.publisherName %></td>
-                <td>
-                  <% if comic.story == "hardcover" %>
-                    <%= "単行本" %>
-                  <% elsif comic.story == "separate_volumes" %>
-                    <%= "分冊本" %>
-                  <% elsif comic.story == "single_story" %>
-                    <%= "単話" %>
-                  <% end %>
-                </td>
-                <td><%= comic.volumes.sort_by { |volume| volume.name.to_i }.pluck(:name).join(',') %></td>
-                <td><%= comic.hardcover_volumes_count %></td>
-                <td><%= link_to '編集', edit_comic_path(comic), class: 'btn btn-primary' %></td>
-              </tr>
-            <% end %>
-          <% elsif @comics.present? %>
+          <% if @comics.present? %>
             <% @comics.each do |comic| %>
               <tr>
                 <td><%= comic.initial %></td>
@@ -66,12 +45,10 @@
                 <td>
                   <% if comic.medium == "paper" %>
                     <%= "紙" %>
-                  <% elsif comic.medium == "e_book" %>
+                  <% else comic.medium == "e_book" %>
                     <%= "電子書籍" %>
-                  <% elsif comic.medium == "others" %>
-                    <%= comic.medium_custom %>
                   <% end %>
-                  <br>/
+                  /<br>
                   <% if comic.story == "hardcover" %>
                     <%= "単行本" %>
                   <% elsif comic.story == "separate_volumes" %>
@@ -91,8 +68,10 @@
             </tr>
           <% end %>
         </tbody>
+        
         <tfoot>
-          <td colspan="6"><strong>単行本の合計：<%= @user.total_hardcover_volumes %></strong></td>
+          <td colspan="6"><strong>紙の単行本の合計：<%= @user.total_hardcover_volumes %></strong></td>
+          <p>漫画のタイトルの総数: <%= @total_titles_count %></p>
         </tfoot>
       </table>
       

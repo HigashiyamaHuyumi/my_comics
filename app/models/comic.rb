@@ -68,20 +68,29 @@ class Comic < ApplicationRecord
   
   # 単行本の場合に巻数を数えるメソッド
   def hardcover_volumes_count
-    return "-" unless story == 'hardcover'
+    return "0" unless story == 'hardcover' && medium == 'paper'
     comic_volumes.count
   end
   
+  # すべての単行本（mediumがpaperまたはe_book）の合計巻数
   def total_hardcover_volumes
-    comics.hardcover.sum(&:hardcover_volumes_count)
+    comics.hardcover.paper.sum(&:hardcover_volumes_count)
+  end
+  
+  # 漫画のタイトルの数を返すメソッド
+  def self.total_titles_count
+    count
   end
   
   def self.search(query)
     where(
-      "title LIKE ? OR author LIKE ? OR publisherName LIKE ? OR story LIKE ? OR medium LIKE ? OR initial LIKE ? OR medium_custom LIKE ? OR tags.name LIKE ? OR remarks LIKE ?",
-      "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%"
+      "title LIKE ? OR author LIKE ? OR publisherName LIKE ? OR story LIKE ? OR medium LIKE ?
+      OR initial LIKE ? OR tags.name LIKE ? OR comic_size LIKE ? OR remarks LIKE ?",
+      "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%",
+      "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%"
     ).joins("LEFT JOIN comic_tags ON comics.id = comic_tags.comic_id")
      .joins("LEFT JOIN tags ON tags.id = comic_tags.tag_id")
+     .distinct
   end
   
 end

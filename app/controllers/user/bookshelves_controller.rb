@@ -1,7 +1,7 @@
 class User::BookshelvesController < ApplicationController
 
   def index
-    @bookshelves = current_user.bookshelves
+    @bookshelves = current_user.bookshelves.page(params[:page]).per(10)
   end
   
   def create

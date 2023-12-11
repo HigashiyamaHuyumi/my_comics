@@ -16,11 +16,9 @@
       </p>
       <p class="width-matched">媒体:
         <% if @comic.medium == "paper" %>
-          <%= "本屋" %>
-        <% elsif @comic.medium == "e_book" %>
+          <%= "紙" %>
+        <% else @comic.medium == "e_book" %>
           <%= "電子書籍" %>
-        <% else @comic.medium == "others" %>
-          <%= @comic.medium_custom %>
         <% end %>
       </p>
       <p class="width-matched">形式:
@@ -34,6 +32,7 @@
       </p>
       <p class="width-matched">所持巻数: <%= @volumes %></p>
       <p class="width-matched">タグ: <%= @comic.tags.join(', ') %></p>
+      <p class="width-matched">漫画のサイズ: <%= @comic.comic_size %></p>
       <p class="width-matched">備考欄: <%= @comic.remarks %></p>
 
       <%= link_to '編集', edit_comic_path(@comic), class: 'btn btn-primary' %>

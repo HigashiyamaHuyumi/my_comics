@@ -5,3 +5,28 @@
 .example1 li{
   display:block;
 }
+
+th, td {
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis; /* 必要に応じて省略記号を表示 */
+}
+
+.table-container {
+  overflow-x: auto;
+  max-width: 100%; /* 必要に応じて最大幅を指定 */
+}
+
+table {
+  width: 100%; /* テーブルの横幅を100%に設定 */
+}
+
+/* 各列の幅を指定 */
+.col1 { width: 5%; }
+.col2 { width: 25%; }
+.col3 { width: 15%; }
+.col4 { width: 10; }
+.col5 { width: 10%; }
+.col6 { width: 20%; }
+.col7 { width: 10%; }
+.col8 { width: 5%; }

@@ -45,11 +45,6 @@
     
             <%= f.radio_button :medium, "e_book", id: :medium_e_book %>
             <%= f.label :medium_e_book, "電子書籍" %>
-    
-            <%= f.radio_button :medium, "others", id: :medium_others %>
-            <%= f.label :medium_others, "他" %>
-    
-            <%= f.text_field :medium_custom, placeholder: '自由記入' %>
           </div>
         </div>
         
@@ -65,6 +60,11 @@
             <%= f.radio_button :story, "single_story", id: :story_single_story %>
             <%= f.label :story_single_story, "単話" %>
           </div>
+        </div>
+        
+        <div class="field row">
+          <%= f.label :漫画のサイズ, class: "col-lg-2" %>
+          <%= f.text_field :comic_size, class: "col-lg-5" %>
         </div>
 
         <div class="field row">

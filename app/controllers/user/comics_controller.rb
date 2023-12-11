@@ -39,7 +39,6 @@ class User::ComicsController < ApplicationController
 
   def update
     @comic = Comic.find(params[:id])
-    @comic.medium_custom = params[:comic][:medium_custom]
 
     if @comic.update(comic_params)
       @tags = Tag.all
@@ -98,7 +97,7 @@ class User::ComicsController < ApplicationController
   private
 
   def comic_params
-    params.require(:comic).permit(:title, :initial, :author, :publisherName, :situation, :story, :medium, :medium_custom, :comics_size, :remarks, new_tag: [], new_volume: [], volume_ids: [])
+    params.require(:comic).permit(:title, :initial, :author, :publisherName, :situation, :story, :medium, :medium_custom, :comic_size, :remarks, new_tag: [], new_volume: [], volume_ids: [])
   end
 
   def is_matching_login_user
