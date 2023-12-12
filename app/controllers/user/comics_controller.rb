@@ -12,7 +12,7 @@ class User::ComicsController < ApplicationController
     if @comic.save
       @tags = Tag.all
       @volumes = Volume.all
-      redirect_to my_page_path, notice: '漫画が作成されました'
+      redirect_to comic_path(@comic), notice: '漫画が作成されました'
     else
       render :new
     end
@@ -26,9 +26,7 @@ class User::ComicsController < ApplicationController
       redirect_to my_page_path
       return
     end
-    
-    @tags = @comic.tags.pluck(:name).join(',')
-    @volumes = @comic.volumes.sort_by { |volume| volume.name.to_i }.pluck(:name).join(',')
+
   end
 
   def edit #データを更新するためのフォームを表示す

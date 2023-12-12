@@ -6,27 +6,30 @@
   display:block;
 }
 
-th, td {
-  white-space: normal;
-  overflow: hidden;
-  text-overflow: ellipsis; /* 必要に応じて省略記号を表示 */
-}
-
-.table-container {
-  overflow-x: auto;
-  max-width: 100%; /* 必要に応じて最大幅を指定 */
-}
-
-table {
-  width: 100%; /* テーブルの横幅を100%に設定 */
-}
-
 /* 各列の幅を指定 */
-.col1 { width: 5%; }
-.col2 { width: 25%; }
-.col3 { width: 15%; }
+.col1 { width: 6%; }
+.col2 { width: 30%; }
+.col3 { width: 18%; }
 .col4 { width: 10; }
 .col5 { width: 10%; }
-.col6 { width: 20%; }
-.col7 { width: 10%; }
-.col8 { width: 5%; }
+.col6 { width: 18%; }
+.col7 { width: 5%; }
+.col8 { width: 3%; }
+
+table {
+  border-collapse: collapse; /* テーブルセルの境界線を重ねる */
+  width: 100%;
+}
+
+th, td {
+  border-bottom: 1px solid black; /* 横線のみ表示 */
+
+}
+
+th {
+  border-bottom: 2px solid black; /* ヘッダーの横線を少し太くする */
+}
+
+tr:last-child td {
+  border-bottom: none; /* 最後の行のセルの下側の横線を削除 */
+}

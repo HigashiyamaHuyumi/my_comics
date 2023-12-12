@@ -3,7 +3,7 @@ class Comic < ApplicationRecord
   validates :initial, presence: true, length: { is: 1 }
   
   enum story: { hardcover: 0, separate_volumes: 1, single_story: 2 }
-  enum medium: { paper: 0, e_book: 1, others: 2 }
+  enum medium: { paper: 0, e_book: 1 }
   enum situation: { serialization: 0, completed: 1, suspended: 2 }
 
   belongs_to :user

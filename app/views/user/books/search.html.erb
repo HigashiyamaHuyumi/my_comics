@@ -2,7 +2,7 @@
   
   <div class="row">
     <%= form_tag(books_search_path, method: :get) do %>
-      <%= text_field_tag :title, @title, placeholder: "タイトルを入力" %>
+      <%= text_field_tag :title, @title, placeholder: "タイトルを入力" , size: 50 %>
       <%= button_tag "検索", type: "submit" %>
     <% end %>
   </div>
@@ -20,33 +20,39 @@
           </tr>
         </thead>
         <tbody>
-          <% @books.each do |book| %>
-            <tr>
-              <td>
-                <% if book.image_url.present? %>
-                  <%= image_tag book.image_url, width: 128, height: 188 %>
-                <% else %>
-                  <%= image_tag "no_image.jpg", width: 128, height: 188 %>
-                <% end %>
-              </td>
-              <td>
-                <%= book.title %>
-                <br>
-                <%= book.author %>
-                <br>
-                <%= book.publisherName %>
-              </td>
-              <td>
-                <%= book.salesDate %>
-              </td>
-              <td>
-                <%= form_tag(bookshelves_path, method: :post) do %>
-                  <%= hidden_field_tag :isbn, book.isbn %>
-                  <%= button_tag class: 'btn btn-primary' do %>
-                    <i class="fas fa-bookmark"></i>
+          <% if @books.present? %>
+            <% @books.each do |book| %>
+              <tr>
+                <td>
+                  <% if book.image_url.present? %>
+                    <%= image_tag book.image_url, width: 128, height: 188 %>
+                  <% else %>
+                    <%= image_tag "no_image.jpg", width: 128, height: 188 %>
                   <% end %>
-                <% end %>
-              </td>
+                </td>
+                <td>
+                  <%= book.title %>
+                  <br>
+                  <%= book.author %>
+                  <br>
+                  <%= book.publisherName %>
+                </td>
+                <td>
+                  <%= book.salesDate %>
+                </td>
+                <td>
+                  <%= form_tag(bookshelves_path, method: :post) do %>
+                    <%= hidden_field_tag :isbn, book.isbn %>
+                    <%= button_tag class: 'btn btn-primary' do %>
+                      <i class="fas fa-bookmark"></i>
+                    <% end %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          <% else %>
+            <tr>
+              <td colspan="6">データがありません。</td>
             </tr>
           <% end %>
         </tbody>

@@ -1,8 +1,21 @@
 ja:
+  enums:
+    comic:
+      story:
+        hardcover: "単行本"
+        separate_volumes: "分冊本"
+        single_story: "単話"
+      medium:
+        paper: "紙"
+        e_book: "電子書籍"
+      situation:
+        serialization: "連載中"
+        completed: "完結"
+        suspended: "休載中"
   activerecord:
     errors:
       models:
-        user: # モデル名
+        user:
           attributes:
             nickname:
               blank: "ニックネームを入力してください"

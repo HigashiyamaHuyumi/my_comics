@@ -13,27 +13,29 @@
   
   <!-- 作者、タグ、および検索での絞り込みフォーム -->
   <%= form_tag(my_page_path(current_user), method: :get) do %>
-    <%= text_field_tag :search, params[:search], placeholder: 'タイトル,著者,出版社,タグ' %>
+    <%= text_field_tag :search, params[:search], placeholder: 'タイトル,著者,出版社,タグ', size: 50 %>
     <%= submit_tag '検索' %>
   <% end %>
-  
+
+</div>
+
+<div class="container">
   <div class="row">
     <div class="col-md-12">
+      
       <table class="table">
-        
         <thead>
           <tr>
             <th class="col1">a<%= link_to "順▼", my_page_path(order: 'initial') %></th>
-            <th class="col2">タイトル<%= link_to "順▼", my_page_path(order: 'title') %></th>
+            <th class="col2">タイトル(<%= @total_titles_count %>)</th>
             <th class="col3">著者<%= link_to "順▼", my_page_path(order: 'author') %></th>
             <th class="col4">出版社<%= link_to "順▼", my_page_path(order: 'publisherName') %></th>
-            <th class="col5"></th>
+            <th class="col5">媒体/形式</th>
             <th class="col6">所持巻数</th>
-            <th class="col7">合計巻数</th>
-            <th class="col8"></th>
+            <th class="col7">合計</th>
+            <th class="col8">編集</th>
           </tr>
         </thead>
-
         <tbody>
           <% if @comics.present? %>
             <% @comics.each do |comic| %>
@@ -57,9 +59,17 @@
                     <%= "単話" %>
                   <% end %>
                 </td>
-                <td><%= comic.volumes.sort_by { |volume| volume.name.to_i }.pluck(:name).join(',') %></td>
-                <td><%= comic.hardcover_volumes_count %></td>
-                <td><%= link_to '編集', edit_comic_path(comic), class: 'btn btn-primary' %></td>
+                <td>
+                  <%= comic.volumes.sort_by { |volume| volume.name.to_i }.pluck(:name).join(', ') %>
+                </td>
+                <td style="text-align: center;">
+                  <%= comic.hardcover_volumes_count %>
+                  </td>
+                <td>
+                  <%= link_to edit_comic_path(comic) do %>
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  <% end %>
+                </td>
               </tr>
             <% end %>
           <% else %>
@@ -68,10 +78,8 @@
             </tr>
           <% end %>
         </tbody>
-        
         <tfoot>
           <td colspan="6"><strong>紙の単行本の合計：<%= @user.total_hardcover_volumes %></strong></td>
-          <p>漫画のタイトルの総数: <%= @total_titles_count %></p>
         </tfoot>
       </table>
       
