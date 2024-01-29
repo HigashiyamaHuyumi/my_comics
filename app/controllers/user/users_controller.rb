@@ -3,8 +3,7 @@ class User::UsersController < ApplicationController
 
   def my_page #顧客のマイページ
     @user = current_user
-    order_by = params[:order] || 'initial' # パラメータがない場合は頭文字順にデフォルト
-    @comics = current_user.comics.order(order_by)
+    
     @total_hardcover_volumes = @user.total_hardcover_volumes
     @total_titles_count = Comic.total_titles_count
     

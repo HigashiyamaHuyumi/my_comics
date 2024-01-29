@@ -32,7 +32,9 @@ class User::ComicsController < ApplicationController
   def edit #データを更新するためのフォームを表示す
     @comic = Comic.find(params[:id])
     @tags = Tag.where(user_id: current_user.id)
-    @volumes = Volume.where(user_id: current_user.id).sort_by { |volume| [volume.name.to_i, volume.name] }
+    order_by = params[:order] || 'initial' # パラメータがない場合は頭文字順にデフォルト
+    @comics = current_user.comics.order(order_by)
+    @volumes = Volume.where(user_id: current_user.id).sort_by { |volume| volume.name }
   end
 
   def update
