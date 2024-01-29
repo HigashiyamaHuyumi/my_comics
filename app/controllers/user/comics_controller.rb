@@ -20,7 +20,7 @@ class User::ComicsController < ApplicationController
 
   def show
     @comic = Comic.find_by(id: params[:id])
-  
+
     if @comic.nil?
       flash[:alert] = "指定された漫画は存在しません。"
       redirect_to my_page_path
@@ -34,7 +34,8 @@ class User::ComicsController < ApplicationController
     @tags = Tag.where(user_id: current_user.id)
     order_by = params[:order] || 'initial' # パラメータがない場合は頭文字順にデフォルト
     @comics = current_user.comics.order(order_by)
-    @volumes = Volume.where(user_id: current_user.id).sort_by { |volume| volume.name }
+    #@volumes = Volume.where(user_id: current_user.id).sort_by { |volume| volume.name }
+    @volumes = Volume.where(user_id: current_user.id)
   end
 
   def update
@@ -46,7 +47,7 @@ class User::ComicsController < ApplicationController
 
       # 既存のタグが選択されている場合
       @comic.tag_ids = params[:comic][:tag_ids].presence || []
-      
+
       # 新しいタグが入力されている場合
       if params[:comic][:new_tag].present?
         new_tags = params[:comic][:new_tag].split(',').map(&:strip)
@@ -61,10 +62,10 @@ class User::ComicsController < ApplicationController
           end
         end
       end
-      
+
       # 既存の巻が選択されている場合
       @comic.volume_ids = params[:comic][:volume_ids].presence || []
-      
+
       # 新しい巻が入力されている場合
       if params[:comic][:new_volume].present?
         new_volumes = params[:comic][:new_volume].split(',').map(&:strip)
