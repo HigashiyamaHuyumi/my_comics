@@ -135,7 +135,6 @@ ActiveRecord::Schema.define(version: 2023_11_27_081345) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["comic_id"], name: "index_volumes_on_comic_id"
-    t.index ["user_id"], name: "index_volumes_on_user_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -144,5 +143,4 @@ ActiveRecord::Schema.define(version: 2023_11_27_081345) do
   add_foreign_key "comic_tags", "tags"
   add_foreign_key "tags", "users"
   add_foreign_key "volumes", "comics"
-  add_foreign_key "volumes", "users"
 end
