@@ -15,8 +15,8 @@ ActiveRecord::Schema.define(version: 2023_11_27_081345) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.integer "record_id", null: false
-    t.integer "blob_id", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2023_11_27_081345) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.integer "blob_id", null: false
+    t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
@@ -88,8 +88,6 @@ ActiveRecord::Schema.define(version: 2023_11_27_081345) do
     t.integer "volume_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["comic_id"], name: "index_comic_volumes_on_comic_id"
-    t.index ["volume_id"], name: "index_comic_volumes_on_volume_id"
   end
 
   create_table "comics", force: :cascade do |t|
@@ -132,9 +130,11 @@ ActiveRecord::Schema.define(version: 2023_11_27_081345) do
 
   create_table "volumes", force: :cascade do |t|
     t.string "name", null: false
+    t.integer "comic_id", null: false
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["comic_id"], name: "index_volumes_on_comic_id"
     t.index ["user_id"], name: "index_volumes_on_user_id"
   end
 
@@ -142,8 +142,7 @@ ActiveRecord::Schema.define(version: 2023_11_27_081345) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comic_tags", "comics"
   add_foreign_key "comic_tags", "tags"
-  add_foreign_key "comic_volumes", "comics"
-  add_foreign_key "comic_volumes", "volumes"
   add_foreign_key "tags", "users"
+  add_foreign_key "volumes", "comics"
   add_foreign_key "volumes", "users"
 end
