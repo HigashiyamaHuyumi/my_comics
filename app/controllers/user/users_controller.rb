@@ -5,7 +5,7 @@ class User::UsersController < ApplicationController
     @user = current_user
     
     @total_hardcover_volumes = @user.total_hardcover_volumes
-    @total_titles_count = Comic.total_titles_count
+    @total_titles_count = @user.comic.total_titles_count
     
     # 検索クエリに基づいてコミックを絞り込む
     @search_query = params[:search]
