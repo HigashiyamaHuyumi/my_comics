@@ -72,7 +72,7 @@ class User::ComicsController < ApplicationController
           if existing_volume
             @comic.volumes << existing_volume
           else
-            new_volume = Volume.create(name: new_volume_name, user_id: current_user.id)
+            new_volume = Volume.create(name: new_volume_name, user_id: current_user.id, comic_id: @comic.id)
             @comic.volumes << new_volume
           end
         end
