@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 2023_11_27_081345) do
   end
 
   create_table "comic_volumes", force: :cascade do |t|
-    t.integer "comic_id", null: false
+    t.integer "comics_id", null: false
     t.integer "volume_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -130,11 +130,11 @@ ActiveRecord::Schema.define(version: 2023_11_27_081345) do
 
   create_table "volumes", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "comic_id", null: false
+    t.integer "comics_id", null: false
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["comic_id"], name: "index_volumes_on_comic_id"
+    t.index ["comics_id"], name: "index_volumes_on_comics_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -142,5 +142,5 @@ ActiveRecord::Schema.define(version: 2023_11_27_081345) do
   add_foreign_key "comic_tags", "comics"
   add_foreign_key "comic_tags", "tags"
   add_foreign_key "tags", "users"
-  add_foreign_key "volumes", "comics"
+  add_foreign_key "volumes", "comics", column: "comics_id"
 end
