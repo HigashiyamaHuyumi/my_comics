@@ -19,8 +19,8 @@ class User::ComicsController < ApplicationController
   end
 
   def show
-    @comic = Comic.find_by(id: params[:id])
-  
+    @comic = Comic.find(params[:id])
+
     if @comic.nil?
       flash[:alert] = "指定された漫画は存在しません。"
       redirect_to my_page_path
@@ -44,7 +44,7 @@ class User::ComicsController < ApplicationController
 
       # 既存のタグが選択されている場合
       @comic.tag_ids = params[:comic][:tag_ids].presence || []
-      
+
       # 新しいタグが入力されている場合
       if params[:comic][:new_tag].present?
         new_tags = params[:comic][:new_tag].split(',').map(&:strip)
@@ -59,10 +59,10 @@ class User::ComicsController < ApplicationController
           end
         end
       end
-      
+
       # 既存の巻が選択されている場合
       @comic.volume_ids = params[:comic][:volume_ids].presence || []
-      
+
       # 新しい巻が入力されている場合
       if params[:comic][:new_volume].present?
         new_volumes = params[:comic][:new_volume].split(',').map(&:strip)
@@ -95,7 +95,7 @@ class User::ComicsController < ApplicationController
   private
 
   def comic_params
-    params.require(:comic).permit(:title, :initial, :author, :publisherName, :situation, :story, :medium, :medium_custom, :comic_size, :remarks, new_tag: [], new_volume: [], volume_ids: [])
+    params.require(:comic).permit(:title, :initial, :author, :publisherName, :situation, :story, :medium, :medium_custom, :comic_size, :remarks, :tags, new_tag: [], new_volume: [], volume_ids: [])
   end
 
   def is_matching_login_user

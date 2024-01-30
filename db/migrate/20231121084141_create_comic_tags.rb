@@ -6,6 +6,6 @@ class CreateComicTags < ActiveRecord::Migration[6.1]
       t.timestamps
     end
     # 同じタグは2回保存出来ない
-    add_index :comic_tags, [:comic_id,:tag_id],unique: true
+    add_index :comic_tags, [:comic_id, :tag_id], unique: true
   end
 end

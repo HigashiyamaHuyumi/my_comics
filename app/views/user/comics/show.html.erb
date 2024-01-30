@@ -31,7 +31,7 @@
         <% end %>
       </p>
       <p class="width-matched">
-        所持巻数:<%= @comic.volumes.sort_by { |volume| volume.name.to_i }.pluck(:name).join(', ') %>
+        所持巻数:<%= @comic.volumes.sort_by { |volume| volume.name }.pluck(:name).join(', ') %>
       </p>
       <p class="width-matched">タグ: <%= @comic.tags.join(', ') %></p>
       <p class="width-matched">漫画のサイズ: <%= @comic.comic_size %></p>
