@@ -16,8 +16,4 @@ class User < ApplicationRecord
   has_many :comic
   has_many :tags
   
-  def total_hardcover_volumes
-    comic.paper.sum(&:hardcover_volumes_count)
-  end
-  
 end
