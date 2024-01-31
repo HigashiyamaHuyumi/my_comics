@@ -85,11 +85,17 @@ class User::ComicsController < ApplicationController
     end
   end
 
-  def destroy #データを削除する
+  def destroy
     @comic = Comic.find(params[:id])
-    @comic.destroy  # データ（レコード）を削除
-    flash[:notice] ='選んだ漫画を本棚から削除しました'
-    redirect_to my_page_path # 投稿一覧画面へリダイレクト
+    # 関連するTagとVolumeを削除しないように設定する
+    @comic.transaction do
+      @comic.tags.clear
+      @comic.volumes.clear
+      @comic.destroy
+    end
+  
+    flash[:notice] = '選んだ漫画を本棚から削除しました'
+    redirect_to my_page_path
   end
 
   private

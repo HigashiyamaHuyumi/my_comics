@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     end
 		resources :bookshelves
 		resources :tags, only: [:index, :create, :destroy] do
-	    get 'comics', on: :member
+	    get 'comic', on: :member
     end
 		get 'books/search', to: "books#search", as: 'books_search'
     resources :books do

@@ -1,7 +1,7 @@
 class Comic < ApplicationRecord
   validates :title, presence: true
   validates :initial, presence: true, length: { is: 1 }
-  
+
   enum story: { hardcover: 0, separate_volumes: 1, single_story: 2 }
   enum medium: { paper: 0, e_book: 1 }
   enum situation: { serialization: 0, completed: 1, suspended: 2 }
@@ -13,10 +13,12 @@ class Comic < ApplicationRecord
 
   has_many :comic_tags, dependent: :destroy
   has_many :tags, through: :comic_tags
+  
+  before_destroy :clear_associated_records
 
   attr_accessor :new_tag
   attr_accessor :new_volume
-  attr_accessor :medium_custom 
+  attr_accessor :medium_custom
 
   # タグ付けの新規投稿用メソッド
   def save_tags(tag_params)
@@ -50,38 +52,38 @@ class Comic < ApplicationRecord
     # 巻数の更新用メソッド
   def update_volumes(latest_volumes)
     return unless latest_volumes.present?
-  
+
     # 既存の巻数も更新対象の巻数もある場合は差分更新
     current_volumes = self.volumes.pluck(:name)
     old_volumes = current_volumes - Array(latest_volumes)
     new_volumes = Array(latest_volumes) - current_volumes
-  
+
     old_volumes.each do |old_volume|
       volume = self.volumes.find_by(name: old_volume)
       self.volumes.delete(volume) if volume.present?
     end
-  
+
     new_volumes.each do |new_volume|
       Volume.find_or_create_by(name: new_volume)
     end
   end
-  
+
   # 単行本の場合に巻数を数えるメソッド
   def hardcover_volumes_count
     return "0" unless story == 'hardcover' && medium == 'paper'
     comic_volumes.count
   end
-  
+
   # すべての単行本（mediumがpaperまたはe_book）の合計巻数
   def total_hardcover_volumes
     comics.hardcover.paper.sum(&:hardcover_volumes_count)
   end
-  
+
   # 漫画のタイトルの数を返すメソッド
   def self.total_titles_count
     count
   end
-  
+
   def self.search(query)
     where(
       "title LIKE ? OR author LIKE ? OR publisherName LIKE ? OR story LIKE ? OR medium LIKE ?
@@ -93,4 +95,12 @@ class Comic < ApplicationRecord
      .distinct
   end
   
+  private
+
+  # 関連するレコードをクリアする代わりに、削除しないように設定する
+  def clear_associated_records
+    tags.each { |tag| tag.comic.delete(self) }
+    volumes.each { |volume| volume.comic.delete(self) }
+  end
+
 end

@@ -26,7 +26,7 @@
           <div class="col-md-6 mb-3">
             <div class="tag">
               <% if tag.id.present? %>
-                <%= link_to comics_tag_path(tag), class: "tag-link" do %>
+                <%= link_to comic_tag_path(tag), class: "tag-link" do %>
                   <%= tag.name %>(<%= tag.comic_tags.count %>)
                 <% end %>
               <% else %>

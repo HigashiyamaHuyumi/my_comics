@@ -3,10 +3,11 @@ class User::UsersController < ApplicationController
 
   def my_page #顧客のマイページ
     @user = current_user
-    
+    order_by = params[:order] || 'initial' # パラメータがない場合は頭文字順にデフォルト
+    @comic = @user.comic.order(order_by)
     @total_hardcover_volumes = @user.total_hardcover_volumes
     @total_titles_count = @user.comic.total_titles_count
-    
+
     # 検索クエリに基づいてコミックを絞り込む
     @search_query = params[:search]
     if @search_query.present?
@@ -59,5 +60,5 @@ class User::UsersController < ApplicationController
       redirect_to user_path(current_user)
     end
   end
-  
+
 end

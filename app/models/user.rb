@@ -13,11 +13,11 @@ class User < ApplicationRecord
   end
 
   has_many :bookshelves, dependent: :destroy
-  has_many :comics
+  has_many :comic
   has_many :tags
   
   def total_hardcover_volumes
-    comics.paper.sum(&:hardcover_volumes_count)
+    comic.paper.sum(&:hardcover_volumes_count)
   end
   
 end

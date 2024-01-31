@@ -22,7 +22,7 @@ class User::TagsController < ApplicationController
     end
   end
   
-  def comics
+  def comic
     # タグが存在するか確認
     @tag = Tag.find_by(id: params[:id])
   
@@ -33,7 +33,7 @@ class User::TagsController < ApplicationController
     end
   
     # タグに紐づく漫画を取得
-    @comics = @tag.comics
+    @comic = @tag.comic
   end
 
   def destroy

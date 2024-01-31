@@ -37,8 +37,8 @@
           </tr>
         </thead>
         <tbody>
-          <% if @comics.present? %>
-            <% @comics.each do |comic| %>
+          <% if @comic.present? %>
+            <% @comic.each do |comic| %>
               <tr>
                 <td><%= comic.initial %></td>
                 <td><%= link_to comic.title, comic_path(comic) %></td>
