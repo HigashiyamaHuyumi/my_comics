@@ -74,12 +74,12 @@ ActiveRecord::Schema.define(version: 2023_11_27_081345) do
   end
 
   create_table "comic_tags", force: :cascade do |t|
-    t.integer "comics_id", null: false
+    t.integer "comic_id", null: false
     t.integer "tag_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["comics_id", "tag_id"], name: "index_comic_tags_on_comics_id_and_tag_id", unique: true
-    t.index ["comics_id"], name: "index_comic_tags_on_comics_id"
+    t.index ["comic_id", "tag_id"], name: "index_comic_tags_on_comic_id_and_tag_id", unique: true
+    t.index ["comic_id"], name: "index_comic_tags_on_comic_id"
     t.index ["tag_id"], name: "index_comic_tags_on_tag_id"
   end
 
@@ -88,8 +88,6 @@ ActiveRecord::Schema.define(version: 2023_11_27_081345) do
     t.integer "volume_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["comic_id"], name: "index_comic_volumes_on_comic_id"
-    t.index ["volume_id"], name: "index_comic_volumes_on_volume_id"
   end
 
   create_table "comics", force: :cascade do |t|
@@ -113,6 +111,7 @@ ActiveRecord::Schema.define(version: 2023_11_27_081345) do
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_tags_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -140,9 +139,8 @@ ActiveRecord::Schema.define(version: 2023_11_27_081345) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "comic_tags", "comics", column: "comics_id"
+  add_foreign_key "comic_tags", "comics"
   add_foreign_key "comic_tags", "tags"
-  add_foreign_key "comic_volumes", "comics"
-  add_foreign_key "comic_volumes", "volumes"
+  add_foreign_key "tags", "users"
   add_foreign_key "volumes", "comics"
 end
