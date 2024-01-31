@@ -44,12 +44,12 @@ class Comic < ApplicationRecord
     end
   end
 
-   # 巻数の新規投稿用メソッド
+  # 巻数の新規投稿用メソッド
   def save_volumes(volume_params)
     self.volumes = volume_params.split(',') if volume_params.present?
   end
 
-    # 巻数の更新用メソッド
+  # 巻数の更新用メソッド
   def update_volumes(latest_volumes)
     return unless latest_volumes.present?
 
@@ -66,17 +66,6 @@ class Comic < ApplicationRecord
     new_volumes.each do |new_volume|
       Volume.find_or_create_by(name: new_volume)
     end
-  end
-
-  # 単行本の場合に巻数を数えるメソッド
-  def hardcover_volumes_count
-    return "0" unless story == 'hardcover' && medium == 'paper'
-    comic_volumes.count
-  end
-
-  # すべての単行本（mediumがpaperまたはe_book）の合計巻数
-  def total_hardcover_volumes
-    comics.hardcover.paper.sum(&:hardcover_volumes_count)
   end
 
   # 漫画のタイトルの数を返すメソッド
