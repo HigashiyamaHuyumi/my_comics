@@ -8,7 +8,7 @@
 
       <table class="table">
         <tbody>
-          <% @comic.each do |comic| %>
+          <% @comics.each do |comic| %>
             <tr>
               <td><%= link_to comic.title, comic_path(comic) %></td>
             </tr>

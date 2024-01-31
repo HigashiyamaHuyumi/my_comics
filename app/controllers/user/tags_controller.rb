@@ -33,14 +33,18 @@ class User::TagsController < ApplicationController
     end
   
     # タグに紐づく漫画を取得
-    @comic = @tag.comic
+    @comics = @tag.comics
   end
 
   def destroy
-    @tag = Tag.find(params[:id])
-    @tag.destroy
-    flash[:notice] ='選んだタグを削除しました'
-    redirect_to tags_path
+    # タグを削除できるのは、作成者のみ
+    if @tag.user == current_user
+      @tag.destroy
+      redirect_to tags_path, notice: 'タグが削除されました。'
+    else
+      flash[:alert] = '他のユーザーのタグを削除することはできません。'
+      redirect_to tags_path
+    end
   end
 
   private

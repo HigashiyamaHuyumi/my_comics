@@ -3,6 +3,6 @@ class ComicTag < ApplicationRecord
   belongs_to :tag
   # タグ付けのバリデーション・アソシエーション
   # validateをいれることで重複を防ぐ
-  validates :comic_id, uniqueness: { scope: :tag_id }
+  validates :comic_id, presence: true
   validates :tag_id, presence: true
 end
