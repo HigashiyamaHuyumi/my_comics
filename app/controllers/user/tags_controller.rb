@@ -37,8 +37,9 @@ class User::TagsController < ApplicationController
   end
 
   def destroy
+    @tag = Tag.find(params[:id])
     # タグを削除できるのは、作成者のみ
-    if @tag.user == current_user
+    if @tag.user_id == current_user.id
       @tag.destroy
       redirect_to tags_path, notice: 'タグが削除されました。'
     else
