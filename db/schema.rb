@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2023_11_27_081345) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
-  create_table "books", primary_key: "isbn", force: :cascade do |t|
+  create_table "books", primary_key: "isbn", id: :string, force: :cascade do |t|
     t.string "title"
     t.string "author"
     t.string "publisherName"
