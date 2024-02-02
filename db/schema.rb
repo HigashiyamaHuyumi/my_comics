@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 2023_11_27_081345) do
 
   create_table "bookshelves", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.string "book_id", null: false
+    t.integer "book_id", null: false
     t.string "title"
     t.string "author"
     t.string "publisherName"
