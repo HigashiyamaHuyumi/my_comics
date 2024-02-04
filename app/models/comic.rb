@@ -88,8 +88,8 @@ class Comic < ApplicationRecord
 
   # 関連するレコードをクリアする代わりに、削除しないように設定する
   def clear_associated_records
-    tags.each { |tag| tag.comic.delete(self) }
-    volumes.each { |volume| volume.comic.delete(self) }
+    tags.clear
+    volumes.clear
   end
 
 end

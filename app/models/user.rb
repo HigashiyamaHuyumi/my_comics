@@ -13,7 +13,8 @@ class User < ApplicationRecord
   end
 
   has_many :bookshelves, dependent: :destroy
-  has_many :comic
+  has_many :comics, dependent: :destroy
   has_many :tags
+  has_many :volumes
   
 end

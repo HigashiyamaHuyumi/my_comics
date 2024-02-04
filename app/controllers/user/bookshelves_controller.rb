@@ -5,15 +5,13 @@ class User::BookshelvesController < ApplicationController
   end
   
   def create
-    isbn = params[:isbn]
-    book = Book.find_or_create_by(isbn: isbn) do |new_book|
+    @book = Book.find_or_create_by(isbn: params[:isbn].to_s) do |new_book|
       new_book.attributes = read(params[:book])
     end
-
-    current_user.bookshelves.find_or_create_by(book: book)
-    redirect_to books_search_path, notice: '本がブックマークに追加されました。'
+    current_user.bookshelves.find_or_create_by(book: @book)
+    redirect_to search_path, notice: '本がブックマークに追加されました。'
   end
-  
+
   def show
     @bookshelf = current_user.bookshelves.find(params[:id])
   end

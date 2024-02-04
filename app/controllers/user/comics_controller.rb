@@ -26,7 +26,6 @@ class User::ComicsController < ApplicationController
       redirect_to my_page_path
       return
     end
-
   end
 
   def edit #データを更新するためのフォームを表示す
@@ -52,7 +51,9 @@ class User::ComicsController < ApplicationController
           # 既に存在するタグと同じ名前の場合は既存のタグを追加するだけにする
           existing_tag = Tag.find_by(name: new_tag_name, user_id: current_user.id)
           if existing_tag
-            @comic.tags << existing_tag
+            unless @comic.tags.include?(existing_tag)
+              @comic.tags << existing_tag
+            end
           else
             new_tag = Tag.find_or_create_by(name: new_tag_name, user_id: current_user.id)
             @comic.tags << new_tag
@@ -87,13 +88,14 @@ class User::ComicsController < ApplicationController
 
   def destroy
     @comic = Comic.find(params[:id])
-    # 関連するTagとVolumeを削除しないように設定する
-    @comic.transaction do
-      @comic.tags.clear
-      @comic.volumes.clear
-      @comic.destroy
-    end
-  
+    
+    # 関連する ComicTag と ComicVolume のレコードを削除
+    @comic.comic_tags.destroy_all
+    @comic.comic_volumes.destroy_all
+    
+    # 漫画を削除
+    @comic.destroy
+    
     flash[:notice] = '選んだ漫画を本棚から削除しました'
     redirect_to my_page_path
   end
@@ -111,4 +113,5 @@ class User::ComicsController < ApplicationController
       redirect_to comics_path
     end
   end
+  
 end

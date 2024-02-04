@@ -1,7 +1,7 @@
 <div class="container-book">
   
   <div class="row">
-    <%= form_tag(books_search_path, method: :get) do %>
+    <%= form_tag(search_path, method: :get) do %>
       <%= text_field_tag :title, @title, placeholder: "タイトルを入力" , size: 50 %>
       <%= button_tag "検索", type: "submit" %>
     <% end %>

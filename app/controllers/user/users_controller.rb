@@ -4,9 +4,9 @@ class User::UsersController < ApplicationController
   def my_page #顧客のマイページ
     @user = current_user
     order_by = params[:order] || 'initial' # パラメータがない場合は頭文字順にデフォルト
-    @comic = @user.comic.order(order_by)
+    @comics = @user.comics.order(order_by)
    
-    @total_titles_count = @user.comic.total_titles_count
+    @total_titles_count = @user.comics.total_titles_count
 
     # 検索クエリに基づいてコミックを絞り込む
     @search_query = params[:search]
