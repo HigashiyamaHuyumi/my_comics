@@ -86,10 +86,9 @@ class Comic < ApplicationRecord
   
   private
 
-  # 関連するレコードをクリアする代わりに、削除しないように設定する
   def clear_associated_records
-    tags.clear
-    volumes.clear
+    comic_volumes.destroy_all
+    comic_tags.destroy_all
   end
 
 end

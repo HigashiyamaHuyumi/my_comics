@@ -88,14 +88,7 @@ class User::ComicsController < ApplicationController
 
   def destroy
     @comic = Comic.find(params[:id])
-    
-    # 関連する ComicTag と ComicVolume のレコードを削除
-    @comic.comic_tags.destroy_all
-    @comic.comic_volumes.destroy_all
-    
-    # 漫画を削除
     @comic.destroy
-    
     flash[:notice] = '選んだ漫画を本棚から削除しました'
     redirect_to my_page_path
   end
