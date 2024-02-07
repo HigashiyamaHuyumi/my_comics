@@ -69,11 +69,13 @@ class User::ComicsController < ApplicationController
         new_volumes = params[:comic][:new_volume].split(',').map(&:strip)
         new_volumes.each do |new_volume_name|
           # 既に存在する巻数と同じ番号の場合は既存の巻数を追加するだけにする
-          existing_volume = Volume.find_by(name: new_volume_name, user_id: current_user.id, comic_id: @comic.id)
+          existing_volume = Volume.find_by(name: new_volume_name, user_id: current_user.id)
           if existing_volume
-            @comic.volumes << existing_volume
+            unless @comic.volumes.include?(existing_volume)
+              @comic.volumes << existing_volume
+            end
           else
-            new_volume = Volume.create(name: new_volume_name, user_id: current_user.id, comic_id: @comic.id)
+            new_volume = Volume.find_or_create_by(name: new_volume_name, user_id: current_user.id)
             @comic.volumes << new_volume
           end
         end
@@ -106,5 +108,5 @@ class User::ComicsController < ApplicationController
       redirect_to comics_path
     end
   end
-  
+
 end

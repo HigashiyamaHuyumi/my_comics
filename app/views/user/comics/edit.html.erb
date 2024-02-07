@@ -5,7 +5,7 @@
 
       <%= render 'layouts/comics_errors', comic: @comic %>
       
-      <%= form_with model: @comic do |f| %>
+      <%= form_with model: @comic, url: comic_path(@comic), method: :patch do |f| %>
         <div class="field row">
           <%= f.label "タイトル(必須)", class: "col-lg-2" %>
           <%= f.text_field :initial, required: true, size: 2 , placeholder: '頭文字' %>
