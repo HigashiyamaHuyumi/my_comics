@@ -1,4 +1,5 @@
 class User::TagsController < ApplicationController
+  
   def create
     @tag = current_user.tags.build(tag_params)
     if @tag.save
