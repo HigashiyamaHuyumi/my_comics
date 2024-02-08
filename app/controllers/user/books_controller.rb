@@ -16,7 +16,7 @@ class User::BooksController < ApplicationController
         end
 
         # 選択された本のIDがあれば本棚に追加
-        if params[:selected_book_id] == book.id.to_s
+        if params[:selected_book_id] == book.id
           current_user.bookshelves.find_or_create_by(book: book)
         end
 
