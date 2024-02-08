@@ -1,5 +1,4 @@
 class Book < ApplicationRecord
-  validates :isbn, presence: true
-  self.primary_key = "isbn"
-  has_many :bookshelves, foreign_key: 'isbn', primary_key: 'isbn'
+  validates :isbn, presence: true, uniqueness: true, length: { is: 13 }
+  has_many :bookshelves, foreign_key: 'isbn'
 end
