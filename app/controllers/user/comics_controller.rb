@@ -98,7 +98,7 @@ class User::ComicsController < ApplicationController
   private
 
   def comic_params
-    params.require(:comic).permit(:title, :initial, :author, :publisherName, :situation, :story, :medium, :medium_custom, :comic_size, :remarks, :tags, new_tag: [], new_volume: [], volume_ids: [])
+    params.require(:comic).permit(:title, :initial, :author, :publisherName, :situation, :story, :medium, :medium_custom, :comic_size, :remarks, new_tag: [], new_volume: [], volume_ids: [], tag_ids: [])
   end
 
   def is_matching_login_user
