@@ -1,5 +1,5 @@
 class User::ComicsController < ApplicationController
-  before_action :is_matching_login_user, only: [:edit, :update, :destroy]
+  before_action :is_matching_login_user, only: [:show, :edit, :update, :destroy]
 
   def new
     @comic = Comic.new
@@ -19,7 +19,7 @@ class User::ComicsController < ApplicationController
   end
 
   def show
-    @comic = Comic.find(params[:id])
+    @comic = Comic.find_by(id: params[:id])
 
     if @comic.nil?
       flash[:alert] = "指定された漫画は存在しません。"
@@ -105,7 +105,7 @@ class User::ComicsController < ApplicationController
     comic = Comic.find(params[:id])
     unless comic.user_id == current_user.id
       flash[:alert] = '他のユーザーの漫画を編集する権限がありません。'
-      redirect_to comics_path
+      redirect_to my_page_path
     end
   end
 

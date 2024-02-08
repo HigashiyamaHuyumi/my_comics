@@ -4,11 +4,21 @@ class Admin::UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find_by(id: params[:id])
+    if @user.nil?
+      flash[:alert] = "指定されたユーザーは存在しません。"
+      redirect_to admin_users_path
+      return
+    end
   end
 
   def edit
-    @user = User.find(params[:id])
+    @user = User.find_by(id: params[:id])
+    if @user.nil?
+      flash[:alert] = "指定されたユーザーは存在しません。"
+      redirect_to admin_users_path
+      return
+    end
   end
 
   def update #顧客の登録情報更新
