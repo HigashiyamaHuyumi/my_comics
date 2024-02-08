@@ -5,7 +5,7 @@ class User::BookshelvesController < ApplicationController
   end
   
   def create
-    @book = Book.find_or_create_by(isbn: params[:isbn].to_s) do |new_book|
+    @book = Book.find_or_create_by(isbn: params[:isbn]) do |new_book|
       new_book.attributes = read(params[:book])
     end
     current_user.bookshelves.find_or_create_by(book: @book)
