@@ -1,28 +1,43 @@
 <div class="container">
-  
+
+  <div class="row">
+    <h5><%= link_to "#{current_user.nickname}" , user_path(@user) %>の本棚</h5>
+  </div>
+
+  <div class="row">
+    <p>作成した
+      <%= link_to tags_path do %>
+        <i class="fa fa-tag"></i> タグ一覧
+      <% end %>
+    と
+      <%= link_to volumes_path do %>
+        巻数一覧
+      <% end %>
+    </p>
+  </div>
+
   <div class="row">
     <div class="col-10">
-      <h5><%= link_to "#{current_user.nickname}" , user_path(@user) %>の本棚</h5>
+      <!-- 作者、タグ、および検索での絞り込みフォーム -->
+      <%= form_tag(my_page_path(current_user), method: :get) do %>
+        <%= text_field_tag :search, params[:search], placeholder: 'タイトル,著者,出版社,タグ', size: 50 %>
+        <%= submit_tag '検索' %>
+      <% end %>
     </div>
+
     <div class="col-2" style="text-align: right;">
       <%= link_to new_comic_path, class: "btn btn-outline-dark btn-circle text-dark" do %>
         <i class="fas fa-plus"></i>
       <% end %>
     </div>
   </div>
-  
-  <!-- 作者、タグ、および検索での絞り込みフォーム -->
-  <%= form_tag(my_page_path(current_user), method: :get) do %>
-    <%= text_field_tag :search, params[:search], placeholder: 'タイトル,著者,出版社,タグ', size: 50 %>
-    <%= submit_tag '検索' %>
-  <% end %>
 
 </div>
 
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      
+
       <table class="table">
         <thead>
           <tr>
@@ -79,7 +94,7 @@
           <% end %>
         </tbody>
       </table>
-      
+
     </div>
   </div>
 </div>

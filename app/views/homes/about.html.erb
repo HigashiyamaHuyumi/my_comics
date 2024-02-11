@@ -21,22 +21,22 @@
       </span>
     </h3>
     <p><i class="fa fa-paperclip"></i>　自分の名前の部分を押すと会員登録情報が表示されます。このページから登録情報の編集、会員退会ができます。
+    </br><i class="fa fa-paperclip"></i>
+      <%= link_to tags_path do %>
+        <i class="fa fa-tag"></i> タグ一覧
+      <% end %>
+      から漫画に着けるタグの追加・削除ができます。
+      </br>　　漫画の編集ページで追加したタグもこちらの一覧ページに表示されます。
+    </br><i class="fa fa-paperclip"></i>　
+      <%= link_to volumes_path do %>
+        巻数一覧
+      <% end %>
+      から漫画の巻数の削除ができます。
+      </br>　　漫画の編集ページで追加した巻数もこちらの一覧ページに表示されます。
     </br><i class="fa fa-paperclip"></i>　右上のプラスボタンから漫画を追加することができます。
     </br><i class="fa fa-paperclip"></i>　検索ボタンでタイトル、著者、出版社、タグのいずれかで検索をすることができます。
     </br><i class="fa fa-paperclip"></i>　タイトル、著者、出版社のいずれかで並び替えができます。
     </br><i class="fa fa-paperclip"></i>　漫画のタイトルをクリックすると漫画の詳細が確認できます。</p>
-
-    <h3>
-      <span class="about">
-        <%= link_to tags_path do %>
-          <i class="fa fa-tag"></i> tagと巻数
-        <% end %>
-      </span>
-    </h3>
-    <p><i class="fa fa-paperclip"></i>　漫画に着けるタグの追加・削除ができます。
-    </br><i class="fa fa-paperclip"></i>　漫画の編集ページで追加したタグもこちらの一覧ページに表示されます。
-    </br><i class="fa fa-paperclip"></i>　漫画の巻数の削除ができます。
-    </br><i class="fa fa-paperclip"></i>　漫画の編集ページで追加した巻数もこちらの一覧ページに表示されます。</p>
 
     <h3>
       <span class="about">

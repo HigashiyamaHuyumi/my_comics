@@ -7,7 +7,7 @@
       </h3>
       
       <div class="row">
-        <% volumes.each do |volume| %>
+        <% @volumes.each do |volume| %>
           <div class="col-md-4 mb-3">
             <div class="volume">
               <%= volume.name %>
@@ -21,3 +21,5 @@
     </div>
   </div>
 </div>
+
+<%= render 'layouts/footer' %>
