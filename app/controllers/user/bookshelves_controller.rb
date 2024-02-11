@@ -1,9 +1,10 @@
 class User::BookshelvesController < ApplicationController
+  before_action :is_matching_login_user, only: [:show, :edit, :update, :destroy]
 
   def index
     @bookshelves = current_user.bookshelves.page(params[:page]).per(10)
   end
-  
+
   def create
     @book = Book.find_or_create_by(isbn: params[:isbn]) do |new_book|
       new_book.attributes = read(params[:book])
@@ -37,11 +38,11 @@ class User::BookshelvesController < ApplicationController
   end
 
   private
-  
+
   def bookshelf_params
     params.require(:bookshelf).permit(:title, :author, :publisherName)
   end
-  
+
   def read(book_params)
     # 必要なデータを抽出してハッシュとして返す
     {
@@ -52,6 +53,12 @@ class User::BookshelvesController < ApplicationController
       image_url: book_params["mediumImageUrl"]&.gsub('?_ex=120x120', ''),
       salesDate: book_params["salesDate"],
     }
+  end
+
+  def is_matching_login_user
+    unless current_user == @bookshelf.user
+      redirect_to bookshelves_path, alert: '権限がありません'
+    end
   end
 
 end
