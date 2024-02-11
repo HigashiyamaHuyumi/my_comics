@@ -7,12 +7,12 @@
         About
       </span>
     </h1>
-    
+
     <p>自分の所持している漫画の把握するためのサイトです。
     </br>本棚に漫画を追加することができ、漫画の編集・削除などご自由にカスタムして自分の漫画を確認できます。
     </br>各ページの説明、できることを下記に記しております。
     </p>
-    
+
     <h3>
       <span class="about">
         <%= link_to my_page_path do %>
@@ -25,17 +25,19 @@
     </br><i class="fa fa-paperclip"></i>　検索ボタンでタイトル、著者、出版社、タグのいずれかで検索をすることができます。
     </br><i class="fa fa-paperclip"></i>　タイトル、著者、出版社のいずれかで並び替えができます。
     </br><i class="fa fa-paperclip"></i>　漫画のタイトルをクリックすると漫画の詳細が確認できます。</p>
-    
+
     <h3>
       <span class="about">
         <%= link_to tags_path do %>
-          <i class="fa fa-tag"></i> tag
+          <i class="fa fa-tag"></i> tagと巻数
         <% end %>
       </span>
     </h3>
     <p><i class="fa fa-paperclip"></i>　漫画に着けるタグの追加・削除ができます。
-    </br><i class="fa fa-paperclip"></i>　漫画の編集ページで追加したタグもこちらの一覧ページに表示されます。</p>
-    
+    </br><i class="fa fa-paperclip"></i>　漫画の編集ページで追加したタグもこちらの一覧ページに表示されます。
+    </br><i class="fa fa-paperclip"></i>　漫画の巻数の削除ができます。
+    </br><i class="fa fa-paperclip"></i>　漫画の編集ページで追加した巻数もこちらの一覧ページに表示されます。</p>
+
     <h3>
       <span class="about">
         <%= link_to search_path do %>
@@ -45,7 +47,7 @@
     </h3>
     <p><i class="fa fa-paperclip"></i>　楽天に登録されている本から探すことができます。
     </br><i class="fa fa-paperclip"></i>　好きな本をブックマークに保存することができます。
-    
+
     <h3>
       <span class="about">
         <%= link_to bookshelves_path do %>
@@ -56,7 +58,7 @@
     <p><i class="fa fa-paperclip"></i>　[本を探す]で見つけた本がこちらに表示されるようになります。
     </br><i class="fa fa-paperclip"></i>　タイトル、著者、出版社が表示されるのでマイページに追加する際に
     </br>コピペして利用するのにおすすめです。
-    
+
     </div>
   </div>
 </div>

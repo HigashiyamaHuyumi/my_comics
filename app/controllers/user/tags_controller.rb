@@ -21,6 +21,7 @@ class User::TagsController < ApplicationController
     when 'comic_tags_count'
       @tags = current_user.tags.left_joins(:comic_tags).group(:id).order('COUNT(comic_tags.tag_id) DESC')
     end
+    @volumes = current_user.volumes.order(:name)
   end
   
   def comic

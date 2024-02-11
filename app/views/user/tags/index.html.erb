@@ -5,7 +5,7 @@
       <h3 style="text-align: center;">
         <span style="background-color: #eaedf7;">タグ一覧</span>
       </h3>
-      
+
       <div class="text-center">
         <%= form_with(model: Tag.new, url: tags_path, local: true) do |form| %>
           <%= form.label :name, '新しいタグの名前:' %>
@@ -13,14 +13,14 @@
           <%= form.submit '作成する' %>
         <% end %>
       </div>
-      
+
       <div class="row justify-content-center">
         <strong>並び順:</strong>
         <%= link_to '名前順', tags_path(order: 'name'), class: 'tag-sort-link' %>
         |
         <%= link_to '漫画数順', tags_path(order: 'comic_tags_count'), class: 'tag-sort-link' %>
       </div>
-      
+
       <div class="row">
         <% @tags.each do |tag| %>
           <div class="col-md-6 mb-3">
@@ -38,9 +38,11 @@
           </div>
         <% end %>
       </div>
-      
+
     </div>
   </div>
 </div>
+
+<%= render 'user/volume/index', volumes: @volumes %>
 
 <%= render 'layouts/footer' %>

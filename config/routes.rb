@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 		resources :tags, only: [:index, :create, :destroy] do
 	    get 'comic', on: :member
     end
+    resources :volumes, only: [:index, :destroy]
 		get 'books/search', to: "books#search", as: 'search'
     resources :books do
       post 'bookshelf', on: :member

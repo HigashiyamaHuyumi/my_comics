@@ -17,13 +17,13 @@
       <nav class="navbar navbar-expand-lg text-black">
         <div class="container">
           <%= link_to "my comics", root_path, class: "navbar-brand", style: "font-size: 3rem;" %>
-    
+
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon", style: "font-size: 3rem;" >
               <i class="fas fa-bars"></i>
             </span>
           </button>
-    
+
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
 
@@ -31,7 +31,7 @@
                 <li class="nav-item">
                   <%= link_to "About", home_about_path, class: "btn btn-outline-dark" %>
                 </li>
-                
+
                 <li class="nav-item">
                   <%= link_to my_page_path , class: "btn btn-outline-dark" do %>
                     <i class="fa fa-book-open-reader"></i> マイページ
@@ -40,16 +40,16 @@
 
                 <li class="nav-item">
                   <%= link_to tags_path , class: "btn btn-outline-dark" do %>
-                    <i class="fa fa-tag"></i> tag
+                    <i class="fa fa-tag"></i> tagと巻数
                   <% end %>
                 </li>
-                
+
                 <li class="nav-item">
                   <%= link_to search_path , class: "btn btn-outline-dark" do %>
                     <i class="fa fa-magnifying-glass"></i> 本を探す
                   <% end %>
                 </li>
-                
+
                 <li class="nav-item">
                   <%= link_to bookshelves_path , class: "btn btn-outline-dark" do %>
                     <i class="fa fa-bookmark"></i> ブックマーク

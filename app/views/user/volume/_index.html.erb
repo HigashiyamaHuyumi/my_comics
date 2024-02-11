@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-10 ">
+
+      <h3 style="text-align: center;">
+        <span style="background-color: #eaedf7;">巻数一覧</span>
+      </h3>
+      
+      <div class="row">
+        <% volumes.each do |volume| %>
+          <div class="col-md-4 mb-3">
+            <div class="volume">
+              <%= volume.name %>
+              |
+              <%= link_to '削除', volume, method: :delete, data: { confirm: 'この巻数を登録している漫画からもこの巻数は削除されます。本当に削除しますか？' } %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      
+    </div>
+  </div>
+</div>
