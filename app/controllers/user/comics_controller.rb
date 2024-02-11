@@ -108,6 +108,5 @@ class User::ComicsController < ApplicationController
       redirect_to my_page_path
     end
   end
- 
 
 end
