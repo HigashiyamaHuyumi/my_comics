@@ -1,0 +1,20 @@
+Revert "update login_check"
+
+This reverts commit 610effb7b4ba0cbd42318cac9a86d5aa3a9a114f.
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is ahead of 'origin/main' by 1 commit.
+#   (use "git push" to publish your local commits)
+#
+# Revert currently in progress.
+#
+# Changes to be committed:
+#	modified:   app/controllers/admin/users_controller.rb
+#	modified:   app/controllers/user/bookshelves_controller.rb
+#	modified:   app/controllers/user/tags_controller.rb
+#	modified:   app/controllers/user/users_controller.rb
+#	modified:   app/controllers/user/volumes_controller.rb
+#
