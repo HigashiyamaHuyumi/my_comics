@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   # 顧客用
   devise_for :users, skip: [:passwords], controllers: {
     registrations: "user/registrations",
@@ -32,11 +32,11 @@ Rails.application.routes.draw do
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
-  
+
   namespace :admin do
 	  resources :users,only: [:index, :show, :edit, :update]
 	end
-  
+
   root to: "homes#top"
   get '/about', to: 'homes#about', as: 'home_about'
   post '/homes/guest_sign_in', to: 'homes#guest_sign_in'

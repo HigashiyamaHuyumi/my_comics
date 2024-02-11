@@ -102,11 +102,12 @@ class User::ComicsController < ApplicationController
   end
 
   def is_matching_login_user
-    comic = Comic.find(params[:id])
-    unless comic.user_id == current_user.id
+    @comic = Comic.find(params[:id])
+    unless @comic.user == current_user
       flash[:alert] = '他のユーザーの漫画を編集する権限がありません。'
       redirect_to my_page_path
     end
   end
+ 
 
 end

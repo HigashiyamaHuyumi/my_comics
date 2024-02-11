@@ -1,5 +1,4 @@
 class User::TagsController < ApplicationController
-  before_action :is_matching_login_user, only: [:index, :comic, :destroy]
   
   def create
     @tag = current_user.tags.build(tag_params)
@@ -55,14 +54,6 @@ class User::TagsController < ApplicationController
 
   def tag_params
     params.require(:tag).permit(:name)
-  end
-  
-  def is_matching_login_user
-    @tag = Tag.find_by(id: params[:id])
-    unless @tag && @tag.user_id == current_user.id
-      flash[:alert] = '他のユーザーのタグを編集する権限がありません。'
-      redirect_to tags_path
-    end
   end
 
 end
