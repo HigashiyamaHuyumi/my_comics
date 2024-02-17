@@ -1,6 +1,5 @@
 class Admin::UsersController < ApplicationController
-  before_action :require_admin, only: [:index, :show, :edit, :update]
-  
+
   def index
     @users = User.page(params[:page]).per(20)
   end
@@ -38,12 +37,5 @@ class Admin::UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:nickname, :email, :is_active)
   end
-  
-  def require_admin
-    unless current_user.admin?
-      flash[:alert] = "管理者権限が必要です。"
-      redirect_to root_path
-    end
-  end
-  
+
 end
