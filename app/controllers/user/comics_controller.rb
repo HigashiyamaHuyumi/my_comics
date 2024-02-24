@@ -3,15 +3,14 @@ class User::ComicsController < ApplicationController
 
   def new
     @comic = Comic.new
+    @tags = Tag.all
+    @volumes = Volume.all
   end
 
   def create
     @comic = Comic.new(comic_params)
     @comic.user_id = current_user.id
-
     if @comic.save
-      @tags = Tag.all
-      @volumes = Volume.all
       redirect_to comic_path(@comic), notice: '漫画が作成されました'
     else
       render :new
