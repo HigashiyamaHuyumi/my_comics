@@ -20,7 +20,7 @@
     <div class="col-10">
       <!-- 作者、タグ、および検索での絞り込みフォーム -->
       <%= form_tag(my_page_path(current_user), method: :get) do %>
-        <%= text_field_tag :search, params[:search], placeholder: 'タイトル,著者,出版社,タグ', size: 50 %>
+        <%= text_field_tag :search, params[:search], placeholder: 'タイトル,著者,出版社,タグ', size: 35 %>
         <%= submit_tag '検索' %>
       <% end %>
     </div>
@@ -31,13 +31,12 @@
       <% end %>
     </div>
   </div>
-
 </div>
 
-<div class="container">
+<!-- PC用のテーブル形式 -->
+<div class="container d-none d-sm-block"> <!-- スマホサイズでは非表示 -->
   <div class="row">
     <div class="col-md-12">
-
       <table class="table">
         <thead>
           <tr>
@@ -96,5 +95,48 @@
       </table>
 
     </div>
+  </div>
+</div>
+
+<!-- スマートフォン用のカード形式 -->
+<div class="container d-sm-none"> <!-- スマホサイズのみ表示 -->
+  <div class="row">
+    <% if @comics.present? %>
+      <% @comics.each do |comic| %>
+        <div class="col-12">
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to comic.title, comic_path(comic) %></h5>
+              <p class="card-text">著者： <%= comic.author %></p>
+              <p class="card-text">出版社： <%= comic.publisherName %></p>
+              <p class="card-text">
+                媒体：
+                <% if comic.medium == "paper" %>
+                  <%= "紙" %>
+                <% elsif comic.medium == "e_book" %>
+                  <%= "電子書籍" %>
+                <% end %>
+              </p>
+              <p class="card-text">
+                形式：
+                <% if comic.story == "hardcover" %>
+                  <%= "単行本" %>
+                <% elsif comic.story == "separate_volumes" %>
+                  <%= "分冊本" %>
+                <% elsif comic.story == "single_story" %>
+                  <%= "単話" %>
+                <% end %>
+              </p>
+              <p class="card-text">所持巻数： <%= comic.volumes.sort_by { |volume| volume.name.to_i }.pluck(:name).join(', ') %></p>
+              <%= link_to edit_comic_path(comic) do %>
+                <i class="fa-solid fa-pen-to-square"></i> 編集
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <p>データがありません。</p>
+    <% end %>
   </div>
 </div>

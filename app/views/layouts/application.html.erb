@@ -29,29 +29,29 @@
 
               <% if user_signed_in? %><!-- 顧客がログインしている場合のメニュー項目 -->
                 <li class="nav-item">
-                  <%= link_to "About", home_about_path, class: "btn btn-outline-dark" %>
+                  <%= link_to "About", home_about_path %>
                 </li>
 
                 <li class="nav-item">
-                  <%= link_to my_page_path , class: "btn btn-outline-dark" do %>
+                  <%= link_to my_page_path do %>
                     <i class="fa fa-book-open-reader"></i> マイページ
                   <% end %>
                 </li>
 
                 <li class="nav-item">
-                  <%= link_to search_path , class: "btn btn-outline-dark" do %>
+                  <%= link_to search_path do %>
                     <i class="fa fa-magnifying-glass"></i> 本を探す
                   <% end %>
                 </li>
 
                 <li class="nav-item">
-                  <%= link_to bookshelves_path , class: "btn btn-outline-dark" do %>
+                  <%= link_to bookshelves_path do %>
                     <i class="fa fa-bookmark"></i> ブックマーク
                   <% end %>
                 </li>
 
                 <li class="nav-item">
-                  <%= link_to destroy_user_session_path, method: :delete, class: "btn btn-outline-dark" do %>
+                  <%= link_to destroy_user_session_path, method: :delete do %>
                     <i class="fa fa-right-from-bracket"></i> ログアウト
                   <% end %>
                 </li>
@@ -59,34 +59,34 @@
               <% elsif admin_signed_in? %><!-- 管理者がログインしている場合のメニュー項目 -->
 
                 <li class="nav-item">
-                <%= link_to "About", home_about_path, class: "btn btn-outline-dark" %>
+                  <%= link_to "About", home_about_path %>
                 </li>
 
                 <li class="nav-item">
-                  <%= link_to admin_users_path, class: "btn btn-outline-dark" do %>
+                  <%= link_to admin_users_path do %>
                     <i class="fa fa-users"></i> 会員一覧
                   <% end %>
                 </li>
 
                 <li class="nav-item">
-                  <%= link_to destroy_user_session_path, method: :delete, class: "btn btn-outline-dark" do %>
+                  <%= link_to destroy_user_session_path, method: :delete do %>
                     <i class="fa fa-right-from-bracket"></i> ログアウト
                   <% end %>
                 </li>
 
               <% else %>
                 <li class="nav-item">
-                  <%= link_to "About", home_about_path, class: "btn btn-outline-dark" %>
+                  <%= link_to "About", home_about_path %>
                 </li>
 
                 <li class="nav-item">
-                  <%= link_to new_user_registration_path, class: "btn btn-outline-dark" do %>
+                  <%= link_to new_user_registration_path do %>
                     <i class="fa fa-arrow-right-to-bracket"></i> 新規登録
                   <% end %>
                 </li>
 
                 <li class="nav-item">
-                  <%= link_to new_user_session_path, class: "btn btn-outline-dark" do %>
+                  <%= link_to new_user_session_path do %>
                     <i class="fa fa-right-to-bracket"></i> ログイン
                   <% end %>
                 </li>
