@@ -5,8 +5,29 @@
 .about {
   /*線の種類（二重線）太さ 色*/
   border-bottom: double 5px #98d98e;
+  font-size: 40px;
 }
 
 .row {
   justify-content: center;
+}
+
+p {
+  font-size: 20px;
+}
+
+
+
+@media screen and (max-width:425px) {
+  .container {
+    margin: 0;
+  }
+
+  .about {
+    font-size: 20px;
+  }
+
+  p {
+    font-size: 10px;
+  }
 }
