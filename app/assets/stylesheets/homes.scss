@@ -8,8 +8,13 @@
   font-size: 40px;
 }
 
+.explanation {
+  margin-bottom: 50px;
+}
+
 .row {
   justify-content: center;
+  margin-bottom: 5px;
 }
 
 p {
@@ -23,11 +28,15 @@ p {
     margin: 0;
   }
 
+  .explanation {
+    margin-bottom: 15px;
+  }
+
   .about {
-    font-size: 20px;
+    font-size: 16px;
   }
 
   p {
-    font-size: 10px;
+    font-size: 8px;
   }
 }

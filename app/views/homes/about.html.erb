@@ -1,92 +1,96 @@
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-10">
+    <div class="col-12">
 
-    <h1>
-      <span class="about" style= "color:#98d98e;">
-        About
-      </span>
-    </h1>
+    <div class="explanation">
+      <h1>
+        <span class="about" style= "color:#98d98e;">
+          About
+        </span>
+      </h1>
 
-    <p>自分の所持している漫画の把握するためのサイトです。
-    </br>本棚に漫画を追加することができ、漫画の編集・削除などご自由にカスタムして自分の漫画を確認できます。
-    </br>各ページの説明、できることを下記に記しております。
-    </p>
+      <p>自分の所持している漫画の把握するためのサイトです。
+      </br>本棚に漫画を追加することができ、漫画の編集・削除などご自由にカスタムして自分の漫画を確認できます。
+      </br>各ページの説明、できることを下記に記しております。
+      </p>
+    </div>
 
-    <h3>
-      <span class="about">
-        <% if current_user %>
-          <%= link_to my_page_path do %>
-            <i class="fa fa-book-open-reader"></i>マイページ
+    <div class="explanation">
+      <h3>
+        <span class="about">
+          <% if current_user %>
+            <%= link_to my_page_path do %>
+              <i class="fa fa-book-open-reader"></i>マイページ
+            <% end %>
+          <% else %>
+            <%= link_to new_user_session_path do %>
+              <i class="fa fa-book-open-reader"></i>マイページ
+            <% end %>
           <% end %>
-        <% else %>
-          <%= link_to new_user_session_path do %>
-            <i class="fa fa-book-open-reader"></i>マイページ
-          <% end %>
-        <% end %>
-      </span>
-    </h3>
+        </span>
+      </h3>
 
-    <p><i class="fa fa-paperclip"></i>自分の名前の部分を押すと会員登録情報が表示されます。このページから登録情報の編集、会員退会ができます。
-      </br><i class="fa fa-paperclip"></i>
-        <% if current_user %>
-          <%= link_to tags_path do %>
+      <p><i class="fa fa-paperclip"></i>自分の名前の部分を押すと会員登録情報が表示されます。このページから登録情報の編集、会員退会ができます。
+        </br><i class="fa fa-paperclip"></i>
+          <% if current_user %>
+            <%= link_to tags_path do %>
+              <i class="fa fa-tag"></i>タグ一覧
+            <% end %>
+          <% else %>
             <i class="fa fa-tag"></i>タグ一覧
           <% end %>
-        <% else %>
-          <i class="fa fa-tag"></i>タグ一覧
-        <% end %>
-        から漫画に着けるタグの追加・削除ができます。
-      </br>漫画の編集ページで追加したタグもこちらの一覧ページに表示されます。
-      </br><i class="fa fa-paperclip"></i>
-        <% if current_user %>
-          <%= link_to volumes_path do %>
+          から漫画に着けるタグの追加・削除ができます。
+        </br>漫画の編集ページで追加したタグもこちらの一覧ページに表示されます。
+        </br><i class="fa fa-paperclip"></i>
+          <% if current_user %>
+            <%= link_to volumes_path do %>
+              巻数一覧
+            <% end %>
+          <% else %>
             巻数一覧
           <% end %>
-        <% else %>
-          巻数一覧
-        <% end %>
-        から漫画の巻数の削除ができます。
-        </br>漫画の編集ページで追加した巻数もこちらの一覧ページに表示されます。
-      </br><i class="fa fa-paperclip"></i>右上のプラスボタンから漫画を追加することができます。
-      </br><i class="fa fa-paperclip"></i>検索ボタンでタイトル、著者、出版社、タグのいずれかで検索をすることができます。
-      </br><i class="fa fa-paperclip"></i>タイトル、著者、出版社のいずれかで並び替えができます。
-      </br><i class="fa fa-paperclip"></i>漫画のタイトルをクリックすると漫画の詳細が確認できます。
-  　</p>
+          から漫画の巻数の削除ができます。
+          </br>漫画の編集ページで追加した巻数もこちらの一覧ページに表示されます。
+        </br><i class="fa fa-paperclip"></i>右上のプラスボタンから漫画を追加することができます。
+        </br><i class="fa fa-paperclip"></i>検索ボタンでタイトル、著者、出版社、タグのいずれかで検索をすることができます。
+        </br><i class="fa fa-paperclip"></i>タイトル、著者、出版社のいずれかで並び替えができます。
+        </br><i class="fa fa-paperclip"></i>漫画のタイトルをクリックすると漫画の詳細が確認できます。
+    　</p>
+    </div>
 
-
-    <h3>
-      <span class="about">
-        <% if current_user %>
-          <%= link_to search_path do %>
+    <div class="explanation">
+      <h3>
+        <span class="about">
+          <% if current_user %>
+            <%= link_to search_path do %>
+              <i class="fa fa-magnifying-glass"></i>本を探す
+            <% end %>
+          <% else %>
             <i class="fa fa-magnifying-glass"></i>本を探す
           <% end %>
-        <% else %>
-          <i class="fa fa-magnifying-glass"></i>本を探す
-        <% end %>
-      </span>
-    </h3>
+        </span>
+      </h3>
+      <p><i class="fa fa-paperclip"></i>楽天に登録されている本から探すことができます。
+      </br><i class="fa fa-paperclip"></i>好きな本をブックマークに保存することができます。
+    </div>
 
-    <p><i class="fa fa-paperclip"></i>楽天に登録されている本から探すことができます。
-    </br><i class="fa fa-paperclip"></i>好きな本をブックマークに保存することができます。
-
-
-    <h3>
-      <span class="about">
-        <% if current_user %>
-          <%= link_to bookshelves_path do %>
+    <div class="explanation">
+      <h3>
+        <span class="about">
+          <% if current_user %>
+            <%= link_to bookshelves_path do %>
+              <i class="fa fa-bookmark"></i>ブックマーク
+            <% end %>
+          <% else %>
             <i class="fa fa-bookmark"></i>ブックマーク
           <% end %>
-        <% else %>
-          <i class="fa fa-bookmark"></i>ブックマーク
-        <% end %>
-      </span>
-    </h3>
+        </span>
+      </h3>
 
-    <p><i class="fa fa-paperclip"></i>[本を探す]で見つけた本がこちらに表示されるようになります。
-    </br><i class="fa fa-paperclip"></i>タイトル、著者、出版社が表示されるのでマイページに追加する際に
-    </br>コピペして利用するのにおすすめです。
-
+      <p><i class="fa fa-paperclip"></i>[本を探す]で見つけた本がこちらに表示されるようになります。
+      </br><i class="fa fa-paperclip"></i>タイトル、著者、出版社が表示されるのでマイページに追加する際に
+      </br>コピペして利用するのにおすすめです。
+    </div>
 
     </div>
   </div>

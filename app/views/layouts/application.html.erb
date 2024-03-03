@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    
     <script src="https://kit.fontawesome.com/1a020bd911.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -16,10 +16,10 @@
     <header>
       <nav class="navbar navbar-expand-lg text-black">
         <div class="container">
-          <%= link_to "my comics", root_path, class: "navbar-brand", style: "font-size: 3rem;" %>
+          <%= link_to "my comics", root_path, class: "navbar-brand my-comics-link" %>
 
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon", style: "font-size: 3rem;" >
+            <span class="navbar-toggler-icon">
               <i class="fas fa-bars"></i>
             </span>
           </button>

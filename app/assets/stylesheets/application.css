@@ -19,7 +19,9 @@ header {
  margin-bottom: 25px;
 }
 
-.navbar-brand {
+.my-comics-link {
+ font-size: 50px !important;
+ font-weight: bold;
  color: #F0FFFF;
 }
 
@@ -28,12 +30,16 @@ header {
  margin: 20px;
 }
 
+
+
 body {
  margin: 0;
  position: relative;
  flex-direction: column;
  min-height: 100vh;
 }
+
+
 
 footer {
  position: absolute;
@@ -51,9 +57,19 @@ footer {
 }
 
 
+
 @media screen and (max-width:425px) {
  header {
   font-size: 15px;
   margin-bottom: 15px;
  }
+
+ .my-comics-link {
+  font-size: 25px !important;
+ }
+
+ .navbar-nav a {
+  margin: 10px;
+ }
+
 }
