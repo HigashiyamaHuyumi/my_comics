@@ -2,9 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-.container-book {
+.container {
   margin: 1rem ;
-  
+
 
   .row {
     margin-bottom: 20px;
@@ -28,4 +28,16 @@
       height: 188px;
     }
   }
+}
+
+
+@media screen and (max-width:425px) {
+ img {
+    width: 64px;
+    height: 94px;
+  }
+
+ .btn {
+   font-size: 10px !important;
+ }
 }

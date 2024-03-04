@@ -1,10 +1,13 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-6 text-center">
-      
-      <h1>welcome to my comics!!</h1>
+
+      <span class="heading">
+        welcome to
+        <br>my comics!!
+      </span>
       <p>自分の本棚を管理しよう</p>
-      
+
       <div class="row">
         <%= link_to "ログイン", new_user_session_path ,class: "btn btn-info" %>
       </div>
@@ -14,7 +17,7 @@
       <div class="row">
         <%= link_to "ゲストログイン", homes_guest_sign_in_path, method: :post ,class: "btn btn-secondary" %>
       </div>
-      
+
     </div>
   </div>
 </div>

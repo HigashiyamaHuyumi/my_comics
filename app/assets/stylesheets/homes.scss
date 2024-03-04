@@ -2,6 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+
+.heading {
+  font-weight: bold;
+  font-size: 40px;
+  padding: 0;
+}
+
 .about {
   /*線の種類（二重線）太さ 色*/
   border-bottom: double 5px #98d98e;
@@ -24,9 +31,6 @@ p {
 
 
 @media screen and (max-width:425px) {
-  .container {
-    margin: 0;
-  }
 
   .explanation {
     margin-bottom: 15px;
