@@ -9,14 +9,18 @@
   padding: 0;
 }
 
-.about {
-  /*線の種類（二重線）太さ 色*/
+.title {
   border-bottom: double 5px #98d98e;
+  color: #98d98e;
   font-size: 40px;
 }
 
+.title a {
+  color: #98d98e;
+}
+
 .explanation {
-  margin-bottom: 50px;
+  margin-bottom: 40px;
 }
 
 .row {

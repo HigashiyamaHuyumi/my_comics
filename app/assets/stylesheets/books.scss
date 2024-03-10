@@ -3,8 +3,6 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 .container {
-  margin: 1rem ;
-
 
   .row {
     margin-bottom: 20px;
@@ -32,12 +30,24 @@
 
 
 @media screen and (max-width:425px) {
- img {
-    width: 64px;
-    height: 94px;
-  }
 
- .btn {
-   font-size: 10px !important;
- }
+ .card {
+    margin: 5px 10px;
+
+    .card-body {
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 64px;
+        height: 94px;
+      }
+
+      .btn {
+        font-size: 10px !important;
+        margin-top : 5px;
+      }
+
+    }
+  }
 }
