@@ -33,6 +33,17 @@ tr:last-child td {
   border-bottom: none; /* 最後の行のセルの下側の横線を削除 */
 }
 
-.card-text {
-  margin-bottom: 5px;
+
+
+@media screen and (max-width:425px) {
+
+ .card {
+    margin: 5px 10px;
+
+    .card-text {
+      margin-bottom: 5px;
+    }
+  }
+
+
 }
