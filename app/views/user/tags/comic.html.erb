@@ -6,16 +6,14 @@
         「<%= @tag.name %>」のタグが付いている漫画一覧(<%= @tag.comic_tags.count %>)
       </h3>
 
-      <table class="table">
-        <tbody>
-          <% @comics.each do |comic| %>
-            <tr>
-              <td><%= link_to comic.title, comic_path(comic) %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-      
+      <li>
+        <% @comics.each do |comic| %>
+          <tr>
+            <td><%= link_to comic.title, comic_path(comic) %></td>
+          </tr>
+        <% end %>
+      </li>
+
     </div>
   </div>
 </div>

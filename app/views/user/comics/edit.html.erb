@@ -1,28 +1,35 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h5 style="text-align: center;"><span style="background-color: #eaedf7;">漫画の編集</span></h5>
+
+      <h5 style="text-align: center;">
+        <span style="background-color: #eaedf7;">
+          漫画の編集
+        </span>
+      </h5>
 
       <%= render 'layouts/comics_errors', comic: @comic %>
 
       <%= form_with model: @comic, url: comic_path(@comic), method: :patch do |f| %>
-        <div class="field row">
+        <div class="row">
           <%= f.label "タイトル(必須)", class: "col-lg-2" %>
           <%= f.text_field :initial, required: true, size: 2 , placeholder: '頭文字' %>
           <%= f.text_area :title, required: true, class: "col-lg-5" %>
         </div>
 
-        <div class="field row">
+
+
+        <div class="row">
           <%= f.label :著者, class: "col-lg-2" %>
           <%= f.text_field :author, class: "col-lg-5" %>
         </div>
 
-        <div class="field row">
+        <div class="row">
           <%= f.label :出版社, class: "col-lg-2" %>
           <%= f.text_field :publisherName, class: "col-lg-5" %>
         </div>
 
-        <div class="field row">
+        <div class="row">
           <%= f.label "連載状況", class: "col-lg-2" %>
           <div class="col-lg-5">
             <%= f.radio_button :situation, "serialization", id: :situation_serialization %>
@@ -36,7 +43,7 @@
           </div>
         </div>
 
-        <div class="field row">
+        <div class="row">
           <%= f.label "媒体", class: "col-lg-2" %>
           <div class="col-lg-5">
             <%= f.radio_button :medium, "paper", id: :medium_paper %>
@@ -47,7 +54,7 @@
           </div>
         </div>
 
-        <div class="field row">
+        <div class="row">
           <%= f.label "形式", class: "col-lg-2" %>
           <div class="col-lg-5">
             <%= f.radio_button :story, "hardcover", id: :story_hardcovear %>
@@ -61,40 +68,36 @@
           </div>
         </div>
 
-        <div class="field row">
+        <div class="row">
           <%= f.label :巻数, class: "col-lg-2" %>
           <div class="col-lg-5">
             <%= f.collection_check_boxes(:volume_ids, @volumes || [], :id, :name) %>
           </div>
         </div>
 
-        <div class="field row">
+        <div class="row">
           <%= f.label :新しい巻, class: "col-lg-2" %>
-          <div class="col-lg-5">
-            <%= f.text_field :new_volume, placeholder: '1, 2, ...' %>
-          </div>
+          <%= f.text_field :new_volume, placeholder: '1, 2, ...' , class: "col-lg-5" %>
         </div>
 
-        <div class="field row">
+        <div class="row">
           <%= f.label :タグ, class: "col-lg-2" %>
           <div class="col-lg-5">
             <%= f.collection_check_boxes(:tag_ids, @tags  || [], :id, :name) %>
           </div>
         </div>
 
-        <div class="field row">
+        <div class="row">
           <%= f.label :新しいタグ, class: "col-lg-2" %>
-          <div class="col-lg-5">
-            <%= f.text_field :new_tag, placeholder: 'タグ1, タグ2, ...' %>
-          </div>
+          <%= f.text_field :new_tag, placeholder: 'タグ1, タグ2, ...' , class: "col-lg-5" %>
         </div>
 
-        <div class="field row">
+        <div class="row">
           <%= f.label :漫画のサイズ, class: "col-lg-2" %>
           <%= f.text_field :comic_size, class: "col-lg-5" %>
         </div>
 
-        <div class="field row">
+        <div class="row">
           <%= f.label :備考欄, class: "col-lg-2" %>
           <%= f.text_field :remarks, class: "col-lg-5" %>
         </div>

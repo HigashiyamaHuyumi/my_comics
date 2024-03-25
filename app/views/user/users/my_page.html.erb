@@ -18,12 +18,11 @@
 </div>
 
 
-<!-- PC用形式 -->
-<div class="container d-none d-sm-block"> <!-- スマホサイズでは非表示 -->
+<!-- PC用形式(スマホサイズでは非表示) -->
+<div class="container d-none d-sm-block">
 
   <div class="row">
     <div class="col-10">
-      <!-- 作者、タグ、および検索での絞り込みフォーム -->
       <%= form_tag(my_page_path(current_user), method: :get) do %>
         <%= text_field_tag :search, params[:search], placeholder: 'タイトル,著者,出版社,タグ', size: 25 %>
         <%= submit_tag '検索' %>
@@ -103,8 +102,7 @@
 <!-- スマートフォン用形式 -->
 <div class="container d-sm-none">
 
-  <div class="row">
-    <!-- 作者、タグ、および検索での絞り込みフォーム -->
+  <div class="row" style="margin-top: 20px;">
     <%= form_tag(my_page_path(current_user), method: :get) do %>
       <%= text_field_tag :search, params[:search], placeholder: 'タイトル,著者,出版社,タグ', size: 25 %>
       <%= submit_tag '検索' %>
@@ -124,13 +122,13 @@
         <div class="col-12">
           <div class="card">
             <div class="card-body">
-              <div class="row"> <!-- カード内の全体的な開始位置を左詰めに -->
-                <div class="col-12 col-sm-8"> <!-- 左側のコンテンツ -->
-                  <h5 class="card-title"><%= link_to comic.title, comic_path(comic) %></h5> <!-- タイトル -->
-                  <div class="card-text">著者： <%= comic.author %></div> <!-- 著者 -->
-                  <div class="card-text">所持巻数： <%= comic.volumes.sort_by { |volume| volume.name.to_i }.pluck(:name).join(', ') %></div> <!-- 所持巻数 -->
-                  <div class="card-text">出版社： <%= comic.publisherName %></div> <!-- 出版社 -->
-                  <div class="card-text"> <!-- 媒体 -->
+              <div class="row">
+                <div class="col-12 col-sm-8">
+                  <h5 class="card-title"><%= link_to comic.title, comic_path(comic) %></h5>
+                  <div class="card-text">著者： <%= comic.author %></div>
+                  <div class="card-text">所持巻数： <%= comic.volumes.sort_by { |volume| volume.name.to_i }.pluck(:name).join(', ') %></div>
+                  <div class="card-text">出版社： <%= comic.publisherName %></div>
+                  <div class="card-text">
                     媒体：
                     <% if comic.medium == "paper" %>
                       <%= "紙" %>
@@ -138,7 +136,7 @@
                       <%= "電子書籍" %>
                     <% end %>
                   </div>
-                  <div class="card-text"> <!-- 形式 -->
+                  <div class="card-text">
                     形式：
                     <% if comic.story == "hardcover" %>
                       <%= "単行本" %>
@@ -149,7 +147,7 @@
                     <% end %>
                   </div>
                 </div>
-                <div class="col-12 col-sm-4 text-sm-right mt-3 mt-sm-0"> <!-- 右側の編集ボタン -->
+                <div class="col-12 col-sm-4 text-sm-right mt-3 mt-sm-0">
                   <%= link_to edit_comic_path(comic) do %>
                     <i class="fa-solid fa-pen-to-square"></i> 編集
                   <% end %>
